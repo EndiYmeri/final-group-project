@@ -1,16 +1,16 @@
 {
 
     "scripts": {
-        "dev": "vite title-frontend",
+        "dev": "vite jobless-no-more-frontend",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "start": "ts-node title-backend/index.ts",
+        "start": "ts-node jobless-no-more-backend/index.ts",
         "prisma-studio": "npx prisma studio",
         "prisma-generate": "npx prisma generate",
         "prisma-migrate-dev": "npx prisma migrate dev"
     },
     "prisma": {
-        "schema": "./title-backend/prisma/schema.prisma"
+        "schema": "./jobless-no-more-backend/prisma/schema.prisma"
     },
     "author": "",
     "license": "ISC",
