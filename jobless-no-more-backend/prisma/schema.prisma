@@ -10,7 +10,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id   Int    @id
+model freelanceUser {
+  id            Int        @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String     @unique
+  totalReceived Int
+  password      String
+  image         String
+  location      String
+  bio           String
+  skillS        Skill[]
+  proposals     Proposal[]
+}
+
+model job {
+  id           Int        @id @default(autoincrement())
+  title        String
+  location     String
+  content      String
+  dateCreated  DateTime   @default(now())
+  skills       Skill[]
+  difficulty   Difficulty @relation(fields: [difficultyId], references: [id])
+  difficultyId Int
+  Category     Category   @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  clientUser   clientUser @relation(fields: [clientUserId], references: [id])
+  clientUserId Int
+  proposals    Proposal[]
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
   name String
+  jobs job[]
+}
+
+model Skill {
+  id             Int             @id @default(autoincrement())
+  name           String
+  jobs           job[]
+  freelanceUsers freelanceUser[]
+}
+
+model Proposal {
+  id              Int           @id @default(autoincrement())
+  job             job           @relation(fields: [jobId], references: [id])
+  jobId           Int
+  frelanceUser    freelanceUser @relation(fields: [freelanceUserId], references: [id])
+  freelanceUserId Int
+}
+
+model clientUser {
+  id              Int     @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  email           String  @unique
+  totalSpend      Int
+  password        String
+  image           String
+  location        String
+  rating          Int
+  paymentVerified Boolean
+  jobs            job[]
+}
+
+model Difficulty {
+  id   Int    @id @default(autoincrement())
+  name String
+  jobs job[]
 }

@@ -1,5 +1,4 @@
 {
-
     "scripts": {
         "dev": "vite jobless-no-more-frontend",
         "build": "tsc && vite build",
