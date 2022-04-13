@@ -56,13 +56,13 @@ model job {
 
 model Category {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
   jobs job[]
 }
 
 model Skill {
   id             Int             @id @default(autoincrement())
-  name           String
+  name           String          @unique
   jobs           job[]
   freelanceUsers freelanceUser[]
 }
@@ -77,6 +77,6 @@ model Proposal {
 
 model Difficulty {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
   jobs job[]
 }
