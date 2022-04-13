@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./LoginSignup.css"
 
 function Signup() {
   const [selectedOption, setSelectedOption] = useState("");
 
   const onValueChange = (e: any) => setSelectedOption(e.target.value);
+
+  const navigate = useNavigate()
 
   return (
     <main className="signup-main">
@@ -124,7 +128,7 @@ function Signup() {
         <div className="dont-have-account-section">
           <p>
             Already have an account?
-            <span>Log In</span>
+            <span onClick={()=>{navigate('/login')}} >Log In</span>
           </p>
         </div>
       </div>

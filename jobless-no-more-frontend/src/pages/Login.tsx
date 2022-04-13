@@ -1,4 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import "./LoginSignup.css"
+
 function Login() {
+
+  const navigate = useNavigate()
+
   return (
     <main className="login-main">
       <div className="login-container">
@@ -15,7 +21,10 @@ function Login() {
         </div>
         <div className="dont-have-account-section">
           <span>Don't have an Upwork account?</span>
-          <button className="sign-up-btn">Sign Up</button>
+          <button 
+            className="sign-up-btn"
+            onClick={()=>{navigate('/signup')}}
+            >Sign Up</button>
         </div>
       </div>
     </main>
