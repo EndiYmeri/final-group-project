@@ -1,10 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 header {
     display: grid;
     width: 100%;
     grid-auto-flow: column;
-    background-color: coral;
+    background-color: rgb(250, 84, 24);
     color: white;
     align-items: center;
+    padding: 10px 0;
 }
 
 h1 {
@@ -15,6 +21,16 @@ header .logo {
     display: grid;
     justify-content: center;
     text-align: left;
+}
+
+header .middle {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+}
+
+header.noUser .middle .search {
+    order: 1;
 }
 
 .search {
@@ -33,20 +49,50 @@ header .logo {
     /* border: none; */
 }
 
-ul li {
-    display: inline-block;
-    list-style-type: none;
-    margin: 5px;
-    padding: 5px;
-}
-
-header .nav {
+nav ul {
     display: grid;
     grid-auto-flow: column;
+    gap: 10px;
     justify-content: center;
 }
 
+nav a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    padding: 0 5px;
+}
+
+nav a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    opacity: 0;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+}
+
+nav a:hover::before {
+    bottom: -5px;
+    opacity: 1;
+    transition: opacity .3s ease;
+    transition: bottom .4s ease;
+}
+
+li {
+    list-style: none;
+}
+
 .account-links {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-links ul {
     display: grid;
     grid-auto-flow: column;
 }

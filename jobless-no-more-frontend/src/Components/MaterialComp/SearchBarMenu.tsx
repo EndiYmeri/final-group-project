@@ -39,9 +39,12 @@ export default function PositionedMenu() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>
+          Talents
+        </MenuItem>
+        
+        <MenuItem onClick={handleClose}>Projects</MenuItem>
+        <MenuItem onClick={handleClose}>Jobs</MenuItem>
       </Menu>
     </div>
   );
