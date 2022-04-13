@@ -1,0 +1,159 @@
+:root{
+    --btn-primary-bg: #14a800;
+    --brand-primary: #14a800;
+    --light-gray: rgb(228, 228, 228);
+    --gray: #65735b;
+  }
+  *{
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  img{
+    width: 100%;
+  }
+  .login-main,
+  .signup-main{
+    display: grid;
+    place-content: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  .login-container,
+  .signup-container{
+    display: grid;
+    border: 1px solid var(--light-gray);
+    border-radius: 10px;
+    gap: 1rem;
+  }
+  .login-section,
+  .signup-section {
+    padding: 2rem;
+    display: grid;
+    gap: 1rem;
+    place-items: center;
+  }
+  .login-section input,
+  .signup-section input{
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    width: 100%;
+  }
+  .login-section input:focus,
+  .login-section input:hover
+  .signup-section input:focus,
+  .signup-section input:hover{
+    outline: none;
+    border: 1px solid var(--btn-primary-bg);
+  }
+  .email-btn,
+  .freelance-btn,
+  .client-btn{
+    background-color: var(--btn-primary-bg);
+    border: none;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 2rem;
+    cursor: pointer;
+  
+  }
+  .google-btn{
+    background-color: #4285f4;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 2rem;
+  }
+  .sign-up-btn{
+    border: 1px solid var(--brand-primary) ;
+    cursor: pointer;
+    width: 70%;
+    padding: 0.8rem 1rem;
+    color: #14a800;
+    font-weight: bold;
+    border-radius: 2rem;
+  }
+  .dont-have-account-section{
+    border-top: 1px solid var(--light-gray);
+    padding: 2rem;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+  }
+  .dont-have-account-section span{
+    color: var(--gray);
+  }
+  .signup-section svg{
+    width: 50px;
+  }
+  .client-radio,
+  .freelancer-radio{
+    display: grid;
+    border: 1px solid var(--light-gray);
+    padding: 1.5rem;
+    justify-items: center;
+    position: relative;
+    gap: 1rem;
+    border-radius: 8px;
+  }
+  
+  .client-radio:hover,
+  .freelancer-radio:hover{
+    background-color: var(--light-gray);
+    cursor: pointer;
+  }
+  .client-radio:hover,
+  .freelancer-radio:hover{
+    border: 1px solid var(--brand-primary);
+  } 
+  .client-radio input,
+  .freelancer-radio input{
+    position: absolute;
+    top: 8px;
+    right: -100px;
+    accent-color: var(--brand-primary);
+  }
+  .client-radio span,
+  .freelancer-radio span{
+    width: 20ch;
+  }
+  .signup-section form{
+    display: grid;
+    gap: 2rem;
+    place-items: center;
+  }
+  .signup-section-selection{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    place-items: center;
+  }
+  .disabled-btn{
+    width: 60%;
+    border: 1px solid var(--light-gray);
+    background: none;
+    font-weight: bold;
+    padding: 0.8rem 1rem;
+    color: var(--light-gray);
+    border-radius: 2rem;
+    cursor: not-allowed;
+  }
+  .client-btn,
+  .freelance-btn{
+    width: 60%;
+  }
+  .dont-have-account-section p span{
+    margin-left: 0.5rem;
+    color: var(--brand-primary);
+    cursor: pointer;
+  }
+  .dont-have-account-section p span:hover{
+    text-decoration: underline;
+  }
