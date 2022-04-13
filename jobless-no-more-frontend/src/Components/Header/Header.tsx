@@ -1,22 +1,27 @@
-import PositionedMenu from "../MaterialComp/SearchBarMenu";
+import SearchBarMenu from "../MaterialComp/SearchBarMenu";
 import { Link } from "react-router-dom";
 import './Header.css'
 import { useState } from "react";
-import { Button } from "@mui/material";
+
+type SearchWhere = "talents" | "projects" | "jobs"
+
 export default function Header(){
-    
     const [hasUser, setHasUser] = useState(false)
-    
+
+    const [searchWhere, setSearchWhere] = useState("")
+
     return(
             <header className={hasUser? "hasUser" : "noUser"} > 
                 <div className="logo">
-                    <h1>Jobless</h1>
-                    <span>no more</span>
+                    <Link to="/">
+                        <h1>Jobless</h1>
+                        <span>no more</span>
+                    </Link>
                 </div>
                 <div className="middle">
                     <div className="search">
                         <div className="searchBar">
-                                <PositionedMenu /> 
+                                <SearchBarMenu /> 
                                 <input type="text" name="" id="" />
                         </div>
                     </div>
@@ -40,15 +45,11 @@ export default function Header(){
                                 <img src="https://robohash.org/ND" alt="" />
                             </div>
                         </div>
-
-                    :   <div className="login-buttons">
-                            <button>Log in</button>
-                            <button>Sign up</button>
+                    :   <div className="buttons">
+                            <button className="login-button">Log in</button>
+                            <button className="signup-button"> Sign up</button>
                         </div>
-
                 }
-
-               
             </header>
         )
 }

@@ -2,8 +2,9 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-export default function PositionedMenu() {
+export default function SearchBarMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -16,17 +17,17 @@ export default function PositionedMenu() {
   return (
     <div>
       <Button
-        id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined}
+        id="searchBarMenuButton"
+        aria-controls={open ? 'searchBarMenu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        🔽
+        <KeyboardArrowDownIcon/>
       </Button>
       <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
+        id="searchBarMenu"
+        aria-labelledby="searchBarMenuButton"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -40,6 +41,7 @@ export default function PositionedMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>
+          
           Talents
         </MenuItem>
         
