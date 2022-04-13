@@ -1,0 +1,56 @@
+header {
+    display: grid;
+    width: 100%;
+    grid-auto-flow: column;
+    background-color: coral;
+    color: white;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+header .logo {
+    display: grid;
+    justify-content: center;
+    text-align: left;
+}
+
+.search {
+    background-color: white;
+    width: fit-content;
+}
+
+.search .searchBar {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+}
+
+.search .searchBar input {
+    width: 100%;
+    /* border: none; */
+}
+
+ul li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+header .nav {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+}
+
+.account-links {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.account img {
+    width: 50px;
+}
