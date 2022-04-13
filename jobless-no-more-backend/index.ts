@@ -30,15 +30,26 @@ async function getFreelanceUserFromToken(token: string) {
 
 
 
-app.post('/signup', async (req, res) => {
-    const { firstName, lastName, email, password, image, bio, location, totalReceived } = req.body
+app.post('/signup/:type', async (req, res) => {
+    const { firstName, lastName, email, password, location } = req.body
+    const type = req.params.type
 
     try {
         const hash = bcrypt.hashSync(password, 8)
-        const freelanceUser = await prisma.freelanceUser.create({
-            data: { firstName: firstName, lastName: lastName, email: email, password: hash, image: image, bio: bio, location: location, totalReceived: totalReceived }
+        const signUpData = {firstName, lastName, email, password: hash, location}
+
+
+        const createdUser =
+        type === "client" 
+        ? await prisma.freelanceUser.create({
+            data: signUpData
         })
-        res.send({ freelanceUser, token: createToken(freelanceUser.id) })
+        : await prisma.clientUser.create({
+            data: signUpData
+        })
+
+
+        res.send({ createdUser, token: createToken(createdUser.id) })
     }
     catch (err) {
         // @ts-ignore
