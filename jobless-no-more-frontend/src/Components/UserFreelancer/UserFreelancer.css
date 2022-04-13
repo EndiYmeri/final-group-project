@@ -1,0 +1,277 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.user-container {
+  background-color: rgb(220, 220, 220);
+}
+.user-freelancer-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2rem;
+  padding: 1rem;
+  width: 100vw;
+  height: 100vh;
+  place-content: center;
+}
+.user-greeting {
+  display: grid;
+  grid-template-rows: auto auto;
+
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+.user-greeting-date {
+  display: grid;
+  place-content: start;
+  border: 1px solid rgb(251, 251, 251);
+  border-radius: 10px;
+  background-color: white;
+  padding: 1rem;
+}
+.user-searchForJob {
+  display: grid;
+  grid-template-columns: auto 70px;
+  border: 1px solid rgb(255, 254, 254);
+  border-radius: 10px;
+  background-color: white;
+  padding: 1rem;
+}
+.search-area {
+  justify-items: center;
+  border: 1px solid rgb(215, 215, 214);
+  box-shadow: 2px 2px rgb(215, 215, 214);
+}
+.search-icon {
+  border: 1px solid rgb(215, 215, 214);
+  box-shadow: 2px 2px rgb(215, 215, 214);
+  background-color: rgb(82, 151, 82);
+  width: 70px;
+}
+.recent-search {
+  display: grid;
+  place-content: start;
+  font-weight: bold;
+  color: rgb(0, 108, 0);
+}
+
+.jobs-liked-category {
+  display: grid;
+  place-content: start;
+  border: 1px solid rgb(251, 251, 251);
+  border-radius: 10px;
+  background-color: white;
+  padding: 1rem;
+}
+.job-you-like-details {
+  display: grid;
+  grid-template-columns: auto 30px;
+}
+.jobs-you-like {
+  display: grid;
+  place-content: start;
+  padding-bottom: 1rem;
+}
+.jobs-three-dots {
+  border: 1px solid rgb(215, 212, 212);
+  border-radius: 100px;
+  height: 30px;
+  display: grid;
+  place-content: center;
+  font-weight: bold;
+}
+.jobs-filtered {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 1rem;
+  gap: 1.3rem;
+  border-bottom: 1px solid rgb(176, 176, 176);
+}
+.jobs-filtered-category {
+  font-weight: bold;
+}
+.jobs-filtered-category:hover {
+  color: rgb(15, 190, 15);
+  border-bottom: 1px solid rgb(15, 190, 15);
+}
+.job-browse-paragraph {
+  display: grid;
+  place-content: start;
+  font-size: 13px;
+  border-bottom: 1px solid rgb(176, 176, 176);
+  padding: 1rem 0;
+}
+
+.jobs-theme-development {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  padding: 1.3rem 0;
+  gap: 0.5rem;
+}
+.jobs-ghost-h4 {
+  display: grid;
+  place-content: start;
+}
+.dislike-button {
+  border: 1px solid rgb(212, 211, 211);
+  border-radius: 30px;
+  padding: 0.4rem;
+}
+.like-button {
+  border: 1px solid rgb(212, 211, 211);
+  border-radius: 30px;
+  padding: 0.4rem;
+}
+.job-info-details {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  color: grey;
+  padding: 0.4rem;
+  place-content: start;
+  gap: 0.4rem;
+  font-size: 12px;
+}
+.job-span:hover {
+  font-weight: bold;
+}
+.job-description {
+  display: grid;
+  place-content: start;
+  padding: 1rem 0;
+  font-size: 13px;
+}
+.job-span-details {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 0.3rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(202, 200, 200);
+}
+.job-span-plus {
+  border: 1px solid blue;
+  width: 43px;
+  height: 23px;
+  color: white;
+  background-color: blue;
+  font-weight: bold;
+}
+.job-span-payment {
+  display: grid;
+  grid-template-columns: 20px 120px;
+  font-weight: lighter;
+}
+.job-span-rating:hover {
+  color: rgb(62, 62, 3);
+}
+.job-span-location {
+  display: grid;
+  grid-template-columns: 20px 60px;
+  font-weight: lighter;
+}
+.user-container-info {
+  display: grid;
+  /* grid-template-rows: auto auto; */
+  place-content: start;
+  justify-content: start;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  background-color: white;
+  padding: 1rem;
+  height: auto;
+}
+.user-details {
+  display: grid;
+  /*  */
+  padding: 1.4rem 0;
+}
+.user-image {
+  display: grid;
+  place-content: center;
+  width: 70px;
+  border-radius: 50px;
+}
+.user-fullname {
+  display: grid;
+  place-content: start;
+  border-bottom: 2px solid rgb(167, 167, 167);
+}
+.user-job {
+  display: grid;
+  place-content: start;
+}
+.user-profile{
+    display: grid;
+    border: 1px solid rgba(55, 141, 55, 0.662);
+    width: auto;
+  background-color: rgba(55, 141, 55, 0.662);
+}
+.profile-completeness {
+  display: grid;
+  padding: 1.4rem;
+  width: auto;
+  border: 1px solid rgba(55, 141, 55, 0.662);
+  /* background-color: rgba(8, 128, 8, 0.153); */
+  border-bottom: 1px solid grey;
+
+}
+.profile-name{
+    display: grid;
+    place-content: start;
+    padding-bottom: 1rem;
+}
+.user-stand-wrapper {
+  display: grid;
+  padding: 1rem 0;
+  gap: 1rem;
+}
+.user-stand-out{
+    font-size: 14px;
+    font-weight: bold;
+    display: grid;
+    place-content: center;
+}
+.user-more-info{
+    display: grid;
+    place-content: center;
+    padding: 0.4rem 0;
+    font-size: 14px;
+    border: 1px solid rgba(55, 141, 55, 0.662);
+    background-color: white;
+    border-radius: 10px;
+    
+}
+.add-work{
+    color: green;
+    font-weight: bold;
+}
+.all-badge{
+    display: grid;
+    gap: 1rem;
+    font-weight: bold;
+}
+.available-connects{
+    display: grid;
+    padding: 1rem ;
+    background-color: white;
+    color: green;
+    font-weight: bold;
+}
+.ava-badge{
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: white;
+    border: 1px solid green;
+    border-radius: 10px;
+    gap: 1rem;
+    padding: 0.6rem;
+}
+.change-icon{
+    display: grid;
+    place-content: center;
+    border: 1px solid grey;
+    width: 50px;
+    border-radius: 50px;
+    padding: 0.1rem 0;
+}
