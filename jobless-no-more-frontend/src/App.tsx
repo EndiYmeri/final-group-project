@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Header from './Components/Header/Header'
+import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
@@ -14,6 +15,7 @@ function App() {
     <Routes>
         <Route path={'/login'} element={<Login />} />
         <Route path={'/signup'} element={<Signup />} />
+        <Route path={'/home'} element={<Home />} />
     </Routes>
     </div>
   )
