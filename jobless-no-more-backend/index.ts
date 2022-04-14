@@ -146,3 +146,55 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 })
+
+
+app.get("/categories", async (req, res) => {
+    const categories = await prisma.category.findMany({
+      include: { jobs: true },
+    });
+    res.send(categories);
+  });
+  app.get("/categories/:id", async (req, res) => {
+    const id = Number(req.params.id);
+  
+    try {
+      const category = await prisma.category.findUnique({
+        where: { id },
+        include: { jobs: { include: { Category: true } } },
+      });
+      if (category) {
+        res.send(category);
+      } else {
+        throw Error("Category with this ID doesnt exists.");
+      }
+    } catch (err) {
+      //@ts-ignore
+      res.status(400).send({ error: err.message });
+    }
+  });
+  
+  app.get("/skills", async (req, res) => {
+    const skills = await prisma.skill.findMany({
+      include: { jobs: true, freelanceUsers: true },
+    });
+    res.send(skills);
+  });
+  
+  app.get("/skills/:name", async (req, res) => {
+    const name = req.params.name;
+    try {
+      const skills = await prisma.skill.findMany({
+        where: {
+          name
+        },
+      });
+      if (skills) {
+        res.send(skills);
+      } else {
+        throw Error("Skills with this NAME doesnt exists.");
+      }
+    } catch (err) {
+      //@ts-ignore
+      res.status(400).send({ error: err.message });
+    }
+  });
