@@ -4,6 +4,7 @@ import "./LoginForm.css";
 type Inputs = {
   email: string;
   password: string;
+  userType: "client" | "freelancer";
 };
 
 type Props = {
@@ -85,7 +86,34 @@ export default function LoginForm({ submitFunc }: Props) {
             id="password"
           />
         </label>
-
+        <p>Login as:</p>
+        <div className="userTypeRadio">
+          <label
+            htmlFor="freelancerButton"
+            className={watch("userType") === "freelancer" ? "active" : ""}
+          >
+            Freelancer
+            <input
+              type="radio"
+              id="freelancerButton"
+              value="freelancer"
+              defaultChecked
+              {...register("userType")}
+            />
+          </label>
+          <label
+            htmlFor="clientButton"
+            className={watch("userType") === "client" ? "active" : ""}
+          >
+            Client
+            <input
+              type="radio"
+              {...register("userType")}
+              id="clientButton"
+              value="client"
+            />
+          </label>
+        </div>
         <input
           className="submit-button"
           type="submit"

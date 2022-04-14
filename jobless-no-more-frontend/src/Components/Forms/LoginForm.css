@@ -33,3 +33,27 @@ input.submit-button {
     border-radius: 2rem;
     cursor: pointer;
 }
+
+.userTypeRadio {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-around;
+}
+
+.userTypeRadio label {
+    cursor: pointer;
+    min-width: 100px;
+    text-align: center;
+    padding: 5px 4px;
+    border-radius: 10px;
+    border: 1px solid #14a800;
+}
+
+.userTypeRadio label.active {
+    background-color: #14a800;
+    color: white;
+}
+
+.userTypeRadio input {
+    display: none;
+}
