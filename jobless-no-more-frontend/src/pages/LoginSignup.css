@@ -58,7 +58,7 @@ img {
 .email-btn,
 .freelance-btn,
 .client-btn {
-    background-color: var(--btn-primary-bg);
+    background-color: #171719;
     border: none;
     width: 100%;
     padding: 0.8rem 1rem;
@@ -69,7 +69,7 @@ img {
 }
 
 .google-btn {
-    background-color: #4285f4;
+    background-color: #0d47ff;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -80,11 +80,11 @@ img {
 }
 
 .sign-up-btn {
-    border: 1px solid var(--brand-primary);
+    border: 1px solid #171719;
     cursor: pointer;
     width: 70%;
     padding: 0.8rem 1rem;
-    color: #14a800;
+    color: #171719;
     font-weight: bold;
     border-radius: 2rem;
 }
@@ -105,7 +105,8 @@ img {
     position: relative;
 }
 
-.login-section .user-icon {
+.login-section .user-icon,
+.login-section .password-icon {
     width: 1rem;
     position: absolute;
     height: 100%;
@@ -140,7 +141,7 @@ img {
 
 .client-radio:hover,
 .freelancer-radio:hover {
-    border: 1px solid var(--brand-primary);
+    border: 1px solid #171719;
 }
 
 .client-radio input,
@@ -148,7 +149,7 @@ img {
     position: absolute;
     top: 8px;
     right: -100px;
-    accent-color: var(--brand-primary);
+    accent-color: #171719;
 }
 
 .client-radio span,
@@ -187,7 +188,7 @@ img {
 
 .dont-have-account-section p span {
     margin-left: 0.5rem;
-    color: var(--brand-primary);
+    color: #0d47ff;
     cursor: pointer;
 }
 

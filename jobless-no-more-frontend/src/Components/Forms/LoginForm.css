@@ -24,7 +24,7 @@ input:focus {
 }
 
 input.submit-button {
-    background-color: var(--btn-primary-bg);
+    background-color: #171719;
     border: none;
     width: 100%;
     padding: 0.8rem 1rem;
