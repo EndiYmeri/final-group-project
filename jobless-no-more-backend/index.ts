@@ -23,29 +23,30 @@ async function getFreelanceUserFromToken(token: string) {
     const decodeData = jwt.verify(token, process.env.Secret)
     const frelanceUser = await prisma.freelanceUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }
+        where: { id: decodeData.id }, include: { skillS: true }
     })
     return frelanceUser
 }
 
-app.get('/validate', async (req,res)=>{
+app.get('/validate', async (req, res) => {
     const token = req.headers.authorization || ""
-    try{
-        if(token){
+    try {
+        if (token) {
 
             const user = await getFreelanceUserFromToken(token)
-            if(user){
-            res.send(user)} 
-            else{
-                res.status(404).send({error: "User not found"})
+            if (user) {
+                res.send(user)
             }
-        }else{
-            res.status(404).send({error: "Invalid token or token not found"})
+            else {
+                res.status(404).send({ error: "User not found" })
+            }
+        } else {
+            res.status(404).send({ error: "Invalid token or token not found" })
         }
     }
     catch (err) {
-         // @ts-ignore
-         res.status(400).send({ error: err.message })
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
     }
 
 })
@@ -57,17 +58,17 @@ app.post('/signup/:type', async (req, res) => {
 
     try {
         const hash = bcrypt.hashSync(password, 8)
-        const signUpData = {firstName, lastName, email, password: hash, location}
+        const signUpData = { firstName, lastName, email, password: hash, location }
 
 
         const createdUser =
-        type === "client" 
-        ? await prisma.freelanceUser.create({
-            data: signUpData
-        })
-        : await prisma.clientUser.create({
-            data: signUpData
-        })
+            type === "client"
+                ? await prisma.freelanceUser.create({
+                    data: signUpData
+                })
+                : await prisma.clientUser.create({
+                    data: signUpData
+                })
 
 
         res.send({ createdUser, token: createToken(createdUser.id) })
@@ -99,23 +100,49 @@ app.post('/login', async (req, res) => {
         res.status(400).send({ error: 'User or password invalid' })
     }
 })
-app.get('/jobs', async (req,res) =>{
-    const jobs = await prisma.job.findMany({include: {skills: true, proposals: true, difficulty: true, clientUser: true, Category: true}})
+app.get('/jobs', async (req, res) => {
+    const jobs = await prisma.job.findMany({ include: { skills: true, proposals: true, difficulty: true, clientUser: true, Category: true } })
     res.send(jobs)
 })
 
-app.get('/jobs/:id', async (req,res) =>{
+app.get('/jobs/:id', async (req, res) => {
     const id = Number(req.params.id)
     try {
-        const job = await prisma.job.findUnique({where:{id},include: {Category: true, clientUser: true, difficulty: true, proposals: true, skills: true}})
-        if(job){
+        const job = await prisma.job.findUnique({ where: { id }, include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true } })
+        if (job) {
             res.send(job)
         }
-        else{
+        else {
             throw Error('Job with this Id doesnt exists')
         }
     } catch (err) {
         //@ts-ignore
-        res.status(400).send({error: err.message})
+        res.status(400).send({ error: err.message })
+    }
+})
+
+
+app.get('/jobsBasedOnUserSkills', async (req, res) => {
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getFreelanceUserFromToken(token)
+        if (user) {
+            const jobs = await prisma.job.findMany({
+                // @ts-ignore
+                where: {
+                    skills: { every: { name: { in: user.skillS.map(skill => skill.name) } } }
+                },
+                include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true }
+            })
+
+            res.send(jobs)
+        }
+        else {
+            res.status(404).send({ error: 'You need to login before.' })
+        }
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
     }
 })
