@@ -1,0 +1,35 @@
+:root {
+    --btn-primary-bg: #14a800;
+    --brand-primary: #14a800;
+    --light-gray: rgb(228, 228, 228);
+    --gray: #65735b;
+}
+
+form {
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+}
+
+input {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid var(--btn-primary-bg);
+}
+
+input.submit-button {
+    background-color: var(--btn-primary-bg);
+    border: none;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 2rem;
+    cursor: pointer;
+}

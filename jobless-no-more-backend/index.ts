@@ -28,6 +28,27 @@ async function getFreelanceUserFromToken(token: string) {
     return frelanceUser
 }
 
+app.get('/validate', async (req,res)=>{
+    const token = req.headers.authorization || ""
+    try{
+        if(token){
+
+            const user = await getFreelanceUserFromToken(token)
+            if(user){
+            res.send(user)} 
+            else{
+                res.status(404).send({error: "User not found"})
+            }
+        }else{
+            res.status(404).send({error: "Invalid token or token not found"})
+        }
+    }
+    catch (err) {
+         // @ts-ignore
+         res.status(400).send({ error: err.message })
+    }
+
+})
 
 
 app.post('/signup/:type', async (req, res) => {

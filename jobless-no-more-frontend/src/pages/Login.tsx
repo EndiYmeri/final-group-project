@@ -1,29 +1,46 @@
 import { useNavigate } from "react-router-dom";
+import LoginForm from "../Components/Forms/LoginForm";
+
 import "./LoginSignup.css";
 
-function Login() {
+type LoginData = {
+  email: string;
+  password: string;
+};
+
+type Props = {
+  setUser: Function;
+};
+
+function Login({ setUser }: Props) {
   const navigate = useNavigate();
+
+  function login(loginData: LoginData) {
+    fetch(`http://localhost:4000/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          localStorage.setItem("token", data.token);
+          setUser(data.freelanceUser);
+          navigate("/home");
+        }
+      });
+  }
 
   return (
     <main className="login-main">
       <div className="login-container">
         <div className="login-section">
           <h2>Log in to Upwork</h2>
-          <label>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 14 14"
-              aria-hidden="true"
-              role="img"
-              className="user-icon"
-            >
-              <path d="M7 8c-3.314 0-6 1.85-6 3.297v2.027c0 .373.358.676.8.676h10.4c.442 0 .8-.303.8-.676v-2.027C13 9.85 10.314 8 7 8zm3-5a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <input type="email" name="email" placeholder="Username or email" />
-          </label>
-          <button type="submit" className="email-btn">
-            Continue with Email
-          </button>
+          <LoginForm submitFunc={login} />
           <div>
             <span>or</span>
           </div>
