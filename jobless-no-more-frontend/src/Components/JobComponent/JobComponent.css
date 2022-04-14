@@ -1,0 +1,134 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Noticia+Text&family=Titillium+Web:wght@200;300;900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+.job-component-container{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    place-content: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(220, 220, 220);
+    
+}
+.job-container{
+    border: 2px solid rgb(210, 208, 208);
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+}
+.job-component-details{
+    display: grid;
+    place-content: start;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgb(202, 201, 201);
+}
+.job-component-titles{
+    display: grid;
+    grid-template-columns: 600px 150px;
+    
+}
+.job-for-website{
+display: grid;
+place-items: start;
+gap: 1rem;
+padding-top: 1rem;
+
+
+/* padding: 1rem; */
+}
+.job-details-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    border-right: 2px solid rgb(202, 201, 201);
+    height: auto;
+}
+
+.job-website{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.job-info{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 1rem;
+    place-items: start;
+}
+.website-and-date{
+    display: grid;
+    grid-template-columns: auto auto;
+    font-weight: bold;
+    gap: 1rem;
+}
+.job-date{
+    font-weight: lighter;
+}
+.website{
+    border: 1px solid rgb(243, 239, 239);
+    padding: 0  0.2rem;
+    border-radius: 20px;
+    background-color: rgb(203, 199, 199);
+    color: rgb(72, 71, 71);
+}
+.job-paragraph{
+    display: grid;
+    place-content: start;
+}
+.job-demo{
+    padding: 1rem 0;
+}
+.job-budget{
+    padding: 1rem 0;
+}
+.job-posting{
+    display: grid;
+    padding-bottom: 1rem;
+    color: rgb(0, 139, 0);
+    font-weight: bold;
+}
+
+.jobs-right-side{
+    display: grid;
+    padding: 0.4rem;
+    
+}
+.jobs-entry{
+    display: grid;
+    place-content: start;
+    font-size: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.jobs-entry-paragraph{
+    display: grid;
+    place-content: start;
+   
+}
+
+.job-last-part{
+    display: grid;
+    padding-top: 1rem;
+   gap: 1rem;
+   place-content: start;
+   border-top: 2px solid rgb(202, 201, 201);
+}
+.job-skill{
+display: grid;
+grid-template-columns: auto auto auto;
+gap: 1rem;
+place-items: start;
+}
+.job-skill-name{
+    border: none;
+    border-radius: 20px;
+    display: grid;
+    font-size: 15px;
+    
+}
