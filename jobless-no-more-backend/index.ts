@@ -134,18 +134,18 @@ app.get("/categories", async (req, res) => {
   });
   res.send(categories);
 });
-app.get("/categories/:id", async (req, res) => {
-  const id = Number(req.params.id);
+app.get("/categories/:name", async (req, res) => {
+  const name = req.params.name;
 
   try {
-    const category = await prisma.category.findUnique({
-      where: { id },
+    const categoryName = await prisma.category.findMany({
+      where: { name },
       include: { jobs: { include: { Category: true } } },
     });
-    if (category) {
-      res.send(category);
+    if (categoryName) {
+      res.send(categoryName);
     } else {
-      throw Error("Category with this ID doesnt exists.");
+      throw Error("Category with this Name doesnt exists.");
     }
   } catch (err) {
     //@ts-ignore
