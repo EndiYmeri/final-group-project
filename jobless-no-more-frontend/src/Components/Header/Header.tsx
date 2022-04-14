@@ -1,14 +1,17 @@
-import SearchBarMenu from "../MaterialComp/SearchBarMenu";
-import { Link } from "react-router-dom";
-import './Header.css'
 import { useState } from "react";
+import SearchBarMenu from "../MaterialComp/SearchBarMenu";
+import { Link, useNavigate } from "react-router-dom";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PlayForWorkIcon from '@mui/icons-material/PlayForWork';
+import './Header.css'
 
 type SearchWhere = "talents" | "projects" | "jobs"
 
 export default function Header(){
     const [hasUser, setHasUser] = useState(false)
-
     const [searchWhere, setSearchWhere] = useState("")
+
+    const navigate = useNavigate()
 
     return(
             <header className={hasUser? "hasUser" : "noUser"} > 
@@ -38,15 +41,21 @@ export default function Header(){
                     hasUser
                     ?  <div className="account-links">
                             <ul>
-                                <li>🔔</li>
-                                <li>📄</li>
+                                <li><NotificationsIcon fontSize="large" /></li>
+                                <li><PlayForWorkIcon fontSize="large" /></li>
                             </ul>
                             <div className="account">
                                 <img src="https://robohash.org/ND" alt="" />
                             </div>
                         </div>
                     :   <div className="buttons">
-                            <button className="login-button">Log in</button>
+                            <button 
+                                className="login-button"
+                                onClick={()=>{
+                                    navigate('login')
+                                    setHasUser(true)
+                                }}
+                                >Log in</button>
                             <button className="signup-button"> Sign up</button>
                         </div>
                 }

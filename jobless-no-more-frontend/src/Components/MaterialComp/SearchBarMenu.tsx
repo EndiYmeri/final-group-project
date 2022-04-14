@@ -1,52 +1,74 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Menu from '@mui/material/Menu';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import WorkIcon from '@mui/icons-material/Work';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import './SearchBarMenu.css'
+
+const options = [
+  'Talents',
+  'Jobs',
+  'Projects'
+];
 
 export default function SearchBarMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLElement>,
+    index: number,
+  ) => {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+    console.log(options, options[selectedIndex])
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   return (
     <div>
-      <Button
-        id="searchBarMenuButton"
-        aria-controls={open ? 'searchBarMenu' : undefined}
-        aria-haspopup="true"
+      <div
+        id="lock-button"
+        aria-haspopup="listbox"
+        aria-controls="lock-menu"
+        aria-label="when device is locked"
         aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
+        onClick={handleClickListItem}
       >
-        <KeyboardArrowDownIcon/>
-      </Button>
+        <ArrowDropDownIcon sx={{ color: "#000000" }} />
+      </div>
+      
       <Menu
-        id="searchBarMenu"
-        aria-labelledby="searchBarMenuButton"
+        id="lock-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+        MenuListProps={{
+          'aria-labelledby': 'lock-button',
+          role: 'listbox',
         }}
       >
-        <MenuItem onClick={handleClose}>
-          
-          Talents
-        </MenuItem>
-        
-        <MenuItem onClick={handleClose}>Projects</MenuItem>
-        <MenuItem onClick={handleClose}>Jobs</MenuItem>
+        {options.map((option, index) => (
+          <MenuItem
+            key={option}
+            selected={index === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index)}
+          >
+            {option === "Talents" && <PersonSearchIcon sx={{ mr: 1 }} />}
+            {option === "Jobs" && <WorkIcon sx={{ mr: 1 }} />}
+            {option === "Projects" && <AccountTreeIcon sx={{ mr: 1 }} />}
+            {option}
+          </MenuItem>
+        ))}
       </Menu>
     </div>
   );

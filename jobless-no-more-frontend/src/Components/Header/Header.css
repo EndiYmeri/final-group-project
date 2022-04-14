@@ -54,11 +54,14 @@ header.noUser .middle .search {
     display: grid;
     grid-auto-flow: column;
     justify-content: flex-start;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .search .searchBar input {
-    width: 100%;
-    /* border: none; */
+    border: none;
+    outline: none;
+    padding: 5px 10px;
 }
 
 nav ul {
@@ -73,6 +76,12 @@ nav a {
     text-decoration: none;
     position: relative;
     padding: 0 5px;
+    transition: color 0.3s ease;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: black;
 }
 
 nav a::before {
@@ -83,18 +92,18 @@ nav a::before {
     opacity: 0;
     width: 100%;
     height: 1px;
-    background-color: white;
+    background-color: black;
 }
 
 nav a:hover::before {
     bottom: -5px;
     opacity: 1;
-    transition: opacity .3s ease;
-    transition: bottom .4s ease;
+    transition: bottom .3s ease;
 }
 
 li {
     list-style: none;
+    cursor: pointer;
 }
 
 .account-links {
