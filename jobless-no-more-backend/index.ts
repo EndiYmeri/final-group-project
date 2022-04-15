@@ -80,16 +80,22 @@ app.post('/signup/:type', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body
+    const { email, password, type } = req.body
     try {
-        const freelanceUser = await prisma.freelanceUser.findUnique({
+        
+        const foundUser = 
+            type === "freelance"? 
+        await prisma.freelanceUser.findUnique({
             where: { email: email }
-        })
+        }) 
+        : await prisma.clientUser.findUnique({
+            where: { email: email }
+        }) 
         //@ts-ignore
-        const passwordMatch = bcrypt.compareSync(password, freelanceUser.password)
+        const passwordMatch = bcrypt.compareSync(password, foundUser.password)
 
-        if (freelanceUser && passwordMatch) {
-            res.send({ freelanceUser, token: createToken(freelanceUser.id) })
+        if (foundUser && passwordMatch) {
+            res.send({ foundUser, token: createToken(foundUser.id) })
         }
         else {
             throw Error('Something went  wrong!')

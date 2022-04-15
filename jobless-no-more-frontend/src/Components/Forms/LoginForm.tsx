@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./LoginForm.css";
 
@@ -16,11 +17,13 @@ export default function LoginForm({ submitFunc }: Props) {
     register,
     handleSubmit,
     watch,
+    getValues,
+    getFieldState,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    submitFunc(data);
-    console.log(data);
+    // submitFunc(data);
+    console.log(data, getFieldState("userType"));
   };
 
   return (
@@ -86,7 +89,12 @@ export default function LoginForm({ submitFunc }: Props) {
             id="password"
           />
         </label>
-        <p>Login as:</p>
+        <p>
+          Login as:
+          {errors.userType && (
+            <span className="error">This field is required</span>
+          )}{" "}
+        </p>
         <div className="userTypeRadio">
           <label
             htmlFor="freelancerButton"
@@ -97,8 +105,7 @@ export default function LoginForm({ submitFunc }: Props) {
               type="radio"
               id="freelancerButton"
               value="freelancer"
-              defaultChecked
-              {...register("userType")}
+              {...register("userType", { required: true })}
             />
           </label>
           <label
@@ -108,12 +115,13 @@ export default function LoginForm({ submitFunc }: Props) {
             Client
             <input
               type="radio"
-              {...register("userType")}
+              {...register("userType", { required: true })}
               id="clientButton"
               value="client"
             />
           </label>
         </div>
+
         <input
           className="submit-button"
           type="submit"
