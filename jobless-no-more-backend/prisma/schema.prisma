@@ -45,6 +45,7 @@ model job {
   content      String
   dateCreated  DateTime   @default(now())
   skills       Skill[]
+  duration     Duration?  @relation(fields: [durationId], references: [id])
   difficulty   Difficulty @relation(fields: [difficultyId], references: [id])
   difficultyId Int
   Category     Category   @relation(fields: [categoryId], references: [id])
@@ -52,6 +53,8 @@ model job {
   clientUser   clientUser @relation(fields: [clientUserId], references: [id])
   clientUserId Int
   proposals    Proposal[]
+  durationId   Int?
+  published    Boolean    @default(false)
 }
 
 model Category {
@@ -79,4 +82,10 @@ model Difficulty {
   id   Int    @id @default(autoincrement())
   name String @unique
   jobs job[]
+}
+
+model Duration {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  job  job[]
 }

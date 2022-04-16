@@ -121,6 +121,11 @@ app.get('/jobs/:id', async (req, res) => {
     }
 })
 
+app.post('/jobs', async (req,res)=>{
+    const {} = req.body
+})
+
+
 
 app.get('/jobsBasedOnUserSkills', async (req, res) => {
     const token = req.headers.authorization || ''
