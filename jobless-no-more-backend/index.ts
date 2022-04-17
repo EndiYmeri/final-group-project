@@ -21,11 +21,21 @@ function createToken(id: number) {
 async function getFreelanceUserFromToken(token: string) {
     //@ts-ignore
     const decodeData = jwt.verify(token, process.env.Secret)
-    const frelanceUser = await prisma.freelanceUser.findUnique({
+    const freelanceUser = await prisma.freelanceUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }, include: { skillS: true }
+        where: { id: decodeData.id }, include: { skillS: true, proposals:true }
     })
-    return frelanceUser
+    return freelanceUser
+}
+
+async function getClientUserFromToken(token: string) {
+    //@ts-ignore
+    const decodeData = jwt.verify(token, process.env.Secret)
+    const clientUser = await prisma.clientUser.findUnique({
+        //@ts-ignore
+        where: { id: decodeData.id }, include: {jobs:true}
+    })
+    return clientUser
 }
 
 app.get('/validate', async (req, res) => {
@@ -122,7 +132,31 @@ app.get('/jobs/:id', async (req, res) => {
 })
 
 app.post('/jobs', async (req,res)=>{
-    const {} = req.body
+    const {duration, title, location, content, skills, difficulty, category } = req.body 
+    const token = req.headers.authorization || ''
+
+
+    try{
+        const clientUser = await getClientUserFromToken(token)
+        const jobCreated = await prisma.job.create({
+            data:{
+                content,
+                location,
+                title,
+                skills: {connect: {name:skills}},
+                duration: {connect:  { name: duration } },
+                Category: { connect: { name: category } },
+                difficulty: { connect: { name: difficulty } },
+                clientUser: { connect: { email: clientUser.email } },
+
+            }
+        })
+
+
+    } catch(err){
+        // @ts-ignore
+        res.send({error: err.message})
+    }
 })
 
 
