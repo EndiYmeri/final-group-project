@@ -135,7 +135,7 @@ app.post('/jobs', async (req,res)=>{
     const {duration, title, location, content, skills, difficulty, category } = req.body 
     const token = req.headers.authorization || ''
 
-
+    const skillsMapped = skills.map((skill:any )=> ({name: skill}))
     try{
         const clientUser = await getClientUserFromToken(token)
         const jobCreated = await prisma.job.create({
@@ -143,16 +143,22 @@ app.post('/jobs', async (req,res)=>{
                 content,
                 location,
                 title,
-                skills: {connect: {name:skills}},
+                skills: {connect: skillsMapped },
                 duration: {connect:  { name: duration } },
                 Category: { connect: { name: category } },
                 difficulty: { connect: { name: difficulty } },
                 clientUser: { connect: { email: clientUser.email } },
-
+            },
+            include:{
+                Category:true, skills:true, clientUser:true, difficulty:true, duration:true, proposals:true 
             }
         })
 
-
+        if(jobCreated){
+            res.send(jobCreated)
+        }else{
+            throw Error()
+        }
     } catch(err){
         // @ts-ignore
         res.send({error: err.message})
