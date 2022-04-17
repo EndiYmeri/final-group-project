@@ -17,7 +17,7 @@ function Login({ setUser }: Props) {
   const navigate = useNavigate();
 
   function login(loginData: LoginData) {
-    fetch(`http://localhost:4000/`, {
+    fetch(`http://localhost:4000/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ function Login({ setUser }: Props) {
           console.log(data.error);
         } else {
           localStorage.setItem("token", data.token);
-          setUser(data.freelanceUser);
+          setUser(data.foundUser);
           navigate("/home");
         }
       });

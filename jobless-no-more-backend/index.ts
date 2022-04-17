@@ -80,11 +80,11 @@ app.post('/signup/:type', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-    const { email, password, type } = req.body
+    const { email, password, userType } = req.body
     try {
         
         const foundUser = 
-            type === "freelance"? 
+            userType === "freelance" ? 
         await prisma.freelanceUser.findUnique({
             where: { email: email }
         }) 
