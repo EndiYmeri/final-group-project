@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header/Header";
 import ClientSignup from "./pages/ClientSignup";
@@ -13,6 +13,7 @@ function App() {
   const [user, setUser] = useState<User>();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (localStorage.token) {
@@ -27,7 +28,9 @@ function App() {
           navigate("/home");
         });
     } else {
-      navigate("/landingPage");
+      location.pathname === "/login" || location.pathname === "/signup"
+        ? null
+        : navigate("/landingPage");
     }
   }, []);
 
