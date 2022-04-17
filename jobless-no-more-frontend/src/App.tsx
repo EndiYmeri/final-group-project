@@ -8,6 +8,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { User } from "./types";
+import FreelancerProfile from "./pages/FreelancerProfile";
 
 function App() {
   const [user, setUser] = useState<User>();
@@ -43,6 +44,7 @@ function App() {
         <Route path={"/client-signup"} element={<ClientSignup />} />
         <Route path={"/home"} element={<Home />} />
         <Route index element={<LandingPage user={user} />} />
+        <Route path={"/profile"} element={<FreelancerProfile user={user} />} />
       </Routes>
       <Footer />
     </div>

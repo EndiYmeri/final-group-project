@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.profile-container {
+    display: grid;
+    justify-content: center;
+    display: block;
+
+    padding: 3rem 5rem;
+}
+
+.profile {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+img {
+    width: 100%;
+}
+
+.freelancer-details {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1.8rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.freelancer-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #d1d1d1;
+}
+
+.edit-photo {
+    width: 30px;
+    border: 1px solid #d1d1d1;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    padding: 5px;
+}
+
+.avatar {
+    position: relative;
+}
+
+.freelancer-info {
+    display: grid;
+    padding: 7px;
+    gap: 0.4rem;
+    align-content: start;
+}
+
+.location {
+    font-size: 14px;
+    color: #222222bb;
+
+}
+
+.more-info {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+}
+
+.education-container {
+    border-right: 1px solid #d1d1d1;
+    padding: 1rem;
+
+}
+
+.freelancer-bio {
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.bio {
+    font-size: 14px;
+    color: #222222bb;
+}
+
+.title {
+    display: grid;
+    grid-template-columns: 200px auto;
+    align-items: center;
+}
+
+.edit-title {
+    width: 30px;
+    border: 1px solid #d1d1d1;
+    border-radius: 50%;
+    background-color: white;
+    padding: 5px;
+    vertical-align: center;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: 80px auto;
+    align-items: center;
+    padding: 1rem;
+}
+
+.skills-list {
+    padding: 0.7rem 1rem;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 1.5rem;
+}
+
+.skills-item {
+    background-color: #f2f2f2;
+    border-radius: 25%;
+    padding: 7px;
+}
+
+.education-title {
+    display: grid;
+    grid-template-columns: 100px auto;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.school {
+    display: grid;
+    gap: 0.6rem;
+    padding-bottom: 1rem;
+}
