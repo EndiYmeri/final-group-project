@@ -144,7 +144,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'Worlwide',
         Category: { connect: { name: 'IT & Networking' } },
         difficulty: { connect: { name: 'Intermediate' } },
-        clientUser: { connect: { email: 'denis@email.com' } }
+        clientUser: { connect: { email: 'denis@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where:{name:"Short Term / Part Time"} , create: {name: "Short Term / Part Time"} }}
     },
     {
         title: 'Edit Html web page',
@@ -152,7 +154,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'Albania',
         Category: { connect: { name: 'IT & Networking' } },
         difficulty: { connect: { name: 'Entry level' } },
-        clientUser: { connect: { email: 'arita@email.com' } }
+        clientUser: { connect: { email: 'arita@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where:{name:"Short Term / Part Time"} , create: {name: "Short Term / Part Time"} }}
     },
     {
         title: 'Letter head, business card, flyer creation ',
@@ -160,7 +164,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'Worlwide',
         Category: { connect: { name: 'Design & Creative' } },
         difficulty: { connect: { name: 'Intermediate' } },
-        clientUser: { connect: { email: 'ani@email.com' } }
+        clientUser: { connect: { email: 'ani@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where:{name:"Short Term / Part Time"} , create: {name: "Short Term / Part Time"} }}
     },
     {
         title: 'Creation of HTML templates responsive !!',
@@ -168,7 +174,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'France',
         Category: { connect: { name: 'IT & Networking' } },
         difficulty: { connect: { name: 'Intermediate' } },
-        clientUser: { connect: { email: 'denis@email.com' } }
+        clientUser: { connect: { email: 'denis@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where: { name: "Long Term / Dedicated" } , create: { name:  "Long Term / Dedicated" } }}
     },
     {
         title: 'UK legal adviser (liquidation/strike off)',
@@ -176,7 +184,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'UK',
         Category: { connect: { name: 'Legal' } },
         difficulty: { connect: { name: 'Expert' } },
-        clientUser: { connect: { email: 'john@email.com' } }
+        clientUser: { connect: { email: 'john@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where: { name: "Long Term / Dedicated" } , create: { name:  "Long Term / Dedicated" } }}
     },
     {
         title: 'Translation of a Legal Doc from Spanish to Chinese',
@@ -184,7 +194,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'Worlwide',
         Category: { connect: { name: 'Legal' } },
         difficulty: { connect: { name: 'Intermediate' } },
-        clientUser: { connect: { email: 'ani@email.com' } }
+        clientUser: { connect: { email: 'ani@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where: { name: "Long Term / Dedicated" } , create: { name:  "Long Term / Dedicated" } }}
     },
     {
         title: 'Graphic Designer/ Brand Identity',
@@ -192,7 +204,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'Albania',
         Category: { connect: { name: 'Design & Creative' } },
         difficulty: { connect: { name: 'Expert' } },
-        clientUser: { connect: { email: 'ani@email.com' } }
+        clientUser: { connect: { email: 'ani@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where: { name: "Long Term / Dedicated" } , create: { name:  "Long Term / Dedicated" } }}
     },
     {
         title: 'Alibaba Orders is now hiring!!',
@@ -200,7 +214,9 @@ const jobs: Prisma.jobCreateInput[] = [
         location: 'Worlwide',
         Category: { connect: { name: 'Sales & Marketing' } },
         difficulty: { connect: { name: 'Entry level' } },
-        clientUser: { connect: { email: 'john@email.com' } }
+        clientUser: { connect: { email: 'john@email.com' } },
+        published: true,
+        duration: {connectOrCreate: { where: { name: "Long Term / Dedicated" } , create: { name:  "Long Term / Dedicated" } }}
     }
 ]
 

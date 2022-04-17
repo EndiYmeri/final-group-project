@@ -6,6 +6,7 @@ import "./LoginSignup.css";
 type LoginData = {
   email: string;
   password: string;
+  userType: "freelancer" | "client";
 };
 
 type Props = {
@@ -16,7 +17,7 @@ function Login({ setUser }: Props) {
   const navigate = useNavigate();
 
   function login(loginData: LoginData) {
-    fetch(`http://localhost:4000/login`, {
+    fetch(`http://localhost:4000/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +40,7 @@ function Login({ setUser }: Props) {
     <main className="login-main">
       <div className="login-container">
         <div className="login-section">
-          <h2>Log in to Upwork</h2>
+          <h2>Log in to Jobless</h2>
           <LoginForm submitFunc={login} />
           <div>
             <span>or</span>
