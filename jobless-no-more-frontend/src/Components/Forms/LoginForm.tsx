@@ -22,7 +22,7 @@ export default function LoginForm({ submitFunc }: Props) {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // submitFunc(data);
+    submitFunc(data);
     console.log(data, getFieldState("userType"));
   };
 
