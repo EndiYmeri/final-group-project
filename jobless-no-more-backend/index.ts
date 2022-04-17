@@ -82,15 +82,15 @@ app.post('/signup/:type', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { email, password, userType } = req.body
     try {
-        
-        const foundUser = 
-            userType === "freelance" ? 
-        await prisma.freelanceUser.findUnique({
-            where: { email: email }
-        }) 
-        : await prisma.clientUser.findUnique({
-            where: { email: email }
-        }) 
+
+        const foundUser =
+            userType === "freelancer" ?
+                await prisma.freelanceUser.findUnique({
+                    where: { email: email }
+                })
+                : await prisma.clientUser.findUnique({
+                    where: { email: email }
+                })
         //@ts-ignore
         const passwordMatch = bcrypt.compareSync(password, foundUser.password)
 
@@ -127,8 +127,8 @@ app.get('/jobs/:id', async (req, res) => {
     }
 })
 
-app.post('/jobs', async (req,res)=>{
-    const {} = req.body
+app.post('/jobs', async (req, res) => {
+    const { } = req.body
 })
 
 
@@ -161,45 +161,45 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
 
 app.get("/categories/:name", async (req, res) => {
     const name = req.params.name;
-  
+
     try {
-      const categoryName = await prisma.category.findMany({
-        where: { name },
-        include: { jobs: { include: { Category: true } } },
-      });
-      if (categoryName) {
-        res.send(categoryName);
-      } else {
-        throw Error("Category with this Name doesnt exists.");
-      }
+        const categoryName = await prisma.category.findMany({
+            where: { name },
+            include: { jobs: { include: { Category: true } } },
+        });
+        if (categoryName) {
+            res.send(categoryName);
+        } else {
+            throw Error("Category with this Name doesnt exists.");
+        }
     } catch (err) {
-      //@ts-ignore
-      res.status(400).send({ error: err.message });
+        //@ts-ignore
+        res.status(400).send({ error: err.message });
     }
-  });
-  
-  app.get("/skills", async (req, res) => {
+});
+
+app.get("/skills", async (req, res) => {
     const skills = await prisma.skill.findMany({
-      include: { jobs: true, freelanceUsers: true },
+        include: { jobs: true, freelanceUsers: true },
     });
     res.send(skills);
-  });
-  
-  app.get("/skills/:name", async (req, res) => {
+});
+
+app.get("/skills/:name", async (req, res) => {
     const name = req.params.name;
     try {
-      const skills = await prisma.skill.findMany({
-        where: {
-          name
-        },
-      });
-      if (skills) {
-        res.send(skills);
-      } else {
-        throw Error("Skills with this NAME doesnt exists.");
-      }
+        const skills = await prisma.skill.findMany({
+            where: {
+                name
+            },
+        });
+        if (skills) {
+            res.send(skills);
+        } else {
+            throw Error("Skills with this NAME doesnt exists.");
+        }
     } catch (err) {
-      //@ts-ignore
-      res.status(400).send({ error: err.message });
+        //@ts-ignore
+        res.status(400).send({ error: err.message });
     }
-  });
+});
