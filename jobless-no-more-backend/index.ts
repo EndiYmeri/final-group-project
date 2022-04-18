@@ -170,6 +170,7 @@ app.post('/jobs', async (req,res)=>{
         // @ts-ignore
         res.send({error: err.message})
     }
+})
 
 app.get('/jobsBasedOnUserSkills', async (req, res) => {
     const token = req.headers.authorization || ''
