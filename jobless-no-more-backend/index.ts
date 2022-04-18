@@ -145,10 +145,12 @@ app.post('/jobs', async (req,res)=>{
     const skillsMapped = skills.map((skill:any )=> ({name: skill}))
     try{
         const clientUser = await getClientUserFromToken(token)
-        const jobCreated = await prisma.job.create({
-            data:{
-                content,
-                location,
+        if(clientUser){
+            
+            const jobCreated = await prisma.job.create({
+                data:{
+                    content,
+                    location,
                 title,
                 skills: {connect: skillsMapped },
                 duration: {connect:  { name: duration } },
@@ -160,12 +162,15 @@ app.post('/jobs', async (req,res)=>{
                 Category:true, skills:true, clientUser:true, difficulty:true, duration:true, proposals:true 
             }
         })
-
+        
         if(jobCreated){
             res.send(jobCreated)
         }else{
             throw Error()
         }
+    }else{
+        throw Error("Client not found or broken token")
+    }
     } catch(err){
         // @ts-ignore
         res.send({error: err.message})

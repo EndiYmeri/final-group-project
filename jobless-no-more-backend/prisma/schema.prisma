@@ -20,6 +20,7 @@ model freelanceUser {
   image         String?
   location      String
   bio           String?
+  type          String     @default("freelancer")
   skillS        Skill[]
   proposals     Proposal[]
 }
@@ -33,6 +34,7 @@ model clientUser {
   password        String
   image           String?
   location        String
+  type            String  @default("client")
   rating          Int     @default(0)
   paymentVerified Boolean @default(false)
   jobs            job[]
