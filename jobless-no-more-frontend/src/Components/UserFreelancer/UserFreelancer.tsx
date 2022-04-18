@@ -8,14 +8,15 @@ import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CreateIcon from '@mui/icons-material/Create';
 import ProgressBar from "@ramonak/react-progress-bar";
+import { useNavigate } from "react-router-dom";
 
 
 function UserFreelancer() {
-  
-    const Example = () => {
-      return <ProgressBar completed={60} />;
-    };
-  
+  const navigate = useNavigate()
+  const Example = () => {
+    return <ProgressBar completed={60} />;
+  };
+
   return (
     <div className="user-container">
       <div className="user-freelancer-container">
@@ -105,38 +106,38 @@ function UserFreelancer() {
             <img
               className="user-image"
               src="https://avatars.dicebear.com/api/avataaars/desintilaluzi.svg"
-              alt="Desintila"
+              alt="Desintila" onClick={() => navigate('/profile')}
             />
             <h3 className="user-fullname">Desintila L</h3>
             <h5 className="user-job">Web Developer</h5>
           </div>
           <div className="user-profile">
-          <div className="profile-completeness">
-            <div className="profile-name">Profile Completeness</div>
-            <div>{Example()}
+            <div className="profile-completeness">
+              <div className="profile-name">Profile Completeness</div>
+              <div>{Example()}
+              </div>
+
             </div>
-            
-          </div>
-          <div className="user-stand-wrapper">
-          <div className="user-stand-out">Ways to stand out to our clients right now... </div>
-          <div className="user-more-info">Add your past work so clients know you're a pro(+30%).
-            <div className="add-work">Add work</div>
-            </div>
-            <div className="all-badge">
-              <div className="available-connects">70 Available Connects</div>
-              <div className="ava-badge">
-                <div>Availability Badge</div>
-                <div className="change-icon"><CreateIcon /></div>
-                <div>Hours Per week</div>
-                <div className="change-icon"><CreateIcon /></div>
-                <div>Profile Visibility</div>
-                <div className="change-icon"><CreateIcon /></div>
-                <div>My Categories</div>
-                <div className="change-icon"><CreateIcon /></div>
+            <div className="user-stand-wrapper">
+              <div className="user-stand-out">Ways to stand out to our clients right now... </div>
+              <div className="user-more-info">Add your past work so clients know you're a pro(+30%).
+                <div className="add-work">Add work</div>
+              </div>
+              <div className="all-badge">
+                <div className="available-connects">70 Available Connects</div>
+                <div className="ava-badge">
+                  <div>Availability Badge</div>
+                  <div className="change-icon"><CreateIcon /></div>
+                  <div>Hours Per week</div>
+                  <div className="change-icon"><CreateIcon /></div>
+                  <div>Profile Visibility</div>
+                  <div className="change-icon"><CreateIcon /></div>
+                  <div>My Categories</div>
+                  <div className="change-icon"><CreateIcon /></div>
                 </div>
-              
+
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

@@ -85,7 +85,14 @@ export default function Header({ user, setUser }: Props) {
                 >
                   Log in
                 </button>
-                <button className="signup-button"> Sign up</button>
+                <button
+                  onClick={() => {
+                    navigate("signup");
+                  }}
+                  className="signup-button"
+                >
+                  Sign up
+                </button>
               </div>
             )}
           </>

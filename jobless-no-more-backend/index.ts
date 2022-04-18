@@ -90,16 +90,22 @@ app.post('/signup/:type', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body
+    const { email, password, userType } = req.body
     try {
-        const freelanceUser = await prisma.freelanceUser.findUnique({
-            where: { email: email }
-        })
-        //@ts-ignore
-        const passwordMatch = bcrypt.compareSync(password, freelanceUser.password)
 
-        if (freelanceUser && passwordMatch) {
-            res.send({ freelanceUser, token: createToken(freelanceUser.id) })
+        const foundUser =
+            userType === "freelancer" ?
+                await prisma.freelanceUser.findUnique({
+                    where: { email: email }
+                })
+                : await prisma.clientUser.findUnique({
+                    where: { email: email }
+                })
+        //@ts-ignore
+        const passwordMatch = bcrypt.compareSync(password, foundUser.password)
+
+        if (foundUser && passwordMatch) {
+            res.send({ foundUser, token: createToken(foundUser.id) })
         }
         else {
             throw Error('Something went  wrong!')
@@ -130,6 +136,7 @@ app.get('/jobs/:id', async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 })
+
 
 app.post('/jobs', async (req,res)=>{
     const {duration, title, location, content, skills, difficulty, category } = req.body 
@@ -163,9 +170,6 @@ app.post('/jobs', async (req,res)=>{
         // @ts-ignore
         res.send({error: err.message})
     }
-})
-
-
 
 app.get('/jobsBasedOnUserSkills', async (req, res) => {
     const token = req.headers.authorization || ''
@@ -193,53 +197,47 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
 })
 
 
-app.get("/categories", async (req, res) => {
-    const categories = await prisma.category.findMany({
-      include: { jobs: true },
-    });
-    res.send(categories);
-  });
-  app.get("/categories/:id", async (req, res) => {
-    const id = Number(req.params.id);
-  
+app.get("/categories/:name", async (req, res) => {
+    const name = req.params.name;
+
     try {
-      const category = await prisma.category.findUnique({
-        where: { id },
-        include: { jobs: { include: { Category: true } } },
-      });
-      if (category) {
-        res.send(category);
-      } else {
-        throw Error("Category with this ID doesnt exists.");
-      }
+        const categoryName = await prisma.category.findMany({
+            where: { name },
+            include: { jobs: { include: { Category: true } } },
+        });
+        if (categoryName) {
+            res.send(categoryName);
+        } else {
+            throw Error("Category with this Name doesnt exists.");
+        }
     } catch (err) {
-      //@ts-ignore
-      res.status(400).send({ error: err.message });
+        //@ts-ignore
+        res.status(400).send({ error: err.message });
     }
-  });
-  
-  app.get("/skills", async (req, res) => {
+});
+
+app.get("/skills", async (req, res) => {
     const skills = await prisma.skill.findMany({
-      include: { jobs: true, freelanceUsers: true },
+        include: { jobs: true, freelanceUsers: true },
     });
     res.send(skills);
-  });
-  
-  app.get("/skills/:name", async (req, res) => {
+});
+
+app.get("/skills/:name", async (req, res) => {
     const name = req.params.name;
     try {
-      const skills = await prisma.skill.findMany({
-        where: {
-          name
-        },
-      });
-      if (skills) {
-        res.send(skills);
-      } else {
-        throw Error("Skills with this NAME doesnt exists.");
-      }
+        const skills = await prisma.skill.findMany({
+            where: {
+                name
+            },
+        });
+        if (skills) {
+            res.send(skills);
+        } else {
+            throw Error("Skills with this NAME doesnt exists.");
+        }
     } catch (err) {
-      //@ts-ignore
-      res.status(400).send({ error: err.message });
+        //@ts-ignore
+        res.status(400).send({ error: err.message });
     }
-  });
+});
