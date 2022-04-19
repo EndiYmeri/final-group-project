@@ -201,7 +201,19 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 })
-
+app.post('/proposals', async(req,res) => {
+    const {jobId, freelanceUserId} = req.body
+    const token = req.headers.authorization;
+    try{
+      await prisma.proposal.create({data: {jobId, freelanceUserId}})
+      const freelanceUser = await getFreelanceUserFromToken(token as string)
+      if(freelanceUser){
+        res.send(freelanceUser)
+      }
+    }catch(err: any){
+      res.status(400).send({ error: err.message });
+    }
+  })
 
 app.get("/categories/:name", async (req, res) => {
     const name = req.params.name;
