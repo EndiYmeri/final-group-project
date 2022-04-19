@@ -116,6 +116,7 @@ app.post('/login', async (req, res) => {
         res.status(400).send({ error: 'User or password invalid' })
     }
 })
+
 app.get('/jobs', async (req, res) => {
     const jobs = await prisma.job.findMany({ include: { skills: true, proposals: true, difficulty: true, clientUser: true, Category: true } })
     res.send(jobs)

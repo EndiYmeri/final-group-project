@@ -5,3 +5,12 @@ export type User = {
     password: string,
     location?: string
 }
+
+export type Job = {
+    title: string,
+    content: string,
+    duration: string,
+    difficulty: string,
+    skills: string[],
+    
+}
