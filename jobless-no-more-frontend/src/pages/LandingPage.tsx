@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Intro from "../Components/Intro/Intro";
 import { User } from "../types";
 
 type Props = {
@@ -13,5 +14,5 @@ export default function LandingPage({ user }: Props) {
     if (user) navigate("/home");
   }, []);
 
-  return <h1>LANDING PAGE</h1>;
+  return <Intro />;
 }
