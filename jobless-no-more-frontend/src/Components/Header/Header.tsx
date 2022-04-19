@@ -21,7 +21,7 @@ export default function Header({ user, setUser }: Props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    user ? setHasUser(true) : setHasUser(false);
+    // user ? setHasUser(true) : setHasUser(false);
     setHideHeader(
       location.pathname === "/login" || location.pathname === "/signup"
     );
@@ -35,7 +35,7 @@ export default function Header({ user, setUser }: Props) {
   }
 
   return (
-    <header className={hasUser ? "hasUser" : "noUser"}>
+    <header className={user ? "hasUser" : "noUser"}>
       <div className="logo">
         <Link to="/">
           <h1>Jobless</h1>
@@ -61,7 +61,7 @@ export default function Header({ user, setUser }: Props) {
             </nav>
           </div>
           <>
-            {hasUser ? (
+            {user ? (
               <div className="account-links">
                 <ul>
                   <li>

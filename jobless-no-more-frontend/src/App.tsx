@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { User } from "./types";
 import FreelancerProfile from "./pages/FreelancerProfile";
+import Freelancer from "./pages/Freelancer";
+import Client from "./pages/Client";
 
 function App() {
   const [user, setUser] = useState<User>();
@@ -31,7 +33,7 @@ function App() {
     } else {
       location.pathname === "/login" || location.pathname === "/signup"
         ? null
-        : navigate("/landingPage");
+        : navigate("/");
     }
   }, []);
 
@@ -42,7 +44,13 @@ function App() {
         <Route path={"/login"} element={<Login setUser={setUser} />} />
         <Route path={"/signup"} element={<Signup />} />
         <Route path={"/client-signup"} element={<ClientSignup />} />
-        <Route path={"/home"} element={<Home />} />
+        {user && <Route path={"/home"} element={<Home user={user} />} />}
+        {user?.type === "client" && (
+          <Route path={"/client"} element={<Client />} />
+        )}
+        {user?.type === "freelancer" && (
+          <Route path={"/freelancer"} element={<Freelancer />} />
+        )}
         <Route index element={<LandingPage user={user} />} />
         <Route path={"/profile"} element={<FreelancerProfile user={user} />} />
       </Routes>

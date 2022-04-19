@@ -3,7 +3,8 @@ export type User = {
     lastName: string,
     email: string,
     password: string,
-    location?: string
+    location?: string,
+    type: "freelancer" | "client"
 }
 
 export type Job = {
