@@ -10,8 +10,15 @@ export type User = {
 export type Job = {
     title: string,
     content: string,
-    duration: string,
-    difficulty: string,
-    skills: string[],
-    
+    duration: { name: string },
+    difficulty: { name: string },
+    skills: Skill[],
+    dateCreated: string,
+    id: number,
+    location: string,
+    Category: { name: string }
+}
+export type Skill = {
+    id: number,
+    name: string
 }
