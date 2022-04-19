@@ -52,7 +52,7 @@ function App() {
           <Route path={"/freelancer"} element={<Freelancer />} />
         )}
         <Route index element={<LandingPage user={user} />} />
-        <Route path={"/profile"} element={<FreelancerProfile user={user} />} />
+        { user && <Route path={"/profile"} element={<FreelancerProfile  user={user} />} />}
       </Routes>
       <Footer />
     </div>
