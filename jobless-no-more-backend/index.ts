@@ -81,16 +81,20 @@ app.post('/signup/:type', async (req, res) => {
     const { firstName, lastName, email, password, location } = req.body
     const type = req.params.type
 
+    console.log(type)
     try {
         const hash = bcrypt.hashSync(password, 8)
         const signUpData = { firstName, lastName, email, password: hash, location }
         const createdUser =
-            type === "client"
+            type === "freelancer"
                 ? await prisma.freelanceUser.create({
-                    data: signUpData
+                    data: signUpData,
+                    include:{ proposals:true, skills:true }
                 })
                 : await prisma.clientUser.create({
-                    data: signUpData
+                    data: signUpData,
+                    include:{jobs:true}
+                    
                 })
 
 

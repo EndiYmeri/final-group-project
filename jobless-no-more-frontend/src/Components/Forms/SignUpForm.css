@@ -1,0 +1,15 @@
+.sign-up-form {
+    display: grid;
+    gap: 30px;
+    padding: 2rem 3rem;
+}
+
+.sign-up-form input {
+    padding: 1rem 1.5rem;
+}
+
+.sign-up-form div {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 30px;
+}

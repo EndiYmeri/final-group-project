@@ -5,6 +5,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PlayForWorkIcon from "@mui/icons-material/PlayForWork";
 import "./Header.css";
 import { User } from "../../types";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 type SearchWhere = "talents" | "projects" | "jobs";
 type Props = {
@@ -72,7 +73,11 @@ export default function Header({ user, setUser }: Props) {
                   </li>
                 </ul>
                 <div className="account" onClick={signOut}>
-                  <img src={user.image} alt="" />
+                  {user.image ? (
+                    <img src={user.image} alt="" />
+                  ) : (
+                    <AccountCircleIcon />
+                  )}
                 </div>
               </div>
             ) : (

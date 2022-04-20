@@ -112,7 +112,7 @@ function SignUpUserType({ setUserType }: Props) {
               type="submit"
               className="freelance-btn"
               onClick={() => {
-                setUserType("freelance");
+                setUserType("freelancer");
               }}
             >
               Apply as a Freelance

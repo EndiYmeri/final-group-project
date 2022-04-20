@@ -43,7 +43,7 @@ function App() {
       <Header user={user} setUser={setUser} />
       <Routes>
         <Route path={"/login"} element={<Login setUser={setUser} />} />
-        <Route path={"/signup"} element={<Signup />} />
+        <Route path={"/signup"} element={<Signup setUser={setUser} />} />
         <Route path={"/client-signup"} element={<ClientSignup />} />
         {user && <Route path={"/home"} element={<Home user={user} />} />}
         {user?.type === "client" && (
