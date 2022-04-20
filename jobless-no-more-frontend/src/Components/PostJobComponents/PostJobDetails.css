@@ -1,0 +1,15 @@
+.extra-details form label {
+    display: grid;
+    gap: 20px;
+    padding: 2rem 1rem;
+}
+
+.extra-details form ul {
+    display: grid;
+    gap: 10px;
+}
+
+.extra-details ul li {
+    list-style-type: disc;
+    margin-left: 20px;
+}

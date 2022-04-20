@@ -21,7 +21,7 @@ model freelanceUser {
   location      String
   bio           String?
   type          String     @default("freelancer")
-  skillS        Skill[]
+  skills        Skill[]
   proposals     Proposal[]
 }
 

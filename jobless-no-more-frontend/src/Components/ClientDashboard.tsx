@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./clientDashboard.css";
 function ClientDashboard() {
   const [toShowList, setToShowList] = useState(false);
@@ -6,6 +7,9 @@ function ClientDashboard() {
     setToShowList(!toShowList);
     console.log("haha");
   };
+
+  const navigate = useNavigate();
+
   return (
     <main className="client-main-dashboard">
       <section className="client-dashboard-header">
@@ -14,7 +18,12 @@ function ClientDashboard() {
           <h4>Client Name</h4>
         </div>
         <div className="right-side">
-          <button className="post-a-job__btn">Post a Job</button>
+          <button
+            className="post-a-job__btn"
+            onClick={() => navigate("/post-job/getting-started")}
+          >
+            Post a Job
+          </button>
         </div>
       </section>
       <section className="client-dashboard-posting">
@@ -86,7 +95,7 @@ function ClientDashboard() {
               onClick={handleClick}
             >
               <polygon
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="7 3 0 10.433 1.476 12 7 6.134 12.524 12 14 10.433"
               ></polygon>
             </svg>

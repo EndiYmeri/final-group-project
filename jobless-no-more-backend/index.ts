@@ -13,37 +13,52 @@ const PORT = 4000
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
 const prisma = new PrismaClient()
 
-function createToken(id: number) {
+function createToken(id: number, type: string) {
     //@ts-ignore
-    return jwt.sign({ id: id }, process.env.Secret)
+    return jwt.sign({ id: id, type }, process.env.Secret)
 }
 
-async function getFreelanceUserFromToken(token: string) {
+
+async function getUserFromToken(token: string) {
     //@ts-ignore
     const decodeData = jwt.verify(token, process.env.Secret)
-    const freelanceUser = await prisma.freelanceUser.findUnique({
+    //@ts-ignore
+    const foundUser = decodeData.type === "freelancer"? await prisma.freelanceUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }, include: { skillS: true, proposals:true }
+        where: { id: decodeData.id }, include: { skills: true, proposals: true }
+    }):  await prisma.clientUser.findUnique({
+        //@ts-ignore
+        where: { id: decodeData.id }, include: { jobs:true}
     })
-    return freelanceUser
+    return foundUser
 }
 
-async function getClientUserFromToken(token: string) {
-    //@ts-ignore
-    const decodeData = jwt.verify(token, process.env.Secret)
-    const clientUser = await prisma.clientUser.findUnique({
-        //@ts-ignore
-        where: { id: decodeData.id }, include: {jobs:true}
-    })
-    return clientUser
-}
+// async function getFreelanceUserFromToken(token: string) {
+//     //@ts-ignore
+//     const decodeData = jwt.verify(token, process.env.Secret)
+//     const freelanceUser = await prisma.freelanceUser.findUnique({
+//         //@ts-ignore
+//         where: { id: decodeData.id }, include: { skillS: true, proposals: true }
+//     })
+//     console.log(freelanceUser)
+//     return freelanceUser
+// }
+
+// async function getClientUserFromToken(token: string) {
+//     //@ts-ignore
+//     const decodeData = jwt.verify(token, process.env.Secret)
+//     const clientUser = await prisma.clientUser.findUnique({
+//         //@ts-ignore
+//         where: { id: decodeData.id }, include: { jobs: true }
+//     })
+//     return clientUser
+// }
 
 app.get('/validate', async (req, res) => {
     const token = req.headers.authorization || ""
     try {
         if (token) {
-
-            const user = await getFreelanceUserFromToken(token)
+            const user = await getUserFromToken(token)
             if (user) {
                 res.send(user)
             }
@@ -66,22 +81,24 @@ app.post('/signup/:type', async (req, res) => {
     const { firstName, lastName, email, password, location } = req.body
     const type = req.params.type
 
+    console.log(type)
     try {
         const hash = bcrypt.hashSync(password, 8)
         const signUpData = { firstName, lastName, email, password: hash, location }
-
-
         const createdUser =
-            type === "client"
+            type === "freelancer"
                 ? await prisma.freelanceUser.create({
-                    data: signUpData
+                    data: signUpData,
+                    include:{ proposals:true, skills:true }
                 })
                 : await prisma.clientUser.create({
-                    data: signUpData
+                    data: signUpData,
+                    include:{jobs:true}
+                    
                 })
 
 
-        res.send({ createdUser, token: createToken(createdUser.id) })
+        res.send({ createdUser, token: createToken(createdUser.id, type) })
     }
     catch (err) {
         // @ts-ignore
@@ -105,7 +122,7 @@ app.post('/login', async (req, res) => {
         const passwordMatch = bcrypt.compareSync(password, foundUser.password)
 
         if (foundUser && passwordMatch) {
-            res.send({ foundUser, token: createToken(foundUser.id) })
+            res.send({ foundUser, token: createToken(foundUser.id, userType) })
         }
         else {
             throw Error('Something went  wrong!')
@@ -119,14 +136,14 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/jobs', async (req, res) => {
-    const jobs = await prisma.job.findMany({ include: { skills: true, proposals: true, difficulty: true, clientUser: true, Category: true } })
+    const jobs = await prisma.job.findMany({ include: { skills: true, duration: true, proposals: true, difficulty: true, clientUser: true, Category: true } })
     res.send(jobs)
 })
 
 app.get('/jobs/:id', async (req, res) => {
     const id = Number(req.params.id)
     try {
-        const job = await prisma.job.findUnique({ where: { id }, include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true } })
+        const job = await prisma.job.findUnique({ where: { id }, include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true } })
         if (job) {
             res.send(job)
         }
@@ -140,56 +157,58 @@ app.get('/jobs/:id', async (req, res) => {
 })
 
 
-app.post('/jobs', async (req,res)=>{
-    const {duration, title, location, content, skills, difficulty, category } = req.body 
+app.post('/jobs', async (req, res) => {
+    const { duration, title, location, content, skills, difficulty, category } = req.body
     const token = req.headers.authorization || ''
 
-    const skillsMapped = skills.map((skill:any )=> ({name: skill}))
-    try{
-        const clientUser = await getClientUserFromToken(token)
-        if(clientUser){
-            
+    const skillsMapped = skills.map((skill: any) => ({ name: skill }))
+    try {
+        const clientUser = await getUserFromToken(token)
+        if (clientUser) {
+
             const jobCreated = await prisma.job.create({
-                data:{
+                data: {
                     content,
                     location,
-                title,
-                skills: {connect: skillsMapped },
-                duration: {connect:  { name: duration } },
-                Category: { connect: { name: category } },
-                difficulty: { connect: { name: difficulty } },
-                clientUser: { connect: { email: clientUser.email } },
-            },
-            include:{
-                Category:true, skills:true, clientUser:true, difficulty:true, duration:true, proposals:true 
+                    title,
+                    skills: { connect: skillsMapped },
+                    duration: { connect: { name: duration } },
+                    Category: { connect: { name: category } },
+                    difficulty: { connect: { name: difficulty } },
+                    clientUser: { connect: { email: clientUser.email } },
+                },
+                include: {
+                    Category: true, skills: true, clientUser: true, difficulty: true, duration: true, proposals: true
+                }
+            })
+
+            if (jobCreated) {
+                res.send(jobCreated)
+            } else {
+                throw Error()
             }
-        })
-        
-        if(jobCreated){
-            res.send(jobCreated)
-        }else{
-            throw Error()
+        } else {
+            throw Error("Client not found or broken token")
         }
-    }else{
-        throw Error("Client not found or broken token")
-    }
-    } catch(err){
+    } catch (err) {
         // @ts-ignore
-        res.send({error: err.message})
+        res.send({ error: err.message })
     }
 })
 
 app.get('/jobsBasedOnUserSkills', async (req, res) => {
     const token = req.headers.authorization || ''
     try {
-        const user = await getFreelanceUserFromToken(token)
-        if (user) {
+        const user = await getUserFromToken(token)
+        if (user?.type === "freelancer") {
             const jobs = await prisma.job.findMany({
-                // @ts-ignore
                 where: {
-                    skills: { every: { name: { in: user.skillS.map(skill => skill.name) } } }
+                    // @ts-ignore
+                    skills: { every: { name: { in: user.skills.map(skill => skill.name) } } }
                 },
-                include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true }
+                include: {
+                    Category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true
+                }
             })
 
             res.send(jobs)
@@ -203,19 +222,19 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 })
-app.post('/proposals', async(req,res) => {
-    const {jobId, freelanceUserId} = req.body
+app.post('/proposals', async (req, res) => {
+    const { jobId, freelanceUserId } = req.body
     const token = req.headers.authorization;
-    try{
-      await prisma.proposal.create({data: {jobId, freelanceUserId}})
-      const freelanceUser = await getFreelanceUserFromToken(token as string)
-      if(freelanceUser){
-        res.send(freelanceUser)
-      }
-    }catch(err: any){
-      res.status(400).send({ error: err.message });
+    try {
+        await prisma.proposal.create({ data: { jobId, freelanceUserId } })
+        const freelanceUser = await getUserFromToken(token as string)
+        if (freelanceUser) {
+            res.send(freelanceUser)
+        }
+    } catch (err: any) {
+        res.status(400).send({ error: err.message });
     }
-  })
+})
 
 app.get("/categories/:name", async (req, res) => {
     const name = req.params.name;

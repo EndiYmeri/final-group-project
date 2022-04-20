@@ -11,6 +11,8 @@ import { User } from "./types";
 import FreelancerProfile from "./pages/FreelancerProfile";
 import Freelancer from "./pages/Freelancer";
 import Client from "./pages/Client";
+import JobComponent from "./Components/JobComponent/JobComponent";
+import PostJob from "./pages/PostJob";
 
 function App() {
   const [user, setUser] = useState<User>();
@@ -28,7 +30,6 @@ function App() {
         .then((resp) => resp.json())
         .then((data) => {
           setUser(data);
-          navigate("/home");
         });
     } else {
       location.pathname === "/login" || location.pathname === "/signup"
@@ -42,7 +43,7 @@ function App() {
       <Header user={user} setUser={setUser} />
       <Routes>
         <Route path={"/login"} element={<Login setUser={setUser} />} />
-        <Route path={"/signup"} element={<Signup />} />
+        <Route path={"/signup"} element={<Signup setUser={setUser} />} />
         <Route path={"/client-signup"} element={<ClientSignup />} />
         {user && <Route path={"/home"} element={<Home user={user} />} />}
         {user?.type === "client" && (
@@ -52,7 +53,16 @@ function App() {
           <Route path={"/freelancer"} element={<Freelancer />} />
         )}
         <Route index element={<LandingPage user={user} />} />
-        <Route path={"/profile"} element={<FreelancerProfile user={user} />} />
+        {user && (
+          <Route
+            path={"/profile"}
+            element={<FreelancerProfile user={user} />}
+          />
+        )}
+        <Route path={"/job/:id"} element={<JobComponent />} />
+        {user?.type === "client" && (
+          <Route path="/post-job/:step" element={<PostJob />} />
+        )}
       </Routes>
       <Footer />
     </div>

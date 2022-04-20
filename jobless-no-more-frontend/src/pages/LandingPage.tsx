@@ -11,7 +11,9 @@ export default function LandingPage({ user }: Props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate("/home");
+    if (user) {
+      navigate("/home");
+    }
   }, []);
 
   return <Intro />;

@@ -40,6 +40,7 @@
         "bcryptjs": "^2.4.3",
         "dotenv": "^16.0.0",
         "jsonwebtoken": "^8.5.1",
+        "react-country-region-selector": "^3.4.0",
         "react-hook-form": "^7.29.0",
         "react-router-dom": "^6.3.0"
     }

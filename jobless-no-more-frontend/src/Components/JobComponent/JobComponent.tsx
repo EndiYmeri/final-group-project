@@ -1,4 +1,6 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Job } from "../../types";
 import "./JobComponent.css";
 
 type Props = {
@@ -6,6 +8,24 @@ type Props = {
 };
 
 function JobComponent({ classname }: Props) {
+  const params = useParams()
+  const [job, setJob] = useState<Job | null>(null)
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/jobs/${params.id}`)
+      .then(resp => resp.json())
+      .then(job => setJob(job))
+  }, [])
+
+  function dateFormat(job: Job) {
+    const date = Date.parse(job.dateCreated)
+    const d = new Date(date).toLocaleDateString()
+    return d
+  }
+
+  console.log(job)
+  if (job === null) return <h1>Loading...</h1>
+
   return (
     <div className={`job-component-container ${classname}`}>
       <div className="job-container">
@@ -13,33 +33,25 @@ function JobComponent({ classname }: Props) {
         <div className="job-component-titles">
           <div className="job-details-container">
             <div className="job-for-website">
-              <h3> I Want To Make A Website</h3>
+              <h3> {job.title}</h3>
               <div className="job-info">
                 <div className="job-website">
                   <div className="website-and-date">
                     <h4 className="website">Website</h4>
-                    <div className="job-date">Posted at Apr 12, 2022</div>
+                    <div className="job-date">Posted at  {dateFormat(job)}</div>
                   </div>
                 </div>
                 <div className="job-paragraph">
-                  This is a very simple website. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Sapiente enim laudantium, minus
-                  ex voluptates velit quia, adipisci quam repudiandae ea
-                  quisquam facere distinctio aperiam, quasi commodi amet
-                  delectus sint natus.
-                </div>
-                <div className="job-demo">
-                  Demo: https://www.geeksforgeeks.org/
+                  {job.content}
                 </div>
               </div>
               <div className="job-budget">My budget is 800$</div>
-              <div className="job-posting">View job posting</div>
             </div>
           </div>
 
           <div className="jobs-right-side">
             <div className="jobs-entry">
-              🧠Entry
+              🧠{job.difficulty.name}
               <p className="jobs-entry-paragraph">Experience level</p>
             </div>
             <div className="jobs-entry">
@@ -47,21 +59,21 @@ function JobComponent({ classname }: Props) {
               <p className="jobs-entry-paragraph">Hourly Range</p>
             </div>
             <div className="jobs-entry">
-              ⏲Less than 30hr/week
+              ⏲{job.duration.name}
               <p className="jobs-entry-paragraph">Hourly</p>
             </div>
             <div className="jobs-entry">
-              📅 $100-$200
-              <p className="jobs-entry-paragraph">Hourly Range</p>
+              📅 {job.Category.name}
+              <p className="jobs-entry-paragraph">Category</p>
             </div>
           </div>
         </div>
         <div className="job-last-part">
           <h4>Skills and expertise</h4>
           <div className="job-skill">
-            <button className="job-skill-name">Web design</button>
-            <button className="job-skill-name">HTML</button>
-            <button className="job-skill-name">WordPress</button>
+            {job.skills.map(skill =>
+              <button className="job-skill-name">{skill.name}</button>
+            )}
           </div>
         </div>
       </div>
