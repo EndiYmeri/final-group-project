@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import ScheduleIcon from "@mui/icons-material/Schedule";
-import "./PostJobGettingStarted.css";
+import "./PostJobDetails.css";
 import { Job } from "../../types";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,6 @@ export default function PostJobGettingStarted({ newJob, setNewJob }: Props) {
 
   return (
     <div className="getting-started">
-      <h1>Getting Started</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="labels">
           <label

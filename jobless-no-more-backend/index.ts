@@ -81,7 +81,6 @@ app.post('/signup/:type', async (req, res) => {
     const { firstName, lastName, email, password, location } = req.body
     const type = req.params.type
 
-    console.log(type)
     try {
         const hash = bcrypt.hashSync(password, 8)
         const signUpData = { firstName, lastName, email, password: hash, location }
@@ -163,6 +162,8 @@ app.post('/jobs', async (req, res) => {
     const { duration, title, location, content, skills, difficulty, category } = req.body
     const token = req.headers.authorization || ''
 
+    console.log(req.body);
+    
     const skillsMapped = skills.map((skill: any) => ({ name: skill }))
     try {
         const clientUser = await getUserFromToken(token)
@@ -175,9 +176,10 @@ app.post('/jobs', async (req, res) => {
                     title,
                     skills: { connect: skillsMapped },
                     duration: { connect: { name: duration } },
-                    Category: { connect: { name: category } },
+                    Category: { connect: {name: category.name} },
                     difficulty: { connect: { name: difficulty } },
                     clientUser: { connect: { email: clientUser.email } },
+                    published: true
                 },
                 include: {
                     Category: true, skills: true, clientUser: true, difficulty: true, duration: true, proposals: true
@@ -238,6 +240,32 @@ app.post('/proposals', async (req, res) => {
     }
 })
 
+app.get('/categories',async (req, res) => {
+    const  categories = await prisma.category.findMany({
+        include:{jobs:true}
+    })
+    res.send(categories)
+})
+
+app.post('/categories', async (req, res)=>{
+    const {name} = req.body
+    console.log(name);
+    
+    // const token = req.headers.authorization;
+    try{    
+        const newCategory = await prisma.category.create({
+            data:{name}
+        })
+        if(newCategory){
+            res.send(newCategory)
+        }
+    } catch(err){
+        // @ts-ignore
+        res.status(400).send({error:"Category already exists"})
+    }
+
+})
+
 app.get("/categories/:name", async (req, res) => {
     const name = req.params.name;
 
@@ -263,6 +291,26 @@ app.get("/skills", async (req, res) => {
     });
     res.send(skills);
 });
+
+app.post('/skill', async (req, res)=>{
+    const {name} = req.body
+    console.log(name);
+    
+    // const token = req.headers.authorization;
+    try{    
+        const newSkill = await prisma.skill.create({
+            data:{name}
+        })
+        if(newSkill){
+            res.send(newSkill)
+        }
+    } catch(err){
+        // @ts-ignore
+        res.status(400).send({error:"Skill already exists"})
+    }
+
+})
+
 
 app.get("/skills/:name", async (req, res) => {
     const name = req.params.name;
