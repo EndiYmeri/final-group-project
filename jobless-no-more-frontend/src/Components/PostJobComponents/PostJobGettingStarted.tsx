@@ -3,6 +3,7 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import "./PostJobGettingStarted.css";
 import { Job } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   newJob?: Job;
@@ -22,12 +23,14 @@ export default function PostJobGettingStarted({ newJob, setNewJob }: Props) {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setNewJob({
       ...newJob,
       duration: data.duration,
     });
-    console.log(data);
+    navigate("/post-job/title");
   };
 
   return (
@@ -77,7 +80,18 @@ export default function PostJobGettingStarted({ newJob, setNewJob }: Props) {
             />
           </label>
         </div>
-        <input type="submit" value={"Continue"} />
+        <div className="buttons">
+          <button
+            onClick={() => {
+              navigate("/client");
+            }}
+          >
+            Cancel
+          </button>
+          <button>
+            Next: <span>Title</span>
+          </button>
+        </div>
       </form>
     </div>
   );

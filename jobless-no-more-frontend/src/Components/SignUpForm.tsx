@@ -1,4 +1,4 @@
 function SignUpForm() {
-  return <div></div>;
+  return <SignUpForm />;
 }
 export default SignUpForm;
