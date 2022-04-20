@@ -1,0 +1,25 @@
+.years {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1rem;
+}
+
+.education-form {
+    display: block;
+}
+
+.education-form input {
+    margin: 1rem 0;
+}
+
+.save {
+    background-color: #171719;
+    color: white;
+    padding: 0.8rem 2.5rem;
+
+}
+
+.save-button {
+    display: grid;
+    justify-content: end;
+}
