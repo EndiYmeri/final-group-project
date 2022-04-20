@@ -42,12 +42,13 @@ function Signup({ setUser }: Props) {
 
   return (
     <main className="signup-main">
-      <div className="signup-container"></div>
-      {userType ? (
-        <SignUpForm submitFunc={signUp} />
-      ) : (
-        <SignUpUserType setUserType={setUserType} />
-      )}
+      <div className="signup-container">
+        {userType ? (
+          <SignUpForm submitFunc={signUp} />
+        ) : (
+          <SignUpUserType setUserType={setUserType} />
+        )}
+      </div>
     </main>
   );
 }

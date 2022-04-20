@@ -1,9 +1,9 @@
-:root {
-    --btn-primary-bg: #14a800;
-    --brand-primary: #14a800;
-    --light-gray: rgb(228, 228, 228);
-    --gray: #65735b;
-}
+:root{
+    --primary-color: #171719;
+    --second-color: #eaeaea;
+    --third-color: #b7d3c4;
+    --fourth-color: #0d47ff;
+  }
 
 * {
     font-family: sans-serif;
@@ -27,7 +27,7 @@ img {
 .login-container,
 .signup-container {
     display: grid;
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--primary-color);
     border-radius: 10px;
     gap: 1rem;
 }
@@ -43,7 +43,7 @@ img {
 .login-section input,
 .signup-section input {
     padding: 0.7rem 1rem;
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--third-color);
     border-radius: 4px;
     width: 100%;
 }
@@ -52,13 +52,13 @@ img {
 .login-section input:hover .signup-section input:focus,
 .signup-section input:hover {
     outline: none;
-    border: 1px solid var(--btn-primary-bg);
+    border: 1px solid var(--fourth-color);
 }
 
 .email-btn,
 .freelance-btn,
 .client-btn {
-    background-color: #171719;
+    background-color: var(--primary-color);
     border: none;
     width: 100%;
     padding: 0.8rem 1rem;
@@ -69,7 +69,7 @@ img {
 }
 
 .google-btn {
-    background-color: #0d47ff;
+    background-color: var(--fourth-color);
     border: none;
     cursor: pointer;
     width: 100%;
@@ -80,18 +80,18 @@ img {
 }
 
 .sign-up-btn {
-    border: 1px solid #171719;
+    border: 1px solid var(--primary-color);
     cursor: pointer;
     width: 70%;
     padding: 0.8rem 1rem;
-    color: #171719;
+    color: var(--primary-color);
     font-weight: bold;
     border-radius: 2rem;
 }
 
 .dont-have-account-section {
     border-top: 1px solid var(--light-gray);
-    padding: 2rem;
+    padding: 1rem;
     display: grid;
     place-items: center;
     gap: 1rem;
@@ -110,12 +110,13 @@ img {
     width: 1rem;
     position: absolute;
     height: 100%;
-    fill: var(--gray);
+    fill: var(--primary-color);
     left: 1rem;
 }
 
 .login-section input {
     padding-left: 3rem;
+    width: 350px;
 }
 
 .signup-section svg {
@@ -141,7 +142,7 @@ img {
 
 .client-radio:hover,
 .freelancer-radio:hover {
-    border: 1px solid #171719;
+    outline: 1px solid #171719;
 }
 
 .client-radio input,
@@ -172,11 +173,11 @@ img {
 
 .disabled-btn {
     width: 60%;
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--second-color);
     background: none;
     font-weight: bold;
     padding: 0.8rem 1rem;
-    color: var(--light-gray);
+    color: var(--second-gray);
     border-radius: 2rem;
     cursor: not-allowed;
 }
@@ -188,7 +189,7 @@ img {
 
 .dont-have-account-section p span {
     margin-left: 0.5rem;
-    color: #0d47ff;
+    color: fourh;
     cursor: pointer;
 }
 
