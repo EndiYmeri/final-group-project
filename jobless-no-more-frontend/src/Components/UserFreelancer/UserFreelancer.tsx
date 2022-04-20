@@ -9,9 +9,13 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CreateIcon from "@mui/icons-material/Create";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useNavigate } from "react-router-dom";
-import { Job } from "../../types";
+import { Job, User } from "../../types";
 
-function UserFreelancer() {
+type Props = {
+  user: User;
+};
+
+function UserFreelancer({ user }: Props) {
   const navigate = useNavigate();
   const Example = () => {
     return <ProgressBar bgColor="#0d47ff" completed={60} />;
@@ -30,7 +34,6 @@ function UserFreelancer() {
         .then((jobs) => setJobs(jobs));
     }
   }, []);
-  console.log(jobs);
 
   function dateFormat(job: Job) {
     const date = Date.parse(job.dateCreated);
@@ -88,6 +91,7 @@ function UserFreelancer() {
                 fill="var(--illustration-color-14)"
               ></path>
             </svg>
+
           </div>
           <label className="user-searchForJob">
             <input
@@ -165,8 +169,8 @@ function UserFreelancer() {
           <div className="user-details">
             <img
               className="user-image"
-              src="https://avatars.dicebear.com/api/avataaars/desintilaluzi.svg"
-              alt="Desintila"
+              src={user.image}
+              alt={user.firstName}
               onClick={() => navigate("/profile")}
             />
             <h3 onClick={() => navigate("/profile")} className="user-fullname">
