@@ -287,6 +287,55 @@ const skills: Prisma.SkillCreateInput[] = [
         jobs: { connect: [{ id: 5 }, { id: 6 }] }
     }
 ]
+const educations: Prisma.EducationCreateInput[] =[
+    {
+        institute: "Tirana University",
+        profileOfStudies: "IT",
+        fromYear: 2017,
+        endYear: 2020,
+        freelanceUser: {connect: {email : 'endi@email.com'}}
+    },
+    {
+        institute: "Tirana University",
+        profileOfStudies: "Web Developer",
+        fromYear: 2018,
+        endYear: 2021,
+        freelanceUser: {connect: {email : 'desintila@email.com'}}
+    },
+    {
+        institute: "Prishtina University",
+        profileOfStudies: "Computer Science",
+        fromYear: 2018,
+        endYear: 2021,
+        freelanceUser: {connect: {email : 'besim@email.com'}}
+    },
+    {
+        institute: "Tirana University",
+        profileOfStudies: "Web Developer",
+        fromYear: 2017,
+        endYear: 2021,
+        freelanceUser: {connect: {email : 'artiola@email.com'}}
+    }
+]
+const languages: Prisma.LanguageCreateInput[] =[
+    {
+        languageName: 'English',
+        freelanceUser: {connect : [{email: 'desintila@email.com'}, { email: 'endi@email.com' }, { email: 'artiola@email.com' }, {email: 'besim@email.com'} ]} 
+    },
+    {
+        languageName: 'French',
+        freelanceUser: {connect : [{email: 'desintila@email.com'}, { email: 'endi@email.com' },  {email: 'besim@email.com'} ]} 
+    },
+    {
+        languageName: 'German',
+        freelanceUser: {connect : [{email: 'desintila@email.com'}, { email: 'artiola@email.com' }, {email: 'besim@email.com'} ]} 
+    },
+    
+    {
+        languageName: 'Italian',
+        freelanceUser: {connect : [ { email: 'endi@email.com' }, { email: 'artiola@email.com' }, {email: 'besim@email.com'} ]} 
+    }
+]
 
 
 async function createStuff() {
@@ -310,6 +359,12 @@ async function createStuff() {
     }
     for (const skill of skills) {
         await prisma.skill.create({ data: skill })
+    }
+    for (const  education of educations){
+        await prisma.education.create({data: education })
+    }
+    for (const language of languages){
+        await prisma.language.create({data: language})
     }
 }
 

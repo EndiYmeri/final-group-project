@@ -11,18 +11,20 @@ datasource db {
 }
 
 model freelanceUser {
-  id            Int        @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   firstName     String
   lastName      String
-  email         String     @unique
-  totalReceived Float      @default(0)
+  email         String      @unique
+  totalReceived Float       @default(0)
   password      String
   image         String?
   location      String
   bio           String?
-  type          String     @default("freelancer")
+  type          String      @default("freelancer")
   skills        Skill[]
   proposals     Proposal[]
+  Education     Education[]
+  Language      Language[]
 }
 
 model clientUser {
@@ -90,4 +92,21 @@ model Duration {
   id   Int    @id @default(autoincrement())
   name String @unique
   job  job[]
+}
+
+model Education {
+  id               Int           @id @default(autoincrement())
+  freelanceUser    freelanceUser @relation(fields: [freelanceUserId], references: [id])
+  freelanceUserId  Int
+  institute        String
+  profileOfStudies String
+  fromYear         Int
+  endYear          Int
+}
+
+model Language {
+  id              Int           @id @default(autoincrement())
+  freelanceUser   freelanceUser[]
+ 
+  languageName    String
 }

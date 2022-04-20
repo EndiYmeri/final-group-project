@@ -25,7 +25,7 @@ async function getUserFromToken(token: string) {
     //@ts-ignore
     const foundUser = decodeData.type === "freelancer"? await prisma.freelanceUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }, include: { skills: true, proposals: true }
+        where: { id: decodeData.id }, include: { skills: true, proposals: true, Education: true, Language: true }
     }):  await prisma.clientUser.findUnique({
         //@ts-ignore
         where: { id: decodeData.id }, include: { jobs:true}
@@ -88,7 +88,7 @@ app.post('/signup/:type', async (req, res) => {
             type === "freelancer"
                 ? await prisma.freelanceUser.create({
                     data: signUpData,
-                    include:{ proposals:true, skills:true }
+                    include:{ proposals:true, skills:true, Education: true, Language: true }
                 })
                 : await prisma.clientUser.create({
                     data: signUpData,
@@ -113,7 +113,7 @@ app.post('/login', async (req, res) => {
             userType === "freelancer" ?
                 await prisma.freelanceUser.findUnique({
                     where: { email: email },
-                    include: {proposals:true, skills:true}
+                    include: {proposals:true, skills:true, Education: true, Language: true}
                 })
                 : await prisma.clientUser.findUnique({
                     where: { email: email },
