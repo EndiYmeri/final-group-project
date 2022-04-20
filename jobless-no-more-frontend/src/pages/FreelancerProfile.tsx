@@ -109,7 +109,7 @@ function FreelancerProfile({ user }: Props) {
           <div>
             <div className="freelancer-bio">
               <div className="title">
-                <h3>Graphic Designer</h3>
+                <h3>{user.profession}</h3>
                 <button className="edit-title">
                   <svg
                     className=""
@@ -150,10 +150,9 @@ function FreelancerProfile({ user }: Props) {
               <ul className="skills-list">
                 {user?.skills &&
                   //@ts-ignore
-                  user?.skillS?.map((u) => {
-                    console.log(u);
+                  user?.skills?.map((skill) => {
                     console.log(user.skills);
-                    <li className="skills-item">{u.name}</li>;
+                    return <li className="skills-item">{skill.name}</li>;
                   })}
               </ul>
             </div>

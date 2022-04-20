@@ -1,5 +1,10 @@
 import UserFreelancer from "../Components/UserFreelancer/UserFreelancer";
+import { User } from "../types";
 
-export default function Freelancer() {
-  return <UserFreelancer />;
+type Props = {
+  user: User;
+};
+
+export default function Freelancer({ user }: Props) {
+  return <UserFreelancer user={user} />;
 }

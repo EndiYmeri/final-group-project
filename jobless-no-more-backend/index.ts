@@ -113,10 +113,12 @@ app.post('/login', async (req, res) => {
         const foundUser =
             userType === "freelancer" ?
                 await prisma.freelanceUser.findUnique({
-                    where: { email: email }
+                    where: { email: email },
+                    include: {proposals:true, skills:true}
                 })
                 : await prisma.clientUser.findUnique({
-                    where: { email: email }
+                    where: { email: email },
+                    include:{jobs:true}
                 })
         //@ts-ignore
         const passwordMatch = bcrypt.compareSync(password, foundUser.password)

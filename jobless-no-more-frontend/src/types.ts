@@ -21,7 +21,8 @@ export type User = {
     image?: string,
     bio?: string
     type: "freelancer" | "client",
-    skills: Skill[]
+    skills: Skill[],
+    profession?: string
 }
 
 export type Job = {

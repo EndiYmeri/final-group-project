@@ -9,9 +9,13 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CreateIcon from "@mui/icons-material/Create";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useNavigate } from "react-router-dom";
-import { Job } from "../../types";
+import { Job, User } from "../../types";
 
-function UserFreelancer() {
+type Props = {
+  user: User;
+};
+
+function UserFreelancer({ user }: Props) {
   const navigate = useNavigate();
   const Example = () => {
     return <ProgressBar completed={60} />;
@@ -30,7 +34,6 @@ function UserFreelancer() {
         .then((jobs) => setJobs(jobs));
     }
   }, []);
-  console.log(jobs);
 
   function dateFormat(job: Job) {
     const date = Date.parse(job.dateCreated);
@@ -43,7 +46,7 @@ function UserFreelancer() {
       <div className="user-freelancer-container">
         <div className="user-greeting">
           <div className="user-greeting-date">
-            <h2>Goodmorning, Desintila Luzi</h2>
+            <h2>Goodmorning,{user.firstName + " " + user.lastName}</h2>
             <h3>Wednesday, April 13th</h3>
           </div>
           <div className="user-searchForJob">
@@ -124,12 +127,14 @@ function UserFreelancer() {
           <div className="user-details">
             <img
               className="user-image"
-              src="https://avatars.dicebear.com/api/avataaars/desintilaluzi.svg"
-              alt="Desintila"
+              src={user.image}
+              alt={user.firstName}
               onClick={() => navigate("/profile")}
             />
-            <h3 className="user-fullname">Desintila L</h3>
-            <h5 className="user-job">Web Developer</h5>
+            <h3 className="user-fullname">
+              {user.firstName + " " + user.lastName[0]}
+            </h3>
+            <h5 className="user-job">{user.profession}</h5>
           </div>
           <div className="user-profile">
             <div className="profile-completeness">
