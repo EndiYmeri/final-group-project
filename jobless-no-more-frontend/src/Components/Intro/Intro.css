@@ -6,7 +6,7 @@
 
 .intro-container {
     width: 100vw;
-    height: 100vh;
+    /* height: 100vh; */
     display: grid;
     grid-template-rows: auto auto auto;
     place-content: center;
@@ -107,7 +107,7 @@
 section {
     /* background-image: url('https://www.genequityco.com/images/general/choose-the-right-candidate-59633f2a588ca.jpg'); */
     /* background-size: 150vh; */
-    width: 100vw;
+    /* width: 100vw; */
     /* background-position: top; */
     background-repeat: no-repeat;
 }

@@ -27,7 +27,7 @@ export type User = {
 export type Job = {
     title: string,
     content: string,
-    duration: string,
+    duration: {name: string},
     difficulty: {name: string},
     skills: Skill[],
     dateCreated: string,

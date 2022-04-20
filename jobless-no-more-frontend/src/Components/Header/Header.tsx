@@ -72,7 +72,7 @@ export default function Header({ user, setUser }: Props) {
                   </li>
                 </ul>
                 <div className="account" onClick={signOut}>
-                  <img src="https://robohash.org/ND" alt="" />
+                  <img src={user.image} alt="" />
                 </div>
               </div>
             ) : (

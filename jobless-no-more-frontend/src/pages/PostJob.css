@@ -1,0 +1,7 @@
+.post-job-page {
+    display: grid;
+    place-items: center;
+    min-height: calc(100vh - 302.67px);
+    height: auto;
+    padding: 2rem 0.5rem;
+}

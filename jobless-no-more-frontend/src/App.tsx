@@ -61,7 +61,7 @@ function App() {
         )}
         <Route path={"/job/:id"} element={<JobComponent />} />
         {user?.type === "client" && (
-          <Route path="/post-job" element={<PostJob />} />
+          <Route path="/post-job/:step" element={<PostJob />} />
         )}
       </Routes>
       <Footer />
