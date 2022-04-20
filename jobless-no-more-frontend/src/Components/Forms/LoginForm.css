@@ -1,7 +1,13 @@
+:root{
+    --primary-color: #171719;
+    --second-color: #eaeaea;
+    --third-color: #b7d3c4;
+    --fourth-color: #0d47ff;
+  }
 form {
     display: grid;
     justify-content: center;
-    gap: 10px;
+    gap: 1rem;
 }
 
 input {
@@ -11,13 +17,8 @@ input {
     width: 100%;
 }
 
-input:focus {
-    outline: none;
-    border: 1px solid #171719;
-}
-
 input.submit-button {
-    background-color: #171719;
+    background-color: var(--primary-color);
     border: none;
     width: 100%;
     padding: 0.8rem 1rem;
@@ -39,11 +40,11 @@ input.submit-button {
     text-align: center;
     padding: 5px 4px;
     border-radius: 10px;
-    border: 1px solid #14a800;
+    border: 1px solid var(--fourth-color);
 }
 
 .userTypeRadio label.active {
-    background-color: #14a800;
+    background-color: var(--fourth-color);
     color: white;
 }
 

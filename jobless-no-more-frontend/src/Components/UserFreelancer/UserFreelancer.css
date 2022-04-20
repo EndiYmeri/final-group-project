@@ -1,3 +1,9 @@
+:root{
+    --primary-color: #171719;
+    --second-color: #eaeaea;
+    --third-color: #b7d3c4;
+    --fourth-color: #0d47ff;
+  }
 * {
     padding: 0;
     margin: 0;
@@ -12,67 +18,69 @@
     display: grid;
     grid-template-columns: auto auto;
     gap: 2rem;
-    padding: 1rem;
-    width: 100%;
+    padding: 3rem;
     place-content: center;
 }
 
 .user-greeting {
     display: grid;
     grid-template-rows: auto auto;
-    gap: 1rem;
-    padding: 1rem 2rem;
+    gap: 2rem;
 }
 
 .user-greeting-date {
     display: grid;
-    place-content: start;
-    border: 1px solid rgb(251, 251, 251);
-    border-radius: 10px;
+    align-items: center;
+    outline: 2px solid var(--third-color);
+    border-radius: 6px;
+    grid-template-columns: 1fr auto;
     background-color: white;
     padding: 1rem;
 }
-
+.user-greeting-info{
+    display: grid;
+    gap: 1rem;
+}
+.user-greeting-info h2{
+    width: 30%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.send-icon{
+    width: 100px;
+    fill: var(--primary-color);
+}
 .user-searchForJob {
     display: grid;
-    grid-template-columns: auto 70px;
-    border: 1px solid rgb(255, 254, 254);
-    border-radius: 10px;
+    grid-template-columns: 1fr auto;
+    outline: 2px solid var(--third-color);
+    border-radius: 6px;
     background-color: white;
-    padding: 1rem;
 }
-
-.search-area {
-    justify-items: center;
-    border: 1px solid rgb(215, 215, 214);
-    box-shadow: 2px 2px rgb(215, 215, 214);
+.search-area:focus{
+    border: 2px solid var(--fourth-color);
+    outline: none;
 }
-
 .search-icon {
-    border: 1px solid rgb(215, 215, 214);
-    box-shadow: 2px 2px rgb(215, 215, 214);
-    background-color: rgb(82, 151, 82);
-    width: 70px;
-}
-
-.recent-search {
     display: grid;
-    place-content: start;
-    font-weight: bold;
-    color: rgb(0, 108, 0);
+    place-items: center;
+    background-color: var(--fourth-color);
+    padding: 0.8rem 0.6rem;
+    cursor: pointer;
 }
-
 .jobs-liked-category {
     display: grid;
     place-content: start;
     border: 1px solid rgb(251, 251, 251);
     border-radius: 10px;
+    padding-bottom: 2rem;
     background-color: white;
-    padding: 1rem;
+    outline: 2px solid var(--third-color);
+
 }
 
 .job-you-like-details {
     display: grid;
+    padding: 1rem;
     grid-template-columns: auto 30px;
 }
 
@@ -93,97 +101,120 @@
 
 .jobs-filtered {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-auto-flow: column;
+    justify-content: start;
     padding: 1rem;
-    gap: 1.3rem;
-    border-bottom: 1px solid rgb(176, 176, 176);
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--third-color);
 }
 
 .jobs-filtered-category {
+    transition: 0.3s ease;
     font-weight: bold;
 }
 
 .jobs-filtered-category:hover {
-    color: rgb(15, 190, 15);
-    border-bottom: 1px solid rgb(15, 190, 15);
+    color: var(--fourth-color);
+    cursor: pointer;
+}
+.job-custom{
+    background-color: var(--second-color);
+    border-bottom: 1px solid var(--third-color);
+    cursor: pointer;
 }
 
+.job-custom:last-child{
+    border-bottom: none;
+}
 .job-browse-paragraph {
     display: grid;
     place-content: start;
     font-size: 13px;
     border-bottom: 1px solid rgb(176, 176, 176);
-    padding: 1rem 0;
+    padding: 1rem;
+    
 }
 
 .jobs-theme-development {
     display: grid;
     grid-template-columns: 1fr auto auto;
-    padding: 1.3rem 0;
     gap: 0.5rem;
+    align-items: center;
+    padding: 1rem;
+}
+.jobs-ghost-h4:hover {
+    text-decoration: underline;
+    transition: 0.2s ease-in-out;
+    color: var(--fourth-color);
 }
 
-.jobs-ghost-h4 {
-    display: grid;
-    place-content: start;
-}
-
-.dislike-button {
-    border: 1px solid rgb(212, 211, 211);
-    border-radius: 30px;
-    padding: 0.4rem;
-}
-
+.dislike-button,
 .like-button {
     border: 1px solid rgb(212, 211, 211);
-    border-radius: 30px;
-    padding: 0.4rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 2rem;
+    display: grid;
+    padding: 1.2rem;
+    place-content: center;
 }
+.dislike-button:hover,
+.like-button:hover{
+    background-color: var(--third-color);
+    transition: 0.3s ease-out;
+}
+
 
 .job-info-details {
     display: grid;
     grid-template-columns: auto auto auto auto;
     color: grey;
-    padding: 0.4rem;
+    padding: 1rem;
     place-content: start;
     gap: 0.4rem;
     font-size: 12px;
 }
 
 .job-span:hover {
-    font-weight: bold;
+    color: var(--primary-color);
 }
 
 .job-description {
     display: grid;
     place-content: start;
-    padding: 1rem 0;
+    padding: 1rem;
     font-size: 13px;
 }
 
 .job-span-details {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-auto-flow: column;
     gap: 0.3rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgb(202, 200, 200);
+    padding: 1rem;
 }
 
 .job-span-plus {
-    border: 1px solid blue;
-    width: 43px;
-    height: 23px;
     color: white;
-    background-color: blue;
+    background-color: var(--fourth-color);
     font-weight: bold;
+    border-radius: 2rem;
+    padding: 0.5rem 0.7rem;
+    width: min-content;
 }
 
 .job-span-payment {
     display: grid;
     grid-template-columns: 20px 120px;
     font-weight: lighter;
+    gap: 0.5rem;
+    place-items: center;
 }
-
+.job-span-rating{
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+    width: min-content;
+}
 .job-span-rating:hover {
     color: rgb(62, 62, 3);
 }
@@ -192,35 +223,43 @@
     display: grid;
     grid-template-columns: 20px 60px;
     font-weight: lighter;
+    place-items: center;
+    gap: 0.5rem;
 }
 
 .user-container-info {
     display: grid;
-    /* grid-template-rows: auto auto; */
+    outline: 2px solid var(--third-color);
     place-content: start;
-    justify-content: start;
     border: 1px solid rgb(255, 255, 255);
-    border-radius: 10px;
+    border-radius: 6px;
     background-color: white;
-    padding: 1rem;
-    height: auto;
+    height: min-content;
 }
 
 .user-details {
     display: grid;
-    /*  */
+    place-content: center;
     padding: 1.4rem 0;
+    gap: 0.4rem;
+    justify-items: center;
 }
-
+.user-details:hover{
+    color: var(--fourth-color);
+    transition: 0.5s ease;
+}
 .user-image {
     display: grid;
     place-content: center;
     width: 70px;
+    border: 1px solid var(--second-color);
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .user-fullname {
     display: grid;
+    cursor: pointer;
     place-content: start;
     border-bottom: 2px solid rgb(167, 167, 167);
 }
@@ -232,18 +271,14 @@
 
 .user-profile {
     display: grid;
-    border: 1px solid rgba(55, 141, 55, 0.662);
-    width: auto;
-    background-color: rgba(55, 141, 55, 0.662);
+    padding: 1rem;
+    background-color: var(--second-color)
 }
 
 .profile-completeness {
     display: grid;
     padding: 1.4rem;
-    width: auto;
-    border: 1px solid rgba(55, 141, 55, 0.662);
-    /* background-color: rgba(8, 128, 8, 0.153); */
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid var(--third-color);
 }
 
 .profile-name {
@@ -251,7 +286,10 @@
     place-content: start;
     padding-bottom: 1rem;
 }
-
+.profile-name:hover{
+    text-decoration: underline;
+    color: var(--primary-color);
+}
 .user-stand-wrapper {
     display: grid;
     padding: 1rem 0;
@@ -269,15 +307,17 @@
     display: grid;
     place-content: center;
     padding: 0.4rem 0;
+    padding: 1rem;
     font-size: 14px;
-    border: 1px solid rgba(55, 141, 55, 0.662);
+    border: 1px solid var(--third-color);
     background-color: white;
-    border-radius: 10px;
+    gap: 1rem;
 }
 
 .add-work {
-    color: green;
+    color: var(--fourth-color);
     font-weight: bold;
+    cursor: pointer;
 }
 
 .all-badge {
@@ -289,26 +329,30 @@
 .available-connects {
     display: grid;
     padding: 1rem;
-    background-color: white;
-    color: green;
+    color: var(--fourth-color);
     font-weight: bold;
+    border: 1px solid var(--third-color);
+
 }
 
 .ava-badge {
     display: grid;
     grid-template-columns: auto auto;
     background-color: white;
-    border: 1px solid green;
-    border-radius: 10px;
+    border: 1px solid var(--third-color);
     gap: 1rem;
-    padding: 0.6rem;
+    padding: 1rem;
+    place-content: space-between;
+    font-weight: normal;
+    align-items: center;
 }
 
 .change-icon {
     display: grid;
     place-content: center;
-    border: 1px solid grey;
-    width: 50px;
+    border: 1px solid var(--second-color);
+    width: 20px;
+    height: 20px;
     border-radius: 50px;
-    padding: 0.1rem 0;
+    padding: 1rem;
 }

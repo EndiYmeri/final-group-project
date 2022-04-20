@@ -5,7 +5,7 @@
 }
 
 .sign-up-form input {
-    padding: 1rem 1.5rem;
+    outline: 1px solid black;
 }
 
 .sign-up-form div {
