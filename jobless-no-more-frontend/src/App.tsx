@@ -11,6 +11,7 @@ import { User } from "./types";
 import FreelancerProfile from "./pages/FreelancerProfile";
 import Freelancer from "./pages/Freelancer";
 import Client from "./pages/Client";
+import JobComponent from "./Components/JobComponent/JobComponent";
 
 function App() {
   const [user, setUser] = useState<User>();
@@ -53,6 +54,7 @@ function App() {
         )}
         <Route index element={<LandingPage user={user} />} />
         { user && <Route path={"/profile"} element={<FreelancerProfile  user={user} />} />}
+        <Route path={"/job/:id"} element={<JobComponent />} />
       </Routes>
       <Footer />
     </div>

@@ -29,8 +29,11 @@ export type Job = {
     content: string,
     duration: string,
     difficulty: string,
-    skills: Skills[],
-    
+    skills: Skill[],
+    dateCreated: string,
+    id: number,
+    location: string,
+    Category: string
 }
 
 export type ClientUser ={
@@ -46,19 +49,20 @@ export type ClientUser ={
     type: "client"
 }
 
-export type Skills = {
+export type Skill = {
     name: string,
     freelanceUsers: User [],
     jobs: Job[]
 }
 
-export type Difficulties = {
+export type Difficulty = {
     name: string,
     jobs: Job[]
 }
 
-
-export type Categories = {
+export type Category = {
     name: string
     jobs: Job[]
 }
+
+

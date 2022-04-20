@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./UserFreelancer.css";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
@@ -9,13 +9,34 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CreateIcon from '@mui/icons-material/Create';
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useNavigate } from "react-router-dom";
-
+import { Job } from '../../types'
 
 function UserFreelancer() {
   const navigate = useNavigate()
   const Example = () => {
     return <ProgressBar completed={60} />;
   };
+
+  const [jobs, setJobs] = useState<Job[]>([])
+
+  useEffect(() => {
+    if (localStorage.token) {
+      fetch('http://localhost:4000/jobsBasedOnUserSkills', {
+        headers: {
+          Authorization: localStorage.token
+        }
+      })
+        .then(resp => resp.json())
+        .then(jobs => setJobs(jobs))
+    }
+  }, [])
+  console.log(jobs)
+
+  function dateFormat(job: Job) {
+    const date = Date.parse(job.dateCreated)
+    const d = new Date(date).toLocaleDateString()
+    return d
+  }
 
   return (
     <div className="user-container">
@@ -53,52 +74,50 @@ function UserFreelancer() {
                 preferences. Ordered by most relevant.
               </div>
             </div>
-            <div className="job-custom">
-              <div className="jobs-theme-development">
-                <h4 className="jobs-ghost-h4">
-                  Custom Ghost Blog Theme Development
-                </h4>
-                <div className="dislike-button">
-                  <ThumbDownOutlinedIcon />
+            {jobs.map(job =>
+              <div className="job-custom" key={job.id} onClick={() => navigate(`/job/${job.id}`)}>
+                <div className="jobs-theme-development">
+                  <h4 className="jobs-ghost-h4">
+                    {job.title}
+                  </h4>
+                  <div className="dislike-button">
+                    <ThumbDownOutlinedIcon />
+                  </div>
+                  <div className="like-button">
+                    <FavoriteBorderOutlinedIcon />
+                  </div>
                 </div>
-                <div className="like-button">
-                  <FavoriteBorderOutlinedIcon />
+                <div className="job-info-details">
+                  <span className="job-span">Fixed-price</span>
+                  <span className="job-span">{job.difficulty.name}</span>
+                  <span className="job-span">Budget: $2000</span>
+                  <span className="job-span">Posted {dateFormat(job)}</span>
                 </div>
-              </div>
-              <div className="job-info-details">
-                <span className="job-span">Fixed-price</span>
-                <span className="job-span">Intermediate - Est.</span>
-                <span className="job-span">Budget: $2000</span>
-                <span className="job-span">Posted 4 hours ago</span>
-              </div>
-              <div className="job-paragraph-ghost">
-                <p className="job-description">
-                  Im looking for someone to create a custom theme for Ghost CMS
-                  based on an existing design we have done. Design consist on a
-                  Homepage and Article view. Looking to thurn this around pretty
-                  quickly, please only bid if you feel can start and finish
-                  within th next 24 hours.
-                </p>
-                <div className="job-span-details">
-                  <span className="job-span-plus">PLUS</span>
-                  <span className="job-span-payment">
-                    <VerifiedOutlinedIcon />
-                    Payment verified
-                  </span>
-                  <span className="job-span-rating">
-                    <StarBorderPurple500OutlinedIcon />
-                    <StarBorderPurple500OutlinedIcon />
-                    <StarBorderPurple500OutlinedIcon />
-                    <StarBorderPurple500OutlinedIcon />
-                    <StarBorderPurple500OutlinedIcon />
-                  </span>
-                  <span className="job-span-location">
-                    <LocationOnOutlinedIcon />
-                    Albania
-                  </span>
+                <div className="job-paragraph-ghost">
+                  <p className="job-description">
+                    {job.content}
+                  </p>
+                  <div className="job-span-details">
+                    <span className="job-span-plus">PLUS</span>
+                    <span className="job-span-payment">
+                      <VerifiedOutlinedIcon />
+                      Payment verified
+                    </span>
+                    <span className="job-span-rating">
+                      <StarBorderPurple500OutlinedIcon />
+                      <StarBorderPurple500OutlinedIcon />
+                      <StarBorderPurple500OutlinedIcon />
+                      <StarBorderPurple500OutlinedIcon />
+                      <StarBorderPurple500OutlinedIcon />
+                    </span>
+                    <span className="job-span-location">
+                      <LocationOnOutlinedIcon />
+                      {job.location}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div className="user-container-info">

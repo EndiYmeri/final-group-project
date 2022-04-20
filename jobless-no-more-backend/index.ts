@@ -23,7 +23,7 @@ async function getFreelanceUserFromToken(token: string) {
     const decodeData = jwt.verify(token, process.env.Secret)
     const freelanceUser = await prisma.freelanceUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }, include: { skillS: true, proposals:true }
+        where: { id: decodeData.id }, include: { skillS: true, proposals: true }
     })
     return freelanceUser
 }
@@ -33,7 +33,7 @@ async function getClientUserFromToken(token: string) {
     const decodeData = jwt.verify(token, process.env.Secret)
     const clientUser = await prisma.clientUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }, include: {jobs:true}
+        where: { id: decodeData.id }, include: { jobs: true }
     })
     return clientUser
 }
@@ -119,14 +119,14 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/jobs', async (req, res) => {
-    const jobs = await prisma.job.findMany({ include: { skills: true, proposals: true, difficulty: true, clientUser: true, Category: true } })
+    const jobs = await prisma.job.findMany({ include: { skills: true, duration: true, proposals: true, difficulty: true, clientUser: true, Category: true } })
     res.send(jobs)
 })
 
 app.get('/jobs/:id', async (req, res) => {
     const id = Number(req.params.id)
     try {
-        const job = await prisma.job.findUnique({ where: { id }, include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true } })
+        const job = await prisma.job.findUnique({ where: { id }, include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true } })
         if (job) {
             res.send(job)
         }
@@ -140,42 +140,42 @@ app.get('/jobs/:id', async (req, res) => {
 })
 
 
-app.post('/jobs', async (req,res)=>{
-    const {duration, title, location, content, skills, difficulty, category } = req.body 
+app.post('/jobs', async (req, res) => {
+    const { duration, title, location, content, skills, difficulty, category } = req.body
     const token = req.headers.authorization || ''
 
-    const skillsMapped = skills.map((skill:any )=> ({name: skill}))
-    try{
+    const skillsMapped = skills.map((skill: any) => ({ name: skill }))
+    try {
         const clientUser = await getClientUserFromToken(token)
-        if(clientUser){
-            
+        if (clientUser) {
+
             const jobCreated = await prisma.job.create({
-                data:{
+                data: {
                     content,
                     location,
-                title,
-                skills: {connect: skillsMapped },
-                duration: {connect:  { name: duration } },
-                Category: { connect: { name: category } },
-                difficulty: { connect: { name: difficulty } },
-                clientUser: { connect: { email: clientUser.email } },
-            },
-            include:{
-                Category:true, skills:true, clientUser:true, difficulty:true, duration:true, proposals:true 
+                    title,
+                    skills: { connect: skillsMapped },
+                    duration: { connect: { name: duration } },
+                    Category: { connect: { name: category } },
+                    difficulty: { connect: { name: difficulty } },
+                    clientUser: { connect: { email: clientUser.email } },
+                },
+                include: {
+                    Category: true, skills: true, clientUser: true, difficulty: true, duration: true, proposals: true
+                }
+            })
+
+            if (jobCreated) {
+                res.send(jobCreated)
+            } else {
+                throw Error()
             }
-        })
-        
-        if(jobCreated){
-            res.send(jobCreated)
-        }else{
-            throw Error()
+        } else {
+            throw Error("Client not found or broken token")
         }
-    }else{
-        throw Error("Client not found or broken token")
-    }
-    } catch(err){
+    } catch (err) {
         // @ts-ignore
-        res.send({error: err.message})
+        res.send({ error: err.message })
     }
 })
 
@@ -189,7 +189,9 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
                 where: {
                     skills: { every: { name: { in: user.skillS.map(skill => skill.name) } } }
                 },
-                include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true }
+                include: {
+                    Category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true
+                }
             })
 
             res.send(jobs)
@@ -203,19 +205,19 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 })
-app.post('/proposals', async(req,res) => {
-    const {jobId, freelanceUserId} = req.body
+app.post('/proposals', async (req, res) => {
+    const { jobId, freelanceUserId } = req.body
     const token = req.headers.authorization;
-    try{
-      await prisma.proposal.create({data: {jobId, freelanceUserId}})
-      const freelanceUser = await getFreelanceUserFromToken(token as string)
-      if(freelanceUser){
-        res.send(freelanceUser)
-      }
-    }catch(err: any){
-      res.status(400).send({ error: err.message });
+    try {
+        await prisma.proposal.create({ data: { jobId, freelanceUserId } })
+        const freelanceUser = await getFreelanceUserFromToken(token as string)
+        if (freelanceUser) {
+            res.send(freelanceUser)
+        }
+    } catch (err: any) {
+        res.status(400).send({ error: err.message });
     }
-  })
+})
 
 app.get("/categories/:name", async (req, res) => {
     const name = req.params.name;
