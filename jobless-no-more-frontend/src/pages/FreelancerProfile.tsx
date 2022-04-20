@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import BasicModal from "../Components/MaterialComp/Education";
+import LanguageModal from "../Components/MaterialComp/Language";
 import { User } from "../types";
 import "./Profile.css";
 
@@ -60,19 +62,7 @@ function FreelancerProfile({ user }: Props) {
             <div className="education">
               <div className="education-title">
                 <h4>Education</h4>
-                <button className="edit-title">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    viewBox="0 0 14 14"
-                    role="img"
-                  >
-                    <polygon
-                      fillRule="evenodd"
-                      points="6 0 6 6 0 6 0 8 6 8 6 14 8 14 8 8 14 8 14 6 8 6 8 0"
-                    ></polygon>
-                  </svg>
-                </button>
+                <BasicModal />
               </div>
               <div className="school">
                 <h5>University of Tirana</h5>
@@ -83,19 +73,7 @@ function FreelancerProfile({ user }: Props) {
             <div className="education">
               <div className="education-title">
                 <h4>Languages</h4>
-                <button className="edit-title">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    viewBox="0 0 14 14"
-                    role="img"
-                  >
-                    <polygon
-                      fillRule="evenodd"
-                      points="6 0 6 6 0 6 0 8 6 8 6 14 8 14 8 8 14 8 14 6 8 6 8 0"
-                    ></polygon>
-                  </svg>
-                </button>
+                <LanguageModal />
               </div>
               <div className="school">
                 <ul>
