@@ -21,19 +21,19 @@ export type User = {
     image?: string,
     bio?: string
     type: "freelancer" | "client",
-    skills: Skills[]
+    skills: Skill[]
 }
 
 export type Job = {
     title: string,
     content: string,
     duration: string,
-    difficulty: string,
+    difficulty: {name: string},
     skills: Skill[],
     dateCreated: string,
     id: number,
     location: string,
-    Category: string
+    Category: {name: string}
 }
 
 export type ClientUser ={

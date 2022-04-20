@@ -1,4 +1,4 @@
 function PostJob() {
-  return <div></div>;
+  return <div>POST JOB</div>;
 }
 export default PostJob;
