@@ -38,18 +38,18 @@
     gap: 10px;
 }
 
-.title form label {
+.job-title form label {
     display: grid;
     gap: 20px;
     padding: 2rem 1rem;
 }
 
-.title form ul {
+.job-title form ul {
     display: grid;
     gap: 10px;
 }
 
-.title ul li {
+.job-title ul li {
     list-style-type: disc;
     margin-left: 20px;
 }
@@ -60,7 +60,8 @@
     gap: 10px;
 }
 
-.category .add-new-category-btn {
+.category .add-new-category-btn,
+.job-skills .add-new-skill-btn {
     cursor: pointer;
     margin: 5px 0;
     text-align: center;
@@ -68,4 +69,19 @@
     border: 1px solid #b7d3c4;
     background-color: #eaeaea;
     padding: 0.5rem 0.75rem;
+}
+
+.job-skills form .skill-label {
+    display: grid;
+    gap: 20px;
+}
+
+.last-details .labels {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.last-details .labels label {
+    display: grid;
+    grid-auto-flow: column;
 }

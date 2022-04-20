@@ -35,7 +35,6 @@ export default function PostJobGettingStarted({ newJob, setNewJob }: Props) {
 
   return (
     <div className="getting-started">
-      <h1>Getting Started</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="labels">
           <label

@@ -7,6 +7,7 @@ import CategorySelector from "../MaterialComp/CategorySelector";
 import LinearProgressWithLabel from "../MaterialComp/LinearProgressLabeled";
 import HelpingInfo from "./HelpingInfo";
 import "./PostJobDetails.css";
+import PostJobUpperPart from "./PostJobUpperPart";
 type Props = {
   newJob?: Job;
   setNewJob: Function;
@@ -69,11 +70,8 @@ export default function PostJobCategory({ newJob, setNewJob }: Props) {
 
   return (
     <div className="category">
-      <h1>Select what category this job belongs to</h1>
+      {/* <PostJobUpperPart location="category" /> */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="helping-info">
-          <LinearProgressWithLabel value={40} />
-        </div>
         <label className="category-label" htmlFor="newCategory">
           <p>Create new category</p>
           <input type="text" {...register("newCategory")} name="newCategory" />
@@ -91,10 +89,13 @@ export default function PostJobCategory({ newJob, setNewJob }: Props) {
             )}
           {newCategoryStatus ? <span>{newCategoryStatus}</span> : null}
 
-          {watch("newCategory")?.length === 0 && (
+          {watch("newCategory")?.length !== 0 ? null : (
             <>
               <p>or select one from the list below</p>
-              <CategorySelector setCategory={setCategory} />
+              <CategorySelector
+                oldCategory={newJob?.Category}
+                setCategory={setCategory}
+              />
             </>
           )}
         </label>

@@ -4,6 +4,7 @@ import { Job } from "../../types";
 import LinearProgressWithLabel from "../MaterialComp/LinearProgressLabeled";
 import HelpingInfo from "./HelpingInfo";
 import "./PostJobDetails.css";
+import PostJobUpperPart from "./PostJobUpperPart";
 type Props = {
   newJob?: Job;
   setNewJob: Function;
@@ -31,18 +32,15 @@ export default function PostJobTitle({ newJob, setNewJob }: Props) {
   };
 
   return (
-    <div className="title">
-      <h1>Lets start with a strong title</h1>
+    <div className="job-title">
+      {/* <PostJobUpperPart location="title" /> */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="helping-info">
-          <LinearProgressWithLabel value={20} />
-          <HelpingInfo />
-        </div>
         <div>
           <label htmlFor="title">
             <p> Write a title for your job post </p>
             <input
               type="text"
+              defaultValue={newJob?.title}
               {...register("title", { minLength: 20, required: true })}
               name="title"
               id="title"

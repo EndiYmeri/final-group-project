@@ -160,6 +160,8 @@ app.post('/jobs', async (req, res) => {
     const { duration, title, location, content, skills, difficulty, category } = req.body
     const token = req.headers.authorization || ''
 
+    console.log(req.body);
+    
     const skillsMapped = skills.map((skill: any) => ({ name: skill }))
     try {
         const clientUser = await getUserFromToken(token)
@@ -172,9 +174,10 @@ app.post('/jobs', async (req, res) => {
                     title,
                     skills: { connect: skillsMapped },
                     duration: { connect: { name: duration } },
-                    Category: { connect: { name: category } },
+                    Category: { connect: {name: category.name} },
                     difficulty: { connect: { name: difficulty } },
                     clientUser: { connect: { email: clientUser.email } },
+                    published: true
                 },
                 include: {
                     Category: true, skills: true, clientUser: true, difficulty: true, duration: true, proposals: true
@@ -286,6 +289,26 @@ app.get("/skills", async (req, res) => {
     });
     res.send(skills);
 });
+
+app.post('/skill', async (req, res)=>{
+    const {name} = req.body
+    console.log(name);
+    
+    // const token = req.headers.authorization;
+    try{    
+        const newSkill = await prisma.skill.create({
+            data:{name}
+        })
+        if(newSkill){
+            res.send(newSkill)
+        }
+    } catch(err){
+        // @ts-ignore
+        res.status(400).send({error:"Skill already exists"})
+    }
+
+})
+
 
 app.get("/skills/:name", async (req, res) => {
     const name = req.params.name;

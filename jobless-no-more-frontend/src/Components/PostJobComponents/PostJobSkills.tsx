@@ -9,6 +9,7 @@ import SkillSelector from "../MaterialComp/SkillsSelector";
 import Skills from "../MaterialComp/SkillsSelector";
 import HelpingInfo from "./HelpingInfo";
 import "./PostJobDetails.css";
+import PostJobUpperPart from "./PostJobUpperPart";
 type Props = {
   newJob?: Job;
   setNewJob: Function;
@@ -37,18 +38,19 @@ export default function PostJobSkills({ newJob, setNewJob }: Props) {
       ...newJob,
       skills: jobSkills,
     });
-    // navigate("/post-job/skills");
+    navigate("/post-job/difficulty");
   };
 
   useEffect(() => {
     fetch("http://localhost:4000/skills")
       .then((resp) => resp.json())
       .then((data) => setSkills(data));
-  });
+  }, [newSkillStatus]);
 
-  //   useEffect(() => {
-  //     setNewSkillStatus("");
-  //   }, [watch("newSkill")]);
+  useEffect(() => {
+    setNewSkillStatus("");
+    console.log(watch("newSkill"));
+  }, [watch("newSkill")]);
 
   function createNewSkill(skillName: string) {
     fetch("http://localhost:4000/skill", {
@@ -62,7 +64,6 @@ export default function PostJobSkills({ newJob, setNewJob }: Props) {
       .then((data) => {
         console.log(data);
         if (!data.error) {
-          setJobSkills(data);
           setNewSkillStatus("New skill created");
         } else {
           setNewSkillStatus(data.error);
@@ -72,13 +73,14 @@ export default function PostJobSkills({ newJob, setNewJob }: Props) {
 
   return (
     <div className="job-skills">
-      <h1>Lets select the skills needed for this job</h1>
+      {/* <PostJobUpperPart location="skill" /> */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="helping-info">
-          <LinearProgressWithLabel value={60} />
-        </div>
         <label className="skill-label" htmlFor="newSkill">
-          <p>Create new skill</p>
+          <p>Select skills from the list below</p>
+          {skills && (
+            <SkillSelector skills={skills} setJobSkills={setJobSkills} />
+          )}
+          <p> You can add create new skills here</p>
           <input type="text" {...register("newSkill")} name="newSkill" />
           {watch("newSkill")?.length > 0 &&
             newSkillStatus !== "New skill created" &&
@@ -94,15 +96,7 @@ export default function PostJobSkills({ newJob, setNewJob }: Props) {
             )}
           {newSkillStatus ? <span>{newSkillStatus}</span> : null}
 
-          {watch("newSkill")?.length === 0 && (
-            <>
-              <p>or select one from the list below</p>
-              {skills && (
-                <SkillSelector skills={skills} setJobSkills={setJobSkills} />
-              )}
-              {/* <CategorySelector setCategory={setCategory} /> */}
-            </>
-          )}
+          {/* <CategorySelector setCategory={setCategory} /> */}
         </label>
         <div>
           <div className="buttons">
@@ -114,7 +108,7 @@ export default function PostJobSkills({ newJob, setNewJob }: Props) {
               Back
             </button>
             <button type="submit">
-              Next: <span>Content</span>
+              Next: <span>Difficulty</span>
             </button>
           </div>
         </div>

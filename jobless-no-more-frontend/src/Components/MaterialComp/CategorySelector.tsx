@@ -8,9 +8,10 @@ interface Category {
 }
 type Props = {
   setCategory: Function;
+  oldCategory?: Category;
 };
 
-export default function CategorySelector({ setCategory }: Props) {
+export default function CategorySelector({ oldCategory, setCategory }: Props) {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState<readonly Category[]>([]);
   const loading = open && options.length === 0;
