@@ -1,6 +1,8 @@
 import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import React from "react";
 import './Education.css';
+import Datetime from 'react-datetime';
+
 const style = {
     position: "absolute",
     top: "50%",
@@ -49,8 +51,9 @@ export default function BasicModal() {
                         </label>
                         <label className="label" >Dates Attended
                             <div className="years">
-                                <input type="number" name="startYear" placeholder="startYear" min="1940" max="2029" step="1" />
-                                <input type="number" name="endYear" placeholder="endYear" min="1940" max="2029" step="1" />
+                                <Datetime dateFormat="YYYY" timeFormat={false} />
+                                <Datetime dateFormat="YYYY" timeFormat={false} />
+
                             </div>
                         </label>
                         <label >Degree
