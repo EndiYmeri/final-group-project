@@ -48,7 +48,7 @@ export default function Header({ user, setUser }: Props) {
             <div className="search">
               <div className="searchBar">
                 <SearchBarMenu />
-                <input type="text" name="" id="" />
+                <input type="text" name="search" placeholder="Search" />
               </div>
             </div>
             <nav>

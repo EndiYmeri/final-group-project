@@ -39,7 +39,11 @@ export default function LoginForm({ submitFunc }: Props) {
           >
             <path d="M7 8c-3.314 0-6 1.85-6 3.297v2.027c0 .373.358.676.8.676h10.4c.442 0 .8-.303.8-.676v-2.027C13 9.85 10.314 8 7 8zm3-5a3 3 0 11-6 0 3 3 0 016 0z"></path>
           </svg>
-          <input type={"email"} {...register("email", { required: true })} />
+          <input
+            type={"email"}
+            placeholder="Email"
+            {...register("email", { required: true })}
+          />
         </label>
         <label htmlFor="password">
           <svg
@@ -85,6 +89,7 @@ export default function LoginForm({ submitFunc }: Props) {
 
           <input
             type={"password"}
+            placeholder="Password"
             {...register("password", { required: true })}
             id="password"
           />
