@@ -1,15 +1,71 @@
-.extra-details form label {
+.getting-started {
+    max-width: 900px;
+    width: 100%;
+    text-align: left;
+}
+
+.getting-started form {
+    padding: 2rem 0;
+}
+
+.getting-started form .labels {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.getting-started form label {
+    display: grid;
+    grid-template-columns: 1fr 10px;
+    padding: 3rem;
+    border-radius: 1rem;
+    border: 1px solid #b7d3c4;
+    /* background-color: #eaeaea; */
+}
+
+.getting-started form label:hover,
+.getting-started form label.active {
+    background-color: #eaeaea;
+    border-color: #0d47ff;
+}
+
+.radio-info {
+    text-align: center;
+    max-width: 30ch;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+}
+
+.title form label {
     display: grid;
     gap: 20px;
     padding: 2rem 1rem;
 }
 
-.extra-details form ul {
+.title form ul {
     display: grid;
     gap: 10px;
 }
 
-.extra-details ul li {
+.title ul li {
     list-style-type: disc;
     margin-left: 20px;
+}
+
+.category form .category-label {
+    padding-top: 1rem;
+    display: grid;
+    gap: 10px;
+}
+
+.category .add-new-category-btn {
+    cursor: pointer;
+    margin: 5px 0;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #b7d3c4;
+    background-color: #eaeaea;
+    padding: 0.5rem 0.75rem;
 }

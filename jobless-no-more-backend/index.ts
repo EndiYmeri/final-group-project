@@ -81,7 +81,6 @@ app.post('/signup/:type', async (req, res) => {
     const { firstName, lastName, email, password, location } = req.body
     const type = req.params.type
 
-    console.log(type)
     try {
         const hash = bcrypt.hashSync(password, 8)
         const signUpData = { firstName, lastName, email, password: hash, location }
@@ -234,6 +233,32 @@ app.post('/proposals', async (req, res) => {
     } catch (err: any) {
         res.status(400).send({ error: err.message });
     }
+})
+
+app.get('/categories',async (req, res) => {
+    const  categories = await prisma.category.findMany({
+        include:{jobs:true}
+    })
+    res.send(categories)
+})
+
+app.post('/categories', async (req, res)=>{
+    const {name} = req.body
+    console.log(name);
+    
+    // const token = req.headers.authorization;
+    try{    
+        const newCategory = await prisma.category.create({
+            data:{name}
+        })
+        if(newCategory){
+            res.send(newCategory)
+        }
+    } catch(err){
+        // @ts-ignore
+        res.status(400).send({error:"Category already exists"})
+    }
+
 })
 
 app.get("/categories/:name", async (req, res) => {

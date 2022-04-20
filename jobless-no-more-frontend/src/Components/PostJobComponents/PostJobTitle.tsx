@@ -27,11 +27,11 @@ export default function PostJobTitle({ newJob, setNewJob }: Props) {
       ...newJob,
       title: data.title,
     });
-    navigate("/post-job/skills");
+    navigate("/post-job/category");
   };
 
   return (
-    <div className="extra-details">
+    <div className="title">
       <h1>Lets start with a strong title</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="helping-info">
@@ -71,8 +71,8 @@ export default function PostJobTitle({ newJob, setNewJob }: Props) {
             >
               Cancel
             </button>
-            <button>
-              Next: <span>Skills</span>
+            <button type="submit">
+              Next: <span>Category</span>
             </button>
           </div>
         </div>
