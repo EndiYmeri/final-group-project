@@ -1,9 +1,16 @@
+:root{
+    --primary-color: #171719;
+    --second-color: #eaeaea;
+    --third-color: #b7d3c4;
+    --fourth-color: #0d47ff;
+}
 .footer-container{
     display: grid;
     gap: 1rem;
-    padding: 1rem;
+    padding: 3rem 1rem;
     font-size: 0.8rem;
-    color: gray;
+    background-color: var(--primary-color);
+    color: var(--third-color) ;
 
 }
 .footer-items{
@@ -19,7 +26,7 @@
 }
 .footer-items ul li a{
     text-decoration: none;
-    color: gray;
+    color: var(--third-color);
 }
 .footer-items ul li a:hover{
     cursor: pointer;
