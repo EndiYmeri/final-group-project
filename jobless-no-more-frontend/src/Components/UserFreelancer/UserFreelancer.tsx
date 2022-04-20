@@ -48,7 +48,9 @@ function UserFreelancer({ user }: Props) {
           <div className="user-greeting-date">
             <div className="user-greeting-info">
               <h3>Wednesday, April 13th</h3>
-              <h2>Good Morning, Desintila Luzi</h2>
+              <h2>
+                Good Morning, {user.firstName} {user.lastName}
+              </h2>
             </div>
             <svg
               fill="none"
@@ -91,7 +93,6 @@ function UserFreelancer({ user }: Props) {
                 fill="var(--illustration-color-14)"
               ></path>
             </svg>
-
           </div>
           <label className="user-searchForJob">
             <input
@@ -174,7 +175,7 @@ function UserFreelancer({ user }: Props) {
               onClick={() => navigate("/profile")}
             />
             <h3 onClick={() => navigate("/profile")} className="user-fullname">
-              Desintila L
+              {user.firstName} {user.lastName}
             </h3>
             <h5 className="user-job">Web Developer</h5>
           </div>
