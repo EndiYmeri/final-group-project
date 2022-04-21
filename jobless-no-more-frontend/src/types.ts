@@ -23,8 +23,8 @@ export type User = {
     type: "freelancer" | "client",
     skills: Skill[],
     profession?: string,
-    Language?: Language[],
-    Education?: Education[],
+    language?: Language[],
+    education?: Education[],
     id: Number
 }
 
@@ -37,7 +37,7 @@ export type Job = {
     dateCreated: string,
     id: number,
     location: string,
-    Category: { name: string },
+    category: { name: string },
     payment: number,
     paymentType: string
 }

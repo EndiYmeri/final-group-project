@@ -65,15 +65,15 @@ function FreelancerProfile({ user, setUser }: Props) {
                 <h4>Education</h4>
                 <BasicModal user={user} setUser={setUser} />
               </div>
-              {
-                user.Education?.map(eduaction =>
-                  <div className="school">
-                    <h5> {eduaction.institute}</h5>
-                    <p>{eduaction.profileOfStudies}</p>
-                    <span>{eduaction.fromYear}-{eduaction.endYear}</span>
-                  </div>
-                )
-              }
+              {user.education?.map((eduaction) => (
+                <div className="school">
+                  <h5> {eduaction.institute}</h5>
+                  <p>{eduaction.profileOfStudies}</p>
+                  <span>
+                    {eduaction.fromYear}-{eduaction.endYear}
+                  </span>
+                </div>
+              ))}
             </div>
             <div className="education">
               <div className="education-title">
@@ -82,10 +82,9 @@ function FreelancerProfile({ user, setUser }: Props) {
               </div>
               <div className="school">
                 <ul>
-                  {
-                    user.Language?.map(language =>
-                      <li>{language.languageName}</li>)
-                  }
+                  {user.language?.map((language) => (
+                    <li>{language.languageName}</li>
+                  ))}
                 </ul>
               </div>
             </div>

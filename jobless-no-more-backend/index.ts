@@ -26,7 +26,7 @@ async function getUserFromToken(token: string) {
     const foundUser = decodeData.type === "freelancer" ? await prisma.freelanceUser.findUnique({
         //@ts-ignore
         where: { id: decodeData.id }, include: {
-            skills: true, proposals: true, Education: true, Language: true, savedJobs: true
+            skills: true, proposals: true, education: true, language: true, savedJobs: true
         }
     }) : await prisma.clientUser.findUnique({
         //@ts-ignore
@@ -90,7 +90,7 @@ app.post('/signup/:type', async (req, res) => {
             type === "freelancer"
                 ? await prisma.freelanceUser.create({
                     data: signUpData,
-                    include: { proposals: true, skills: true, Education: true, Language: true }
+                    include: { proposals: true, skills: true, education: true, language: true }
                 })
                 : await prisma.clientUser.create({
                     data: signUpData,
@@ -115,7 +115,7 @@ app.post('/login', async (req, res) => {
             userType === "freelancer" ?
                 await prisma.freelanceUser.findUnique({
                     where: { email: email },
-                    include: { proposals: true, skills: true, Education: true, Language: true, savedJobs: true }
+                    include: { proposals: true, skills: true, education: true, language: true, savedJobs: true }
                 })
                 : await prisma.clientUser.findUnique({
                     where: { email: email },
@@ -139,14 +139,14 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/jobs', async (req, res) => {
-    const jobs = await prisma.job.findMany({ include: { skills: true, duration: true, proposals: true, difficulty: true, clientUser: true, Category: true, } })
+    const jobs = await prisma.job.findMany({ include: { skills: true, duration: true, proposals: true, difficulty: true, clientUser: true, category: true, } })
     res.send(jobs)
 })
 
 app.get('/jobs/:id', async (req, res) => {
     const id = Number(req.params.id)
     try {
-        const job = await prisma.job.findUnique({ where: { id }, include: { Category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true } })
+        const job = await prisma.job.findUnique({ where: { id }, include: { category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true } })
         if (job) {
             res.send(job)
         }
@@ -180,13 +180,13 @@ app.post('/jobs', async (req, res) => {
                     paymentType,
                     skills: { connect: skillsMapped },
                     duration: { connect: { name: duration } },
-                    Category: { connect: { name: category.name } },
+                    category: { connect: { name: category.name } },
                     difficulty: { connect: { name: difficulty } },
                     clientUser: { connect: { email: clientUser.email } },
                     published: true
                 },
                 include: {
-                    Category: true, skills: true, clientUser: true, difficulty: true, duration: true, proposals: true
+                    category: true, skills: true, clientUser: true, difficulty: true, duration: true, proposals: true
                 }
             })
 
@@ -215,7 +215,7 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
                     skills: { every: { name: { in: user.skills.map(skill => skill.name) } } }
                 },
                 include: {
-                    Category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true
+                    category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true
                 }
             })
 
@@ -276,7 +276,7 @@ app.get("/categories/:name", async (req, res) => {
     try {
         const categoryName = await prisma.category.findMany({
             where: { name },
-            include: { jobs: { include: { Category: true } } },
+            include: { jobs: { include: { category: true } } },
         });
         if (categoryName) {
             res.send(categoryName);
@@ -373,7 +373,5 @@ app.post('/language', async (req, res) => {
         // @ts-ignore
         res.status(400).send({ error: err.message })
     }
-
-
 
 });

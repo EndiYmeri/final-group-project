@@ -26,9 +26,7 @@ function JobComponent({ classname, job }: Props) {
               <div className="job-info">
                 <div className="job-website">
                   <div className="website-and-date">
-                    <h4 className="website">
-                      {job.Category.name ? job.Category.name : job.Category}
-                    </h4>
+                    <h4 className="website">{job.category.name}</h4>
                     <div className="job-date">Posted at {dateFormat(job)}</div>
                   </div>
                 </div>
@@ -52,7 +50,7 @@ function JobComponent({ classname, job }: Props) {
               <p className="jobs-entry-paragraph">Duration</p>
             </div>
             <div className="jobs-entry">
-              📅 {job.Category.name}
+              📅 {job.category.name}
               <p className="jobs-entry-paragraph">Category</p>
             </div>
           </div>
