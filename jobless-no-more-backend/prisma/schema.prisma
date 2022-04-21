@@ -47,22 +47,24 @@ model clientUser {
 }
 
 model job {
-  id            Int             @id @default(autoincrement())
-  title         String
-  location      String
-  content       String
-  dateCreated   DateTime        @default(now())
-  skills        Skill[]
-  duration      Duration?       @relation(fields: [durationId], references: [id])
-  difficulty    Difficulty      @relation(fields: [difficultyId], references: [id])
-  difficultyId  Int
-  Category      Category        @relation(fields: [categoryId], references: [id])
-  categoryId    Int
-  clientUser    clientUser      @relation(fields: [clientUserId], references: [id])
-  clientUserId  Int
-  proposals     Proposal[]
-  durationId    Int?
-  published     Boolean         @default(false)
+  id             Int             @id @default(autoincrement())
+  title          String
+  location       String
+  content        String
+  dateCreated    DateTime        @default(now())
+  skills         Skill[]
+  duration       Duration?       @relation(fields: [durationId], references: [id])
+  difficulty     Difficulty      @relation(fields: [difficultyId], references: [id])
+  difficultyId   Int
+  Category       Category        @relation(fields: [categoryId], references: [id])
+  categoryId     Int
+  clientUser     clientUser      @relation(fields: [clientUserId], references: [id])
+  clientUserId   Int
+  paymentType    String?
+  payment        Float?
+  proposals      Proposal[]
+  durationId     Int?
+  published      Boolean         @default(false)
   savedFromUsers freelanceUser[]
 }
 

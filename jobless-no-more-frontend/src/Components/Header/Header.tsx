@@ -39,7 +39,7 @@ export default function Header({ user, setUser }: Props) {
   return (
     <header className={user ? "hasUser" : "noUser"}>
       <div className="logo">
-        {user === undefined ? (
+        {user?.type === "client" ? (
           <Link to="/">
             <h1>Jobless</h1>
             <span>no more</span>

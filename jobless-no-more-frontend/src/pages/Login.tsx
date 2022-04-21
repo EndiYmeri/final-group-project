@@ -31,7 +31,9 @@ function Login({ setUser }: Props) {
         } else {
           localStorage.setItem("token", data.token);
           setUser(data.foundUser);
-          navigate("/freelancer/best-matches");
+          data.foundUser.type === "client"
+            ? navigate("/client")
+            : navigate("/freelancer/best-matches");
         }
       });
   }

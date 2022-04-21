@@ -34,7 +34,9 @@ export type Job = {
     dateCreated: string,
     id: number,
     location: string,
-    Category: {name: string}
+    Category: {name: string},
+    payment: number,
+    paymentType: string
 }
 
 export type ClientUser ={
