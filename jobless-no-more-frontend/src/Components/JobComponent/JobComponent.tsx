@@ -5,27 +5,16 @@ import "./JobComponent.css";
 
 type Props = {
   classname?: "more-info" | "less-info";
+  job: Job;
 };
 
-function JobComponent({ classname }: Props) {
-  const params = useParams();
-  const [job, setJob] = useState<Job | null>(null);
+function dateFormat(job: Job) {
+  const date = Date.parse(job.dateCreated);
+  const d = new Date(date).toLocaleDateString();
+  return d;
+}
 
-  useEffect(() => {
-    fetch(`http://localhost:4000/jobs/${params.id}`)
-      .then((resp) => resp.json())
-      .then((job) => setJob(job));
-  }, []);
-
-  function dateFormat(job: Job) {
-    const date = Date.parse(job.dateCreated);
-    const d = new Date(date).toLocaleDateString();
-    return d;
-  }
-
-  console.log(job);
-  if (job === null) return <h1>Loading...</h1>;
-
+function JobComponent({ classname, job }: Props) {
   return (
     <div className={`job-component-container ${classname}`}>
       <div className="job-container">
@@ -37,7 +26,9 @@ function JobComponent({ classname }: Props) {
               <div className="job-info">
                 <div className="job-website">
                   <div className="website-and-date">
-                    <h4 className="website">{job.Category.name}</h4>
+                    <h4 className="website">
+                      {job.Category.name ? job.Category.name : job.Category}
+                    </h4>
                     <div className="job-date">Posted at {dateFormat(job)}</div>
                   </div>
                 </div>

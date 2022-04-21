@@ -36,6 +36,7 @@ export default function PostJobPreview({ newJob }: Props) {
 
   return (
     <>
+      <JobComponent job={newJob} />
       <button
         onClick={() => {
           createNewJobPost(newJob);

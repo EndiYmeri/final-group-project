@@ -13,6 +13,7 @@ import Freelancer from "./pages/Freelancer";
 import Client from "./pages/Client";
 import JobComponent from "./Components/JobComponent/JobComponent";
 import PostJob from "./pages/PostJob";
+import SingleJobPage from "./pages/SingleJobPage";
 
 function App() {
   const [user, setUser] = useState<User>();
@@ -59,7 +60,7 @@ function App() {
             element={<FreelancerProfile user={user} />}
           />
         )}
-        <Route path={"/job/:id"} element={<JobComponent />} />
+        <Route path={"/job/:id"} element={<SingleJobPage />} />
         {user?.type === "client" && (
           <Route path="/post-job/:step" element={<PostJob />} />
         )}
