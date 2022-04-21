@@ -6,9 +6,10 @@ import "./Profile.css";
 
 type Props = {
   user: User;
+  setUser: Function;
 };
 
-function FreelancerProfile({ user }: Props) {
+function FreelancerProfile({ user, setUser }: Props) {
   console.log("user: ", user);
   return (
     <main className="profile-container">
@@ -62,24 +63,30 @@ function FreelancerProfile({ user }: Props) {
             <div className="education">
               <div className="education-title">
                 <h4>Education</h4>
-                <BasicModal />
+                <BasicModal user={user} setUser={setUser} />
               </div>
-              <div className="school">
-                <h5>University of Tirana</h5>
-                <p>Bachelor degree in Informatics</p>
-                <span>2018-2021</span>
-              </div>
+              {
+                user.Education?.map(eduaction =>
+                  <div className="school">
+                    <h5> {eduaction.institute}</h5>
+                    <p>{eduaction.profileOfStudies}</p>
+                    <span>{eduaction.fromYear}-{eduaction.endYear}</span>
+                  </div>
+                )
+              }
+
             </div>
             <div className="education">
               <div className="education-title">
                 <h4>Languages</h4>
-                <LanguageModal />
+                <LanguageModal user={user} setUser={setUser} />
               </div>
               <div className="school">
                 <ul>
-                  <li>Albanian</li>
-                  <li>English</li>
-                  <li>French</li>
+                  {
+                    user.Language?.map(language =>
+                      <li>{language.languageName}</li>)
+                  }
                 </ul>
               </div>
             </div>

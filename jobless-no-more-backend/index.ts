@@ -23,12 +23,12 @@ async function getUserFromToken(token: string) {
     //@ts-ignore
     const decodeData = jwt.verify(token, process.env.Secret)
     //@ts-ignore
-    const foundUser = decodeData.type === "freelancer"? await prisma.freelanceUser.findUnique({
+    const foundUser = decodeData.type === "freelancer" ? await prisma.freelanceUser.findUnique({
         //@ts-ignore
         where: { id: decodeData.id }, include: { skills: true, proposals: true, Education: true, Language: true }
-    }):  await prisma.clientUser.findUnique({
+    }) : await prisma.clientUser.findUnique({
         //@ts-ignore
-        where: { id: decodeData.id }, include: { jobs:true}
+        where: { id: decodeData.id }, include: { jobs: true }
     })
     return foundUser
 }
@@ -88,12 +88,12 @@ app.post('/signup/:type', async (req, res) => {
             type === "freelancer"
                 ? await prisma.freelanceUser.create({
                     data: signUpData,
-                    include:{ proposals:true, skills:true, Education: true, Language: true }
+                    include: { proposals: true, skills: true, Education: true, Language: true }
                 })
                 : await prisma.clientUser.create({
                     data: signUpData,
-                    include:{jobs:true}
-                    
+                    include: { jobs: true }
+
                 })
 
 
@@ -113,11 +113,11 @@ app.post('/login', async (req, res) => {
             userType === "freelancer" ?
                 await prisma.freelanceUser.findUnique({
                     where: { email: email },
-                    include: {proposals:true, skills:true, Education: true, Language: true}
+                    include: { proposals: true, skills: true, Education: true, Language: true }
                 })
                 : await prisma.clientUser.findUnique({
                     where: { email: email },
-                    include:{jobs:true}
+                    include: { jobs: true }
                 })
         //@ts-ignore
         const passwordMatch = bcrypt.compareSync(password, foundUser.password)
@@ -163,7 +163,7 @@ app.post('/jobs', async (req, res) => {
     const token = req.headers.authorization || ''
 
     console.log(req.body);
-    
+
     const skillsMapped = skills.map((skill: any) => ({ name: skill }))
     try {
         const clientUser = await getUserFromToken(token)
@@ -176,7 +176,7 @@ app.post('/jobs', async (req, res) => {
                     title,
                     skills: { connect: skillsMapped },
                     duration: { connect: { name: duration } },
-                    Category: { connect: {name: category.name} },
+                    Category: { connect: { name: category.name } },
                     difficulty: { connect: { name: difficulty } },
                     clientUser: { connect: { email: clientUser.email } },
                     published: true
@@ -240,28 +240,28 @@ app.post('/proposals', async (req, res) => {
     }
 })
 
-app.get('/categories',async (req, res) => {
-    const  categories = await prisma.category.findMany({
-        include:{jobs:true}
+app.get('/categories', async (req, res) => {
+    const categories = await prisma.category.findMany({
+        include: { jobs: true }
     })
     res.send(categories)
 })
 
-app.post('/categories', async (req, res)=>{
-    const {name} = req.body
+app.post('/categories', async (req, res) => {
+    const { name } = req.body
     console.log(name);
-    
+
     // const token = req.headers.authorization;
-    try{    
+    try {
         const newCategory = await prisma.category.create({
-            data:{name}
+            data: { name }
         })
-        if(newCategory){
+        if (newCategory) {
             res.send(newCategory)
         }
-    } catch(err){
+    } catch (err) {
         // @ts-ignore
-        res.status(400).send({error:"Category already exists"})
+        res.status(400).send({ error: "Category already exists" })
     }
 
 })
@@ -292,21 +292,21 @@ app.get("/skills", async (req, res) => {
     res.send(skills);
 });
 
-app.post('/skill', async (req, res)=>{
-    const {name} = req.body
+app.post('/skill', async (req, res) => {
+    const { name } = req.body
     console.log(name);
-    
+
     // const token = req.headers.authorization;
-    try{    
+    try {
         const newSkill = await prisma.skill.create({
-            data:{name}
+            data: { name }
         })
-        if(newSkill){
+        if (newSkill) {
             res.send(newSkill)
         }
-    } catch(err){
+    } catch (err) {
         // @ts-ignore
-        res.status(400).send({error:"Skill already exists"})
+        res.status(400).send({ error: "Skill already exists" })
     }
 
 })
@@ -328,5 +328,46 @@ app.get("/skills/:name", async (req, res) => {
     } catch (err) {
         //@ts-ignore
         res.status(400).send({ error: err.message });
+    }
+});
+
+
+
+app.post('/education', async (req, res) => {
+    const { institute, profileOfStudies, fromYear, endYear } = req.body
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getUserFromToken(token)
+        const education = await prisma.education.create({
+            // @ts-ignore
+            data: { institute: institute, profileOfStudies: profileOfStudies, fromYear: fromYear, endYear: endYear, freelanceUserId: user.id }
+        })
+        if (education) {
+            res.send(education)
+        }
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
+    }
+});
+
+
+app.post('/language', async (req, res) => {
+    const { languageName } = req.body
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getUserFromToken(token)
+        const language = await prisma.language.create({
+            // @ts-ignore
+            data: { languageName: languageName, freelanceUser: { connect: { id: user.id } } }
+        })
+        if (language) {
+            res.send(language)
+        }
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
     }
 });

@@ -56,7 +56,7 @@ function App() {
         {user && (
           <Route
             path={"/profile"}
-            element={<FreelancerProfile user={user} />}
+            element={<FreelancerProfile user={user} setUser={setUser} />}
           />
         )}
         <Route path={"/job/:id"} element={<JobComponent />} />

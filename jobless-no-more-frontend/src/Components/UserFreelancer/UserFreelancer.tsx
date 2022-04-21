@@ -10,6 +10,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useNavigate } from "react-router-dom";
 import { Job, User } from "../../types";
+import moment from "moment";
 
 type Props = {
   user: User;
@@ -34,22 +35,22 @@ function UserFreelancer({ user }: Props) {
         .then((jobs) => setJobs(jobs));
     }
   }, []);
-
   function dateFormat(job: Job) {
     const date = Date.parse(job.dateCreated);
     const d = new Date(date).toLocaleDateString();
     return d;
   }
-
   return (
     <div className="user-container">
       <div className="user-freelancer-container">
         <div className="user-greeting">
           <div className="user-greeting-date">
             <div className="user-greeting-info">
-              <h3>Wednesday, April 13th</h3>
+              <h3>{new Date().toLocaleString() + ''}
+
+              </h3>
               <h2>
-                Good Morning, {user.firstName} {user.lastName}
+                Hello, {user.firstName} {user.lastName}
               </h2>
             </div>
             <svg
