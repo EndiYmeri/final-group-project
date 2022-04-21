@@ -41,7 +41,7 @@ function UserFreelancer({ user }: Props) {
         <div className="user-greeting">
           <div className="user-greeting-date">
             <div className="user-greeting-info">
-              <h3>{new Date().toLocaleString() + ''}</h3>
+              <h3>{new Date().toLocaleString() + ""}</h3>
               <h2>
                 Hello, {user.firstName} {user.lastName}
               </h2>
@@ -120,14 +120,19 @@ function UserFreelancer({ user }: Props) {
                 preferences. Ordered by most relevant.
               </div>
             </div>
-            <Routes>
-              <Route
-                path="/best-matches"
-                element={<BestMatches jobs={jobs} />}
-              />
-              <Route path="/most-recent" element={<MostRecent jobs={jobs} />} />
-              <Route path="/saved-jobs" element={<SavedJobs />} />
-            </Routes>
+            <div className="jobs-container">
+              <Routes>
+                <Route
+                  path="/best-matches"
+                  element={<BestMatches jobs={jobs} />}
+                />
+                <Route
+                  path="/most-recent"
+                  element={<MostRecent jobs={jobs} />}
+                />
+                <Route path="/saved-jobs" element={<SavedJobs />} />
+              </Routes>
+            </div>
           </div>
         </div>
         <div className="user-container-info">
