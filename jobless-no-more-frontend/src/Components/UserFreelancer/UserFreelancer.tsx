@@ -41,9 +41,9 @@ function UserFreelancer({ user }: Props) {
         <div className="user-greeting">
           <div className="user-greeting-date">
             <div className="user-greeting-info">
-              <h3>Wednesday, April 13th</h3>
+              <h3>{new Date().toLocaleString() + ''}</h3>
               <h2>
-                Good Morning, {user.firstName} {user.lastName}
+                Hello, {user.firstName} {user.lastName}
               </h2>
             </div>
             <svg

@@ -1,7 +1,8 @@
 import { Box, Button, Divider, Modal, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import './Education.css';
 import Datetime from 'react-datetime';
+import { User } from "../../types";
 
 const style = {
     position: "absolute",
@@ -14,11 +15,52 @@ const style = {
     boxShadow: 14,
     p: 4
 };
-
-export default function BasicModal() {
+type Props = {
+    user: User;
+    setUser: Function;
+};
+export default function BasicModal({ user, setUser }: Props) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [fromyear, setfromYear] = useState(new Date())
+    const [endyear, setendYear] = useState(new Date())
+    function getFromYear() {
+        const year = new Date(fromyear);
+        return year.getFullYear()
+    }
+
+    function getEndYear() {
+        const year = new Date(endyear);
+        return year.getFullYear()
+    }
+
+    function addEducation(e: any, user: User) {
+        e.preventDefault()
+        const institute = e.target.school.value
+        const profileOfStudies = e.target.degree.value
+        const fromYear = getFromYear()
+        const endYear = getEndYear()
+        fetch('http://localhost:4000/education', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ institute: institute, profileOfStudies: profileOfStudies, fromYear: fromYear, endYear: endYear, freelanceUserId: user.id })
+        })
+            .then(resp => resp.json())
+
+            .then((data) => {
+                const update = JSON.parse(JSON.stringify(user))
+                update.Education.push(data)
+                setUser(update)
+            })
+
+        e.target.reset()
+        handleClose()
+    }
+
 
     return (
         <div>
@@ -45,14 +87,16 @@ export default function BasicModal() {
                         <Divider></Divider>
                     </Typography>
 
-                    <form className="education-form">
+                    <form className="education-form" onSubmit={(e) => addEducation(e, user)}>
                         <label className="label" >School
                             <input type="text" name="school" placeholder="Ex: University Of Tirana" />
                         </label>
                         <label className="label" >Dates Attended
                             <div className="years">
-                                <Datetime dateFormat="YYYY" timeFormat={false} />
-                                <Datetime dateFormat="YYYY" timeFormat={false} />
+                                <Datetime dateFormat="YYYY" timeFormat={false} inputProps={{ placeholder: "Start Date" }}
+                                    onChange={(date: any) => setfromYear(date._d)} />
+                                <Datetime dateFormat="YYYY" timeFormat={false} inputProps={{ placeholder: "End Date" }}
+                                    onChange={(date: any) => setendYear(date._d)} />
 
                             </div>
                         </label>
@@ -60,7 +104,7 @@ export default function BasicModal() {
                             <input type="text" name="degree" placeholder="Ex: Computer Science" />
                         </label>
                         <div className="save-button">
-                            <input type="button" value="Save" className="save" />
+                            <input type="submit" value="Save" className="save" />
                         </div>
                     </form>
                 </Box>
