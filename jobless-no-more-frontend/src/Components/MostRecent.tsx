@@ -15,51 +15,55 @@ function mostRecent({ jobs }: Props) {
     const d = new Date(date).toLocaleDateString();
     return d;
   }
-  let job = jobs[0];
+  let mostRecentJobs = jobs.slice(jobs.length - 2, jobs.length);
   return (
     <>
-      <div
-        className="job-custom"
-        key={job.id}
-        onClick={() => navigate(`/job/${job.id}`)}
-      >
-        <div className="jobs-theme-development">
-          <h4 className="jobs-ghost-h4">{job.title}</h4>
-          <div className="dislike-button">
-            <ThumbDownOutlinedIcon />
+      {mostRecentJobs.map((job) => {
+        return (
+          <div
+            className="job-custom"
+            key={job.id}
+            onClick={() => navigate(`/job/${job.id}`)}
+          >
+            <div className="jobs-theme-development">
+              <h4 className="jobs-ghost-h4">{job.title}</h4>
+              <div className="dislike-button">
+                <ThumbDownOutlinedIcon />
+              </div>
+              <div className="like-button">
+                <FavoriteBorderOutlinedIcon />
+              </div>
+            </div>
+            <div className="job-info-details">
+              <span className="job-span">Fixed-price</span>
+              <span className="job-span">{job.difficulty.name}</span>
+              <span className="job-span">Budget: $2000</span>
+              <span className="job-span">Posted {dateFormat(job)}</span>
+            </div>
+            <div className="job-paragraph-ghost">
+              <p className="job-description">{job.content}</p>
+              <div className="job-span-details">
+                <span className="job-span-plus">PLUS</span>
+                <span className="job-span-payment">
+                  <VerifiedOutlinedIcon />
+                  Payment verified
+                </span>
+                <span className="job-span-rating">
+                  <StarBorderPurple500OutlinedIcon />
+                  <StarBorderPurple500OutlinedIcon />
+                  <StarBorderPurple500OutlinedIcon />
+                  <StarBorderPurple500OutlinedIcon />
+                  <StarBorderPurple500OutlinedIcon />
+                </span>
+                <span className="job-span-location">
+                  <LocationOnOutlinedIcon />
+                  {job.location}
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="like-button">
-            <FavoriteBorderOutlinedIcon />
-          </div>
-        </div>
-        <div className="job-info-details">
-          <span className="job-span">Fixed-price</span>
-          <span className="job-span">{job.difficulty.name}</span>
-          <span className="job-span">Budget: $2000</span>
-          <span className="job-span">Posted {dateFormat(job)}</span>
-        </div>
-        <div className="job-paragraph-ghost">
-          <p className="job-description">{job.content}</p>
-          <div className="job-span-details">
-            <span className="job-span-plus">PLUS</span>
-            <span className="job-span-payment">
-              <VerifiedOutlinedIcon />
-              Payment verified
-            </span>
-            <span className="job-span-rating">
-              <StarBorderPurple500OutlinedIcon />
-              <StarBorderPurple500OutlinedIcon />
-              <StarBorderPurple500OutlinedIcon />
-              <StarBorderPurple500OutlinedIcon />
-              <StarBorderPurple500OutlinedIcon />
-            </span>
-            <span className="job-span-location">
-              <LocationOnOutlinedIcon />
-              {job.location}
-            </span>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </>
   );
 }

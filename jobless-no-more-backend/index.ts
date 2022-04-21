@@ -170,6 +170,7 @@ app.post('/jobs', async (req, res) => {
     try {
         const clientUser = await getUserFromToken(token)
         if (clientUser) {
+
             const jobCreated = await prisma.job.create({
                 data: {
                     content,
