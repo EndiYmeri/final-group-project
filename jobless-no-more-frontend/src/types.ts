@@ -22,24 +22,27 @@ export type User = {
     bio?: string
     type: "freelancer" | "client",
     skills: Skill[],
-    profession?: string
+    profession?: string,
+    Language?: Language[],
+    Education?: Education[],
+    id: Number
 }
 
 export type Job = {
     title: string,
     content: string,
-    duration: {name: string},
-    difficulty: {name: string},
+    duration: { name: string },
+    difficulty: { name: string },
     skills: Skill[],
     dateCreated: string,
     id: number,
     location: string,
-    Category: {name: string},
+    Category: { name: string },
     payment: number,
     paymentType: string
 }
 
-export type ClientUser ={
+export type ClientUser = {
     email: string,
     firstName: string,
     lastName: string,
@@ -54,7 +57,7 @@ export type ClientUser ={
 
 export type Skill = {
     name: string,
-    freelanceUsers: User [],
+    freelanceUsers: User[],
     jobs: Job[]
 }
 
@@ -68,4 +71,15 @@ export type Category = {
     jobs: Job[]
 }
 
+export type Language = {
+    freelanceUser: User[],
+    languageName: String
+}
+export type Education = {
+    freelanceUser: User,
+    institute: String,
+    profileOfStudies: String,
+    fromYear: Number,
+    endYear: Number
+}
 

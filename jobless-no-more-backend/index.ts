@@ -334,3 +334,46 @@ app.get("/skills/:name", async (req, res) => {
         res.status(400).send({ error: err.message });
     }
 });
+
+
+app.post('/education', async (req, res) => {
+    const { institute, profileOfStudies, fromYear, endYear } = req.body
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getUserFromToken(token)
+        const education = await prisma.education.create({
+            // @ts-ignore
+            data: { institute: institute, profileOfStudies: profileOfStudies, fromYear: fromYear, endYear: endYear, freelanceUserId: user.id }
+        })
+        if (education) {
+            res.send(education)
+        }
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
+    }
+});
+
+
+app.post('/language', async (req, res) => {
+    const { languageName } = req.body
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getUserFromToken(token)
+        const language = await prisma.language.create({
+            // @ts-ignore
+            data: { languageName: languageName, freelanceUser: { connect: { id: user.id } } }
+        })
+        if (language) {
+            res.send(language)
+        }
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
+    }
+
+
+
+});
