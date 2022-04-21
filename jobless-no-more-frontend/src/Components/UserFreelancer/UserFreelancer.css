@@ -26,6 +26,7 @@
     display: grid;
     grid-template-rows: auto auto;
     gap: 2rem;
+    place-content: start;
 }
 
 .user-greeting-date {
@@ -42,7 +43,6 @@
     gap: 1rem;
 }
 .user-greeting-info h2{
-    width: 30%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .send-icon{
@@ -103,17 +103,26 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: start;
-    padding: 1rem;
+    padding: 0.5rem;
     gap: 1.5rem;
     border-bottom: 1px solid var(--third-color);
+    font-size: 14px;
 }
 
 .jobs-filtered-category {
     transition: 0.3s ease;
     font-weight: bold;
 }
-
-.jobs-filtered-category:hover {
+.jobs-filtered-category a {
+    text-decoration: none;
+    color: unset;
+    padding: 0.5rem;
+}
+.jobs-filtered-category .active{
+    border-bottom: 2px solid var(--fourth-color);
+    color: var(--fourth-color);
+}
+.jobs-filtered-category a:hover {
     color: var(--fourth-color);
     cursor: pointer;
 }
@@ -180,10 +189,9 @@
 }
 
 .job-description {
-    display: grid;
-    place-content: start;
     padding: 1rem;
     font-size: 13px;
+    width: 100ch;
 }
 
 .job-span-details {

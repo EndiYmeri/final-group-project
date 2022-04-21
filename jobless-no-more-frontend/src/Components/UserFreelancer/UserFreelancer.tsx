@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./UserFreelancer.css";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
+
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import StarBorderPurple500OutlinedIcon from "@mui/icons-material/StarBorderPurple500Outlined";
-import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+
 import CreateIcon from "@mui/icons-material/Create";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { useNavigate } from "react-router-dom";
+import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { Job, User } from "../../types";
+import MostRecent from "../MostRecent";
+import SavedJobs from "../SavedJobs";
+import BestMatches from "../BestMatches";
 
 type Props = {
   user: User;
@@ -34,12 +34,6 @@ function UserFreelancer({ user }: Props) {
         .then((jobs) => setJobs(jobs));
     }
   }, []);
-
-  function dateFormat(job: Job) {
-    const date = Date.parse(job.dateCreated);
-    const d = new Date(date).toLocaleDateString();
-    return d;
-  }
 
   return (
     <div className="user-container">
@@ -110,9 +104,15 @@ function UserFreelancer({ user }: Props) {
               <span className="jobs-three-dots">...</span>
             </div>
             <div className="jobs-filtered">
-              <div className="jobs-filtered-category">Best Matches</div>
-              <div className="jobs-filtered-category">Most Recent</div>
-              <div className="jobs-filtered-category">Saved Jobs</div>
+              <div className="jobs-filtered-category">
+                <NavLink to="/freelancer/best-matches">Best Matches</NavLink>
+              </div>
+              <div className="jobs-filtered-category">
+                <NavLink to="/freelancer/most-recent">Most Recent</NavLink>
+              </div>
+              <div className="jobs-filtered-category">
+                <NavLink to="/freelancer/saved-jobs">Saved Jobs</NavLink>
+              </div>
             </div>
             <div className="job-browse-paragraph">
               <div>
@@ -120,50 +120,14 @@ function UserFreelancer({ user }: Props) {
                 preferences. Ordered by most relevant.
               </div>
             </div>
-            {jobs.map((job) => (
-              <div
-                className="job-custom"
-                key={job.id}
-                onClick={() => navigate(`/job/${job.id}`)}
-              >
-                <div className="jobs-theme-development">
-                  <h4 className="jobs-ghost-h4">{job.title}</h4>
-                  <div className="dislike-button">
-                    <ThumbDownOutlinedIcon />
-                  </div>
-                  <div className="like-button">
-                    <FavoriteBorderOutlinedIcon />
-                  </div>
-                </div>
-                <div className="job-info-details">
-                  <span className="job-span">Fixed-price</span>
-                  <span className="job-span">{job.difficulty.name}</span>
-                  <span className="job-span">Budget: $2000</span>
-                  <span className="job-span">Posted {dateFormat(job)}</span>
-                </div>
-                <div className="job-paragraph-ghost">
-                  <p className="job-description">{job.content}</p>
-                  <div className="job-span-details">
-                    <span className="job-span-plus">PLUS</span>
-                    <span className="job-span-payment">
-                      <VerifiedOutlinedIcon />
-                      Payment verified
-                    </span>
-                    <span className="job-span-rating">
-                      <StarBorderPurple500OutlinedIcon />
-                      <StarBorderPurple500OutlinedIcon />
-                      <StarBorderPurple500OutlinedIcon />
-                      <StarBorderPurple500OutlinedIcon />
-                      <StarBorderPurple500OutlinedIcon />
-                    </span>
-                    <span className="job-span-location">
-                      <LocationOnOutlinedIcon />
-                      {job.location}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <Routes>
+              <Route
+                path="/best-matches"
+                element={<BestMatches jobs={jobs} />}
+              />
+              <Route path="/most-recent" element={<MostRecent jobs={jobs} />} />
+              <Route path="/saved-jobs" element={<SavedJobs />} />
+            </Routes>
           </div>
         </div>
         <div className="user-container-info">

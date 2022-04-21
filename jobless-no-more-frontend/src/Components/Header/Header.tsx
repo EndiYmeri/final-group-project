@@ -38,10 +38,17 @@ export default function Header({ user, setUser }: Props) {
   return (
     <header className={user ? "hasUser" : "noUser"}>
       <div className="logo">
-        <Link to="/">
-          <h1>Jobless</h1>
-          <span>no more</span>
-        </Link>
+        {user === undefined ? (
+          <Link to="/">
+            <h1>Jobless</h1>
+            <span>no more</span>
+          </Link>
+        ) : (
+          <Link to="/freelancer/best-matches">
+            <h1>Jobless</h1>
+            <span>no more</span>
+          </Link>
+        )}
       </div>
       {!hideHeader && (
         <>
