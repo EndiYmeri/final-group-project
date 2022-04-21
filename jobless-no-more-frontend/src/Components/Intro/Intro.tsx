@@ -1,7 +1,9 @@
 import React from "react";
 import "./Intro.css";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 function Intro() {
+  const navigate = useNavigate();
   return (
     <div className="intro-container">
       <ul className="intro-ul">
@@ -18,8 +20,22 @@ function Intro() {
             here.
           </h3>
           <div className="intro-find">
-            <button className="find-talent">Find Talent</button>
-            <button className="find-work">Find Work</button>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="find-talent"
+            >
+              Find Talent
+            </button>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="find-work"
+            >
+              Find Work
+            </button>
           </div>
         </div>
         <div>
