@@ -1,29 +1,34 @@
-:root{
+:root {
     --primary-color: #171719;
     --second-color: #eaeaea;
     --third-color: #b7d3c4;
     --fourth-color: #0d47ff;
 }
-.client-main-dashboard{
-    background-color: var(--third-color);
+
+.client-main-dashboard {
+    background-color: rgb(220, 220, 220);
     padding: 2rem;
     display: grid;
     gap: 2rem;
     justify-content: center;
     align-content: flex-start;
 }
-.client-dashboard-header{
+
+.client-dashboard-header {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-.left-side{
+
+.left-side {
     display: grid;
     gap: 0.6rem;
 }
-.right-side{
+
+.right-side {
     text-align: end;
 }
-.post-a-job__btn{
+
+.post-a-job__btn {
     border-radius: 2rem;
     background-color: var(--fourth-color);
     color: white;
@@ -32,61 +37,69 @@
     padding: 1rem 3rem;
     border: none;
 }
+
 .client-dashboard-posting,
-.work-with-talent{
+.work-with-talent {
     width: 800px;
-    background-color: var(--second-color);
+    background-color: white;
     display: grid;
     align-items: start;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
-.posting-header{
+
+.posting-header {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr auto;
     padding: 2rem;
     border-bottom: 1px solid var(--third-color);
 }
-.posting-header h5{
+
+.posting-header h5 {
     color: var(--fourth-color);
     cursor: pointer;
 }
-.posting-header h5:hover{
+
+.posting-header h5:hover {
     text-decoration: underline;
 }
-.posting-main{
+
+.posting-main {
     display: grid;
     gap: 1rem;
     padding: 1rem;
     place-items: center;
 }
-.client-main-dashboard svg{
+
+.client-main-dashboard svg {
     width: 120px;
 }
-.work-with-talent__header{
+
+.work-with-talent__header {
     position: relative;
     display: grid;
     padding: 1rem;
     gap: 1rem;
     border-bottom: 1px solid var(--third-color);
 }
-.arrow-icon{
+
+.arrow-icon {
     position: absolute;
     top: 16px;
     right: 16px;
     cursor: pointer;
     fill: var(--fourth-color);
-
 }
 
-.work-with-talent__list-item{
+.work-with-talent__list-item {
     display: grid;
     border-bottom: 1px solid var(--third-color);
     padding: 1rem;
     grid-template-columns: auto 1fr;
     gap: 2rem;
 }
-.describe-section{
+
+.describe-section {
     font-size: 0.85rem;
     display: grid;
     align-content: flex-start;

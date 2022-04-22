@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Job } from "../../types";
 import "./JobComponent.css";
 type Props = {
@@ -7,13 +5,7 @@ type Props = {
   job: Job;
 };
 
-function dateFormat(job: Job) {
-  const date = Date.parse(job.dateCreated);
-  const d = new Date(date).toLocaleDateString();
-  return d;
-}
-
-function JobComponent({ classname, job }: Props) {
+function JobComponentUnpublished({ classname, job }: Props) {
   return (
     <div className={`job-component-container ${classname}`}>
       <div className="job-container">
@@ -26,7 +18,7 @@ function JobComponent({ classname, job }: Props) {
                 <div className="job-website">
                   <div className="website-and-date">
                     <h4 className="website">{job.category.name}</h4>
-                    <div className="job-date">Posted at {dateFormat(job)}</div>
+                    <div className="job-date">Not published yet</div>
                   </div>
                 </div>
                 <div className="job-paragraph">{job.content}</div>
@@ -37,15 +29,14 @@ function JobComponent({ classname, job }: Props) {
           <div className="jobs-right-side">
             <div className="jobs-entry">
               <p className="jobs-entry-paragraph">Experience level</p>
-              🧠{job.difficulty.name}
+              🧠{job.difficulty}
             </div>
             <div className="jobs-entry">
               <p className="jobs-entry-paragraph">Payment</p> 💲$ {job.payment},{" "}
               {job.paymentType}
             </div>
             <div className="jobs-entry">
-              <p className="jobs-entry-paragraph">Duration</p>⏲
-              {job.duration.name}
+              <p className="jobs-entry-paragraph">Duration</p>⏲{job.duration}
             </div>
             <div className="jobs-entry">
               <p className="jobs-entry-paragraph">Category</p>
@@ -66,4 +57,4 @@ function JobComponent({ classname, job }: Props) {
   );
 }
 
-export default JobComponent;
+export default JobComponentUnpublished;

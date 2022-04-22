@@ -25,7 +25,10 @@ export type User = {
     profession?: string,
     language?: Language[],
     education?: Education[],
-    id: Number
+    id: Number,
+    jobs?: Job[],
+    rating?: number,
+    savedJobs : Job[]
 }
 
 export type Job = {

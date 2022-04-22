@@ -130,7 +130,7 @@ function UserFreelancer({ user }: Props) {
                   path="/most-recent"
                   element={<MostRecent jobs={jobs} />}
                 />
-                <Route path="/saved-jobs" element={<SavedJobs />} />
+                <Route path="/saved-jobs" element={<SavedJobs user={user} />} />
               </Routes>
             </div>
           </div>

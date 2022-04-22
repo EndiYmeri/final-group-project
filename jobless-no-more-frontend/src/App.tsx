@@ -48,7 +48,7 @@ function App() {
         <Route path={"/client-signup"} element={<ClientSignup />} />
         {user && <Route path={"/home"} element={<Home user={user} />} />}
         {user?.type === "client" && (
-          <Route path={"/client"} element={<Client />} />
+          <Route path={"/client"} element={<Client user={user} />} />
         )}
         {user?.type === "freelancer" && (
           <Route path={"/freelancer/*"} element={<Freelancer user={user} />} />

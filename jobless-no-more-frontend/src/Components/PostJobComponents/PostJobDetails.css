@@ -85,3 +85,20 @@
     display: grid;
     grid-auto-flow: column;
 }
+
+.publish-button {
+    margin-top: 20px;
+    border-radius: 2rem;
+    border: 1px solid var(--fourth-color);
+    padding: .5rem .7rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--fourth-color);
+}
+
+.publish-button:hover {
+    background-color: var(--fourth-color);
+    color: var(--second-color);
+}

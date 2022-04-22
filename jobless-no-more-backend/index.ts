@@ -335,7 +335,6 @@ app.get("/skills/:name", async (req, res) => {
     }
 });
 
-
 app.post('/education', async (req, res) => {
     const { institute, profileOfStudies, fromYear, endYear } = req.body
     const token = req.headers.authorization || ''
@@ -354,7 +353,34 @@ app.post('/education', async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 });
+app.post('/saveJob', async (req, res) => {
+    const { jobId } = req.body
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getUserFromToken(token)
+        
+        if(user){
+            const updatedUser = await prisma.freelanceUser.update({
+                where: {email: user.email},data:{
+                    savedJobs: {connect: {id: jobId}}
+                },include:{education: true, language: true, proposals: true, savedJobs: true, skills: true}
+            })
+            if(updatedUser) res.send(updatedUser)
+            else{
+                throw Error()
+            }
+        }
+        else{
+            throw Error()
+        }
+        
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
+    }
 
+});
 
 app.post('/language', async (req, res) => {
     const { languageName } = req.body

@@ -8,7 +8,7 @@
 .job-component-container {
     display: grid;
     width: 100%;
-    padding: 4rem 0;
+    padding: 1rem 0;
     place-content: center;
     justify-content: center;
     font-family: 'Inter', sans-serif;
@@ -20,6 +20,7 @@
     padding: 2rem;
     background-color: white;
     border-radius: 10px;
+    max-width: 900px;
 }
 
 .job-component-details {
@@ -31,7 +32,7 @@
 
 .job-component-titles {
     display: grid;
-    grid-template-columns: 600px 150px;
+    grid-template-columns: 1fr auto;
 }
 
 .job-for-website {
@@ -39,14 +40,16 @@
     place-items: start;
     gap: 1rem;
     padding-top: 1rem;
+    width: 60ch;
+    align-content: flex-start;
     /* padding: 1rem; */
 }
 
 .job-details-container {
     display: grid;
-    grid-template-columns: auto auto;
     border-right: 2px solid rgb(202, 201, 201);
     height: auto;
+    padding-right: 10px;
 }
 
 .job-website {
@@ -102,19 +105,22 @@
 
 .jobs-right-side {
     display: grid;
-    padding: 0.4rem;
+    padding: 1rem 0.4rem;
+    gap: 15px;
 }
 
 .jobs-entry {
     display: grid;
     place-content: start;
-    font-size: 10px;
+    font-size: 14px;
+    gap: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .jobs-entry-paragraph {
     display: grid;
     place-content: start;
+    font-weight: bold;
 }
 
 .job-last-part {

@@ -1,6 +1,7 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import { Job } from "../../types";
 import JobComponent from "../JobComponent/JobComponent";
+import JobComponentUnpublished from "../JobComponent/JobComponentUnpublished";
 
 type Props = {
   newJob: Job;
@@ -36,8 +37,9 @@ export default function PostJobPreview({ newJob }: Props) {
 
   return (
     <>
-      <JobComponent job={newJob} />
+      <JobComponentUnpublished job={newJob} />
       <button
+        className="publish-button"
         onClick={() => {
           createNewJobPost(newJob);
           navigate("/home");

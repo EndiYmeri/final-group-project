@@ -33,9 +33,9 @@ function BestMatches({ jobs }: Props) {
             </div>
           </div>
           <div className="job-info-details">
-            <span className="job-span">Fixed-price</span>
+            <span className="job-span">{job.paymentType}</span>
             <span className="job-span">{job.difficulty.name}</span>
-            <span className="job-span">Budget: $2000</span>
+            <span className="job-span">{job.payment}</span>
             <span className="job-span">Posted {dateFormat(job)}</span>
           </div>
           <div className="job-paragraph-ghost">

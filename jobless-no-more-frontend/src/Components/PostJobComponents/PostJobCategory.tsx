@@ -93,7 +93,7 @@ export default function PostJobCategory({ newJob, setNewJob }: Props) {
             <>
               <p>or select one from the list below</p>
               <CategorySelector
-                oldCategory={newJob?.Category}
+                oldCategory={newJob?.category}
                 setCategory={setCategory}
               />
             </>

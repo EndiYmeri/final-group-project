@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./clientDashboard.css";
-function ClientDashboard() {
+import { User } from "../types";
+import JobComponent from "./JobComponent/JobComponent";
+
+type Props = {
+  user: User;
+};
+function ClientDashboard({ user }: Props) {
   const [toShowList, setToShowList] = useState(false);
   const handleClick = () => {
     setToShowList(!toShowList);
@@ -15,7 +21,9 @@ function ClientDashboard() {
       <section className="client-dashboard-header">
         <div className="left-side">
           <h1>Your Dashboard</h1>
-          <h4>Client Name</h4>
+          <h4>
+            {user.firstName} {user.lastName}
+          </h4>
         </div>
         <div className="right-side">
           <button
@@ -77,8 +85,16 @@ function ClientDashboard() {
               fill="var(--illustration-color-2, #beccbe)"
             ></path>
           </svg>
-          <h3>No active job posts</h3>
-          <p>Post a job to the marketplace and let talent come to you.</p>
+          {user.jobs?.length === 0 ? (
+            <>
+              <h3>No active job posts</h3>
+              <p>Post a job to the marketplace and let talent come to you.</p>
+            </>
+          ) : (
+            user?.jobs?.map((job) => {
+              return <JobComponent job={job} />;
+            })
+          )}
           <button className="post-a-job__btn">Post a Job</button>
         </div>
       </section>
