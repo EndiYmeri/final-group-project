@@ -138,7 +138,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "I have a figma, requires few hours of work, HTML/CSS. I need someone who speak English please so that I am able to work with her/him. This is a start of bigger project but need someone who is committed and deliver fast with Quality",
     location: "Worlwide",
-    Category: { connect: { name: "IT & Networking" } },
+    category: { connect: { name: "IT & Networking" } },
     difficulty: { connect: { name: "Intermediate" } },
     clientUser: { connect: { email: "denis@email.com" } },
     published: true,
@@ -154,7 +154,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "I need someone who can perfectly edit and fix some details in our web page.        ",
     location: "Albania",
-    Category: { connect: { name: "IT & Networking" } },
+    category: { connect: { name: "IT & Networking" } },
     difficulty: { connect: { name: "Entry level" } },
     clientUser: { connect: { email: "arita@email.com" } },
     published: true,
@@ -170,7 +170,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "I already have a logo i just need it resized for letter head, then a business card and flyer creation.",
     location: "Worlwide",
-    Category: { connect: { name: "Design & Creative" } },
+    category: { connect: { name: "Design & Creative" } },
     difficulty: { connect: { name: "Intermediate" } },
     clientUser: { connect: { email: "ani@email.com" } },
     published: true,
@@ -186,7 +186,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "Looking for a front-end dev, templates creator who will be able to recreate a couple of specific HTML templates.Thanks,Daniel",
     location: "France",
-    Category: { connect: { name: "IT & Networking" } },
+    category: { connect: { name: "IT & Networking" } },
     difficulty: { connect: { name: "Intermediate" } },
     clientUser: { connect: { email: "denis@email.com" } },
     published: true,
@@ -201,7 +201,7 @@ const jobs: Prisma.jobCreateInput[] = [
     title: "UK legal adviser (liquidation/strike off)",
     content: "Small question regarding liquidation procedures in the UK",
     location: "UK",
-    Category: { connect: { name: "Legal" } },
+    category: { connect: { name: "Legal" } },
     difficulty: { connect: { name: "Expert" } },
     clientUser: { connect: { email: "john@email.com" } },
     published: true,
@@ -217,7 +217,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "Translator needed to work on a Code of Ethics. Languages: Spanish to Chinese (PRC). Word count: 5365. When proposing, please point your price per word for translation services. Do you work in CAT tools?",
     location: "Worlwide",
-    Category: { connect: { name: "Legal" } },
+    category: { connect: { name: "Legal" } },
     difficulty: { connect: { name: "Intermediate" } },
     clientUser: { connect: { email: "ani@email.com" } },
     published: true,
@@ -233,7 +233,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "We are looking to hire someone with strong graphic design and brand visual identity skills to help us do a mini refresh of our brand identity.We are in active talks with brand agencies and are NOT looking to hire a brand agency at this time. We are looking for an individual freelancer who can help with a few components (mainly graphic design related) elements of a brand refresh.",
     location: "Albania",
-    Category: { connect: { name: "Design & Creative" } },
+    category: { connect: { name: "Design & Creative" } },
     difficulty: { connect: { name: "Expert" } },
     clientUser: { connect: { email: "ani@email.com" } },
     published: true,
@@ -249,7 +249,7 @@ const jobs: Prisma.jobCreateInput[] = [
     content:
       "The task here is to assist Amazon internet shopping platform merchants in improving their sales rankings. You can receive a cash incentive for assisting in the accomplishment this activity.",
     location: "Worlwide",
-    Category: { connect: { name: "Sales & Marketing" } },
+    category: { connect: { name: "Sales & Marketing" } },
     difficulty: { connect: { name: "Entry level" } },
     clientUser: { connect: { email: "john@email.com" } },
     published: true,
