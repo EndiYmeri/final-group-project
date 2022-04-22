@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import ScheduleIcon from "@mui/icons-material/Schedule";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import "./PostJobDetails.css";
 import { Job } from "../../types";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +43,7 @@ export default function PostJobDifficulty({ newJob, setNewJob }: Props) {
             className={watch("difficulty") === "Entry level" ? "active" : ""}
           >
             <div className="radio-info">
-              <ScheduleIcon />
+              <WorkspacesIcon />
               <h2>Entry level</h2>
               <p>Easy tasks in general</p>
             </div>
@@ -59,7 +60,7 @@ export default function PostJobDifficulty({ newJob, setNewJob }: Props) {
             className={watch("difficulty") === "Intermediate" ? "active" : ""}
           >
             <div className="radio-info">
-              <DateRangeIcon />
+              <WorkspacesIcon />
               <h2>Intermediate</h2>
               <p>
                 Average difficulty tasks, somebody with a little bit of
@@ -79,7 +80,7 @@ export default function PostJobDifficulty({ newJob, setNewJob }: Props) {
             className={watch("difficulty") === "Expert" ? "active" : ""}
           >
             <div className="radio-info">
-              <DateRangeIcon />
+              <WorkspacesIcon />
               <h2>Expert</h2>
               <p>Hard tasks to complish</p>
             </div>

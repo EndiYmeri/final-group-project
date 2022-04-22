@@ -8,14 +8,16 @@
     padding: 2rem 0;
 }
 
-.getting-started form .labels {
+.getting-started form .labels,
+.difficulty form .labels {
     display: grid;
     grid-auto-flow: column;
     justify-content: flex-start;
     gap: 20px;
 }
 
-.getting-started form label {
+.getting-started form label,
+.difficulty form label {
     display: grid;
     grid-template-columns: 1fr 10px;
     padding: 3rem;
@@ -25,7 +27,9 @@
 }
 
 .getting-started form label:hover,
-.getting-started form label.active {
+.getting-started form label.active,
+.difficulty form label:hover,
+.difficulty form label.active {
     background-color: #eaeaea;
     border-color: #0d47ff;
 }
@@ -84,6 +88,8 @@
 .last-details .labels label {
     display: grid;
     grid-auto-flow: column;
+    padding: 0.5rem 0.75rem;
+    align-items: center;
 }
 
 .last-details textarea {
