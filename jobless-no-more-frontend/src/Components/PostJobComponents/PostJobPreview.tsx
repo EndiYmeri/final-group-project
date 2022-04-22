@@ -23,6 +23,8 @@ export default function PostJobPreview({ newJob }: Props) {
         content: newJobData.content,
         skills: newJobData.skills.map((skill) => skill.name),
         difficulty: newJobData.difficulty,
+        payment: newJobData.payment,
+        paymentType: newJobData.paymentType,
         // @ts-ignore
         category: newJobData.category,
       }),
@@ -30,7 +32,7 @@ export default function PostJobPreview({ newJob }: Props) {
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
-        // navigate("/home");
+        navigate("/home");
       });
   }
   console.log(newJob);
