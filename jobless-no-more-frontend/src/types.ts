@@ -42,7 +42,8 @@ export type Job = {
     location: string,
     category: { name: string },
     payment: number,
-    paymentType: string
+    paymentType: string,
+    savedFromUsers: User[]
 }
 
 export type ClientUser = {

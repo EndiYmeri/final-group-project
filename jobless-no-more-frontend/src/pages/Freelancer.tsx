@@ -3,8 +3,9 @@ import { User } from "../types";
 
 type Props = {
   user: User;
+  setUser: Function;
 };
 
-export default function Freelancer({ user }: Props) {
-  return <UserFreelancer user={user} />;
+export default function Freelancer({ user, setUser }: Props) {
+  return <UserFreelancer setUser={setUser} user={user} />;
 }

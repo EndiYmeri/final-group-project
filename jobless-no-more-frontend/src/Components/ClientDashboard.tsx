@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./clientDashboard.css";
 import { User } from "../types";
 import JobComponent from "./JobComponent/JobComponent";
+import JobComponentCustom from "./JobComponent/JobComponentCustom";
 
 type Props = {
   user: User;
@@ -92,7 +93,7 @@ function ClientDashboard({ user }: Props) {
             </>
           ) : (
             user?.jobs?.map((job) => {
-              return <JobComponent job={job} />;
+              return <>Jobss</>;
             })
           )}
           <button className="post-a-job__btn">Post a Job</button>

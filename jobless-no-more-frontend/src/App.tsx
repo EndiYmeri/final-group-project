@@ -51,7 +51,10 @@ function App() {
           <Route path={"/client"} element={<Client user={user} />} />
         )}
         {user?.type === "freelancer" && (
-          <Route path={"/freelancer/*"} element={<Freelancer user={user} />} />
+          <Route
+            path={"/freelancer/*"}
+            element={<Freelancer user={user} setUser={setUser} />}
+          />
         )}
         <Route index element={<LandingPage user={user} />} />
         {user && (

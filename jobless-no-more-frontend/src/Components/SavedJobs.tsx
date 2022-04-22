@@ -7,63 +7,16 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import { useNavigate } from "react-router-dom";
+import JobComponentCustom from "./JobComponent/JobComponentCustom";
 type Props = {
   user: User;
+  setUser: Function;
 };
-function SavedJobs({ user }: Props) {
-  function dateFormat(job: Job) {
-    const date = Date.parse(job.dateCreated);
-    const d = new Date(date).toLocaleDateString();
-    return d;
-  }
-  const navigate = useNavigate();
+function SavedJobs({ user, setUser }: Props) {
   return (
     <>
       {user?.savedJobs.map((job) => {
-        return (
-          <div
-            className="job-custom"
-            key={job.id}
-            onClick={() => navigate(`/job/${job.id}`)}
-          >
-            <div className="jobs-theme-development">
-              <h4 className="jobs-ghost-h4">{job.title}</h4>
-              <div className="dislike-button">
-                <ThumbDownOutlinedIcon />
-              </div>
-              <div className="like-button">
-                <FavoriteBorderOutlinedIcon />
-              </div>
-            </div>
-            <div className="job-info-details">
-              <span className="job-span">Fixed-price</span>
-              <span className="job-span">{job.difficulty?.name}</span>
-              <span className="job-span">Budget: $2000</span>
-              <span className="job-span">Posted {dateFormat(job)}</span>
-            </div>
-            <div className="job-paragraph-ghost">
-              <p className="job-description">{job.content}</p>
-              <div className="job-span-details">
-                <span className="job-span-plus">PLUS</span>
-                <span className="job-span-payment">
-                  <VerifiedOutlinedIcon />
-                  Payment verified
-                </span>
-                <span className="job-span-rating">
-                  <StarBorderPurple500OutlinedIcon />
-                  <StarBorderPurple500OutlinedIcon />
-                  <StarBorderPurple500OutlinedIcon />
-                  <StarBorderPurple500OutlinedIcon />
-                  <StarBorderPurple500OutlinedIcon />
-                </span>
-                <span className="job-span-location">
-                  <LocationOnOutlinedIcon />
-                  {job.location}
-                </span>
-              </div>
-            </div>
-          </div>
-        );
+        return <JobComponentCustom job={job} user={user} setUser={setUser} />;
       })}
     </>
   );

@@ -13,9 +13,10 @@ import BestMatches from "../BestMatches";
 
 type Props = {
   user: User;
+  setUser: Function;
 };
 
-function UserFreelancer({ user }: Props) {
+function UserFreelancer({ user, setUser }: Props) {
   const navigate = useNavigate();
   const Example = () => {
     return <ProgressBar bgColor="#0d47ff" completed={60} />;
@@ -33,7 +34,7 @@ function UserFreelancer({ user }: Props) {
         .then((resp) => resp.json())
         .then((jobs) => setJobs(jobs));
     }
-  }, []);
+  }, [user]);
 
   return (
     <div className="user-container">
@@ -124,13 +125,20 @@ function UserFreelancer({ user }: Props) {
               <Routes>
                 <Route
                   path="/best-matches"
-                  element={<BestMatches jobs={jobs} />}
+                  element={
+                    <BestMatches user={user} jobs={jobs} setUser={setUser} />
+                  }
                 />
                 <Route
                   path="/most-recent"
-                  element={<MostRecent jobs={jobs} />}
+                  element={
+                    <MostRecent user={user} setUser={setUser} jobs={jobs} />
+                  }
                 />
-                <Route path="/saved-jobs" element={<SavedJobs user={user} />} />
+                <Route
+                  path="/saved-jobs"
+                  element={<SavedJobs setUser={setUser} user={user} />}
+                />
               </Routes>
             </div>
           </div>

@@ -26,7 +26,7 @@ async function getUserFromToken(token: string) {
     const foundUser = decodeData.type === "freelancer" ? await prisma.freelanceUser.findUnique({
         //@ts-ignore
         where: { id: decodeData.id }, include: {
-            skills: true, proposals: true, education: true, language: true, savedJobs: true
+            skills: true, proposals: true, education: true, language: true, savedJobs: {include:{savedFromUsers:true}}
         }
     }) : await prisma.clientUser.findUnique({
         //@ts-ignore
@@ -115,7 +115,7 @@ app.post('/login', async (req, res) => {
             userType === "freelancer" ?
                 await prisma.freelanceUser.findUnique({
                     where: { email: email },
-                    include: { proposals: true, skills: true, education: true, language: true, savedJobs: true }
+                    include: { proposals: true, skills: true, education: true, language: true, savedJobs: {include:{savedFromUsers:true}} }
                 })
                 : await prisma.clientUser.findUnique({
                     where: { email: email },
@@ -215,7 +215,7 @@ app.get('/jobsBasedOnUserSkills', async (req, res) => {
                     skills: { every: { name: { in: user.skills.map(skill => skill.name) } } }
                 },
                 include: {
-                    category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true
+                    category: true, clientUser: true, difficulty: true, proposals: true, skills: true, duration: true, savedFromUsers:true
                 }
             })
 
@@ -363,12 +363,43 @@ app.post('/saveJob', async (req, res) => {
             const updatedUser = await prisma.freelanceUser.update({
                 where: {email: user.email},data:{
                     savedJobs: {connect: {id: jobId}}
-                },include:{education: true, language: true, proposals: true, savedJobs: true, skills: true}
+                },include:{education: true, language: true, proposals: true, savedJobs: {include:{savedFromUsers:true}}, skills: true}
             })
             if(updatedUser) res.send(updatedUser)
             else{
                 throw Error()
             }
+        }
+        else{
+            throw Error()
+        }
+        
+    }
+    catch (err) {
+        // @ts-ignore
+        res.status(400).send({ error: err.message })
+    }
+
+});
+app.post('/removeSavedJob', async (req, res) => {
+    const { jobId } = req.body
+    const token = req.headers.authorization || ''
+    try {
+        const user = await getUserFromToken(token)
+        
+        if(user){
+            const updatedUser = await prisma.freelanceUser.update({
+                where: {email: user.email},
+                data:{
+                    savedJobs: {disconnect:{id: jobId}}
+                },
+                include:{education: true, language: true, proposals: true, savedJobs: {include:{savedFromUsers:true}}, skills: true}
+            })
+            if(updatedUser) res.send(updatedUser)
+            else{
+                throw Error()
+            }
+
         }
         else{
             throw Error()
