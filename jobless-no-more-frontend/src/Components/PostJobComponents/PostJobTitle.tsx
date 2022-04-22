@@ -39,6 +39,7 @@ export default function PostJobTitle({ newJob, setNewJob }: Props) {
           <label htmlFor="title">
             <p> Write a title for your job post </p>
             <input
+              placeholder="Title"
               type="text"
               defaultValue={newJob?.title}
               {...register("title", { minLength: 20, required: true })}

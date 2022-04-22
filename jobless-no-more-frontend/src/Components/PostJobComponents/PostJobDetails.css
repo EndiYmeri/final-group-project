@@ -86,6 +86,10 @@
     grid-auto-flow: column;
 }
 
+.last-details textarea {
+    padding: 0.5rem .75rem;
+}
+
 .publish-button {
     margin-top: 20px;
     border-radius: 2rem;
